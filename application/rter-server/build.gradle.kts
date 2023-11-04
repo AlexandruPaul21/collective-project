@@ -24,9 +24,15 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.session:spring-session-core")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.postgresql:postgresql:42.6.0")
+    implementation("org.mapstruct:mapstruct:1.5.5.Final")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+    implementation("io.springfox:springfox-swagger2:3.0.0")
+    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    implementation("org.springframework:spring-websocket:6.0.13")
+    implementation("org.springframework:spring-messaging:6.0.13")
 }
 
 tasks.withType<Test> {
