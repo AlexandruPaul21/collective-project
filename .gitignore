@@ -1,0 +1,51 @@
+# Ignore general files and directories
+/target/
+/.idea/
+/.vscode/
+/.DS_Store
+
+# Ignore build and generated files
+/build/
+/node_modules/
+npm-debug.log
+package-lock.json
+
+# Ignore IDE-specific files
+/.project
+/.classpath
+/.settings/
+/.metadata/
+/.factorypath
+
+# Ignore log files
+/logs/
+*.log
+
+# Ignore maven wrapper
+/mvnw
+/mvnw.cmd
+
+# Ignore system files
+Thumbs.db
+
+# Ignore macOS directory attributes
+.DS_Store
+
+# Ignore generated files by Hibernate
+/target/classes/
+/target/test-classes/
+/target/generated-sources/
+
+# Ignore generated Gradle files
+.gradle/
+
+# Ignore Postgres database files
+/target/pgsql/
+
+# Ignore IDE files for Eclipse
+.classpath
+.project
+
+# Ignore React build files
+/client/build/
+/client/node_modules/
