@@ -1,0 +1,1 @@
+rootProject.name = "rter-server"
