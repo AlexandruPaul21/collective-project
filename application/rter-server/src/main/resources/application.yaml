@@ -4,7 +4,7 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
-      ddl-auto: update
+      ddl-auto: none
     open-in-view: false
 
   datasource:
@@ -12,3 +12,6 @@ spring:
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+
+  liquibase:
+    change-log: classpath:db.changelog/changelog-master.xml
