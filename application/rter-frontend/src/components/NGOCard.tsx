@@ -29,7 +29,7 @@ interface NGOCardProps {
 }
 
 const NGOCard: React.FC<NGOCardProps> = ({
-  //the NGO card should receive through props an NGO object after it it implemented
+  //the NGO card should receive through props an NGO object after it is implemented
   ngoName,
   ngoPhoto,
   ngoDescription,
