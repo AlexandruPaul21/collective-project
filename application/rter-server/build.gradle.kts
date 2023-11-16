@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     implementation(project(mapOf("path" to ":rter-api")))
-    implementation("org.springframework.boot:spring-boot-starter-data-rest")
+//    implementation("org.springframework.boot:spring-boot-starter-data-rest")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.postgresql:postgresql:42.6.0")
@@ -32,10 +32,13 @@ dependencies {
     compileOnly("org.liquibase:liquibase-core:4.8.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
-    implementation("io.springfox:springfox-swagger2:3.0.0")
-    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+//    implementation("io.springfox:springfox-swagger2:3.0.0")
+//    implementation("io.springfox:springfox-swagger-ui:3.0.0")
     implementation("org.springframework:spring-websocket:6.0.13")
     implementation("org.springframework:spring-messaging:6.0.13")
+    implementation("io.springfox:springfox-boot-starter:3.0.0")
+    implementation("io.springfox:springfox-swagger2:3.0.0")
+    implementation("io.springfox:springfox-swagger-ui:3.0.0")
 
 }
 

@@ -44,4 +44,11 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="20231116015800" author="daria">
+        <preConditions>
+            <tableExists tableName="app_user"/>
+            <columnExists tableName="app_user" columnName="user_type"/>
+        </preConditions>
+        <dropColumn tableName="app_user" columnName="user_type"/>
+    </changeSet>
 </databaseChangeLog>
