@@ -1,5 +1,9 @@
 const NGOCard = () => {
-  return <div>NGOCard</div>;
+  return (
+    <div>
+      
+    </div>
+  );
 };
 
 export default NGOCard;

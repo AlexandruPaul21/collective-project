@@ -1,14 +1,16 @@
-import FilterSidebar from "@/components/FilterSidebar"
-import NGOCard from "@/components/NGOCard"
-import Navbar from "@/components/Navbar"
+import CardsSection from "@/components/CardsSection";
+import FilterSidebar from "@/components/FilterSidebar";
+import Navbar from "@/components/Navbar";
 const MainPage = () => {
   return (
-    <div>
+    <div className="flex flex-col">
+      <Navbar/>
+      <div className="flex flex-row justify">
         <FilterSidebar/>
-        <Navbar/>
-        <NGOCard/>
-    </div>
-  )
-}
+        <CardsSection/>
+      </div>
+</div>
+  );
+};
 
-export default MainPage
+export default MainPage;
