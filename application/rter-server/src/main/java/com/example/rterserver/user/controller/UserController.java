@@ -26,7 +26,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@OpenAPIDefinition(info = @Info(title = "NGO Project API", version = "v1"))
+@OpenAPIDefinition(info = @Info(title = "User API", version = "v1"))
 @Validated
 public class UserController {
 

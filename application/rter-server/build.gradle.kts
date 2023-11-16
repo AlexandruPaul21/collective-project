@@ -32,14 +32,15 @@ dependencies {
     compileOnly("org.liquibase:liquibase-core:4.8.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
-//    implementation("io.springfox:springfox-swagger2:3.0.0")
-//    implementation("io.springfox:springfox-swagger-ui:3.0.0")
     implementation("org.springframework:spring-websocket:6.0.13")
     implementation("org.springframework:spring-messaging:6.0.13")
-    implementation("io.springfox:springfox-boot-starter:3.0.0")
     implementation("io.springfox:springfox-swagger2:3.0.0")
-    implementation("io.springfox:springfox-swagger-ui:3.0.0")
-
+//    implementation("io.springfox:springfox-boot-starter:3.0.0")
+//    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0"){
+        exclude(group = "io.swagger.core.v3", module= "swagger-annotations")
+    }
+    implementation("io.swagger.core.v3:swagger-annotations:2.2.15")
 }
 
 tasks.withType<Test> {
