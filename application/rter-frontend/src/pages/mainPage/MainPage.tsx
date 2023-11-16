@@ -4,12 +4,12 @@ import Navbar from "@/components/Navbar";
 const MainPage = () => {
   return (
     <div className="flex flex-col">
-      <Navbar/>
-      <div className="flex flex-row justify">
-        <FilterSidebar/>
-        <CardsSection/>
+      <Navbar />
+      <div className="justify flex flex-row">
+        <FilterSidebar />
+        <CardsSection />
       </div>
-</div>
+    </div>
   );
 };
 
