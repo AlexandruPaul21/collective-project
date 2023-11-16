@@ -9,7 +9,7 @@ import {
   DialogContent,
   DialogTitle,
   DialogDescription,
-} from "@radix-ui/react-dialog";
+} from "./ui/dialog";
 import {
   Card,
   CardHeader,
