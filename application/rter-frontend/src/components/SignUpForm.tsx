@@ -1,22 +1,28 @@
-"use client"
+"use client";
 
-import {zodResolver} from "@hookform/resolvers/zod"
-import {useForm} from "react-hook-form"
-import * as z from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
-import {Button} from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import {Input} from "@/components/ui/input"
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 import {Gender, User} from "@/utils/types.tsx";
 import {AuthService} from "@/apis/auth/AuthService.ts";
-// import { toast } from "@/components/ui/use-toast"
 
 const FormSchema = z.object({
     username: z.string().min(3).max(64),
@@ -40,138 +46,170 @@ export function SignUpForm() {
         },
     })
 
-
     function onSubmit(data: z.infer<typeof FormSchema>) {
         AuthService.signup(data as User);
     }
+  return (
+    <div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="">
+          <div className="flex">
+            <div className="mr-2 w-full space-y-4">
+              {/*  USERNAME  */}
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-darkgray tracking-wider">
+                      Username
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder=""
+                        {...field}
+                        className="border-lightblu rounded-full border-[1px] "
+                      />
+                    </FormControl>
 
-    return (
-        <div className='w-full'>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                    <div className="space-y-2">
-                        {/*  USERNAME  */}
-                        <FormField
-                            control={form.control}
-                            name="username"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Username</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="" {...field} />
-                                    </FormControl>
+              {/*  NAME  */}
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-darkgray tracking-wider">
+                      Name
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder=""
+                        {...field}
+                        className="border-lightblu rounded-full border-[1px]"
+                      />
+                    </FormControl>
 
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                        {/*  NAME  */}
-                        <FormField
-                            control={form.control}
-                            name="name"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Name</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="" {...field} />
-                                    </FormControl>
+              {/*  EMAIL  */}
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-darkgray tracking-wider">
+                      Email
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder=""
+                        {...field}
+                        className="border-lightblu rounded-full border-[1px]"
+                      />
+                    </FormControl>
 
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
-                        {/*  EMAIL  */}
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Email</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="" {...field} />
-                                    </FormControl>
+            <div className="ml-2 w-full space-y-4">
+              {/*  PASSWORD  */}
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-darkgray tracking-wider">
+                      Password
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder=""
+                        {...field}
+                        className="border-lightblu rounded-full border-[1px]"
+                        type="password"
+                      />
+                    </FormControl>
 
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                        {/*  PASSWORD  */}
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Password</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="" {...field} />
-                                    </FormControl>
+              {/*  ADDRESS  */}
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-darkgray tracking-wider">
+                      Address
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder=""
+                        {...field}
+                        className="border-lightblu rounded-full border-[1px]"
+                      />
+                    </FormControl>
 
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                        {/*  ADDRESS  */}
-                        <FormField
-                            control={form.control}
-                            name="address"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Address</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="" {...field} />
-                                    </FormControl>
+              {/*  GENDER  */}
+              <FormField
+                control={form.control}
+                name="gender"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-darkgray tracking-wider">
+                      Gender
+                    </FormLabel>
+                    <FormControl>
+                      <Select
+                        {...field}
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <SelectTrigger className="border-lightblu rounded-full border-[1px]">
+                          <SelectValue placeholder="Choose" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="MALE">Male</SelectItem>
+                          <SelectItem value="FEMALE">Female</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
 
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-
-                        {/*  GENDER  */}
-                        <FormField
-                            control={form.control}
-                            name="gender"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Gender</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="" {...field} />
-                                    </FormControl>
-
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-
-                        {/*/!*  USER TYPE  *!/*/}
-                        {/*<FormField*/}
-                        {/*    control={form.control}*/}
-                        {/*    name="userType"*/}
-                        {/*    render={({field}) => (*/}
-                        {/*        <FormItem>*/}
-                        {/*            <FormLabel>User Type</FormLabel>*/}
-                        {/*            <FormControl>*/}
-                        {/*                <Input placeholder="" {...field} />*/}
-                        {/*            </FormControl>*/}
-
-                        {/*            <FormMessage/>*/}
-                        {/*        </FormItem>*/}
-                        {/*    )}*/}
-                        {/*/>*/}
-
-                    </div>
-
-
-                    {/*  SIBMIT BUTTON  */}
-                    <Button className="w-full mt-6" type="submit">Sign up</Button>
-                </form>
-            </Form>
-        </div>
-    )
+          {/*  SUBMIT BUTTON  */}
+          <Button
+            className="bg-lightblu mt-9 w-full rounded-full hover:bg-[#2076C1]"
+            type="submit"
+          >
+            Sign up
+          </Button>
+        </form>
+      </Form>
+    </div>
+  );
 }
 
 export default SignUpForm;
