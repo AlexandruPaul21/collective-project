@@ -5,8 +5,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Heart, CircleDollarSign, ChevronDown } from "lucide-react";
+import {useEffect, useState} from "react";
 
 const Navbar = () => {
+
+  const [username,setUsername] = useState("Username");
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    setUsername(user?.email || "Username");
+  }, []);
+
   return (
     <div className="h-[7vh] w-full justify-center overflow-hidden bg-slate-100 z-1 border-b-2 border-gray-300">
       <div className="flex h-[7vh] flex-row items-center justify-between px-10 ">
@@ -34,7 +43,7 @@ const Navbar = () => {
           <DropdownMenu>
             <DropdownMenuTrigger>
               <div className="flex items-center gap-[2px]">
-                <span className="text-lg">Username</span>
+                <span className="text-lg">{username}</span>
                 <ChevronDown className="h-4 w-4" />
               </div>
             </DropdownMenuTrigger>

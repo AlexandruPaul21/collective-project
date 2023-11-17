@@ -14,11 +14,13 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import {Input} from "@/components/ui/input"
+import {AuthService} from "@/apis/auth/AuthService.ts";
+import {LoginRequest} from "@/utils/types.tsx";
 // import { toast } from "@/components/ui/use-toast"
 
 const FormSchema = z.object({
-    email: z.string(),
-    password: z.string()
+    email: z.string().email().min(3).max(64),
+    password: z.string().min(3).max(64),
 })
 
 export function SignUpForm() {
@@ -30,16 +32,8 @@ export function SignUpForm() {
         },
     })
 
-    function onSubmit(/* data: z.infer<typeof FormSchema>*/) {
-        // toast({
-        //     title: "You submitted the following values:",
-        //     description: (
-        //         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-        //   <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        // </pre>
-        //     ),
-        // })
-        alert("submit");
+    function onSubmit( data: z.infer<typeof FormSchema>) {
+        AuthService.login(data as LoginRequest);
     }
 
     return (

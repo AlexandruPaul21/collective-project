@@ -14,17 +14,18 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import {Input} from "@/components/ui/input"
+import {Gender, User} from "@/utils/types.tsx";
+import {AuthService} from "@/apis/auth/AuthService.ts";
 // import { toast } from "@/components/ui/use-toast"
 
 const FormSchema = z.object({
-    username: z.string(),
-    email: z.string(),
-    password: z.string(),
-    name: z.string(),
-    address: z.string(),
-    gender: z.string(),
-    userType: z.string(),
-})
+    username: z.string().min(3).max(64),
+    email: z.string().email().min(3).max(64),
+    password: z.string().min(3).max(64),
+    name: z.string().min(3).max(64),
+    address: z.string().min(3).max(64),
+    gender: z.nativeEnum(Gender),
+}).required();
 
 export function SignUpForm() {
     const form = useForm<z.infer<typeof FormSchema>>({
@@ -35,22 +36,13 @@ export function SignUpForm() {
             password: "",
             name: "",
             address: "",
-            gender: "",
-            userType: "",
-
+            gender: Gender.MALE,
         },
     })
 
-    function onSubmit(/* data: z.infer<typeof FormSchema>*/) {
-        // toast({
-        //     title: "You submitted the following values:",
-        //     description: (
-        //         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-        //   <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        // </pre>
-        //     ),
-        // })
-        alert("submit");
+
+    function onSubmit(data: z.infer<typeof FormSchema>) {
+        AuthService.signup(data as User);
     }
 
     return (
@@ -155,21 +147,21 @@ export function SignUpForm() {
                             )}
                         />
 
-                        {/*  USER TYPE  */}
-                        <FormField
-                            control={form.control}
-                            name="userType"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>User Type</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="" {...field} />
-                                    </FormControl>
+                        {/*/!*  USER TYPE  *!/*/}
+                        {/*<FormField*/}
+                        {/*    control={form.control}*/}
+                        {/*    name="userType"*/}
+                        {/*    render={({field}) => (*/}
+                        {/*        <FormItem>*/}
+                        {/*            <FormLabel>User Type</FormLabel>*/}
+                        {/*            <FormControl>*/}
+                        {/*                <Input placeholder="" {...field} />*/}
+                        {/*            </FormControl>*/}
 
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
+                        {/*            <FormMessage/>*/}
+                        {/*        </FormItem>*/}
+                        {/*    )}*/}
+                        {/*/>*/}
 
                     </div>
 
