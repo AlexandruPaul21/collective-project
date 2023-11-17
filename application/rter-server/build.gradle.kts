@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":rter-api")))
+//    implementation(project(mapOf("path" to ":rter-api")))
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -36,7 +36,8 @@ dependencies {
     implementation("io.springfox:springfox-swagger-ui:3.0.0")
     implementation("org.springframework:spring-websocket:6.0.13")
     implementation("org.springframework:spring-messaging:6.0.13")
-
+    implementation("org.jsoup:jsoup:1.15.3")
+    implementation("org.apache.commons:commons-lang3:3.12.0")
 }
 
 tasks.withType<Test> {

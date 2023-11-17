@@ -44,4 +44,26 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="20231118015500" author="daria">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ngo"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ngo">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contact" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="website" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>
