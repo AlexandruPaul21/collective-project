@@ -6,14 +6,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Heart, CircleDollarSign, ChevronDown } from "lucide-react";
 import {useEffect, useState} from "react";
+import {capitalizeString} from "@/lib/utils.ts";
 
 const Navbar = () => {
 
   const [username,setUsername] = useState("Username");
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    setUsername(user?.username || "Username");
+    const username = localStorage.getItem('username');
+    setUsername(capitalizeString(username||"") || "Username");
   }, []);
 
   return (

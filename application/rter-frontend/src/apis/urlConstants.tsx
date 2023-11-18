@@ -1,9 +1,7 @@
-// const baseUrl = 'http://localhost:8080';
+const baseUrl = 'http://localhost:8080';
+export const signupUrl = `${baseUrl}/signup`;
+export const loginUrl = `${baseUrl}/login`;
 
-
-// export const signupUrl = `${baseUrl}/users`;
-// export const loginUrl = `${baseUrl}/users`;
-
-const baseUrl = 'http://localhost:80';
-export const signupUrl = `${baseUrl}/post`;
-export const loginUrl = `${baseUrl}/post`;
+// const baseUrl = 'http://localhost:80';
+// export const signupUrl = `${baseUrl}/post`;
+// export const loginUrl = `${baseUrl}/post`;

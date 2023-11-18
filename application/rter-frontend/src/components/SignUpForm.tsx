@@ -1,10 +1,10 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {useForm} from "react-hook-form";
 import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,7 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import {Input} from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -22,33 +22,55 @@ import {
   SelectValue,
 } from "./ui/select";
 import {Gender, User} from "@/utils/types.tsx";
-import {AuthService} from "@/apis/auth/AuthService.ts";
+import {AuthService} from "@/apis/auth/AuthService.tsx";
+import {toast} from "@/components/ui/use-toast.ts";
+import {capitalizeString} from "@/lib/utils.ts";
 
 const FormSchema = z.object({
-    username: z.string().min(3).max(64),
-    email: z.string().email().min(3).max(64),
-    password: z.string().min(3).max(64),
-    name: z.string().min(3).max(64),
-    address: z.string().min(3).max(64),
-    gender: z.nativeEnum(Gender),
+  username: z.string().min(3).max(64),
+  email: z.string().email().min(3).max(64),
+  password: z.string().min(3).max(64),
+  name: z.string().min(3).max(64),
+  address: z.string().min(3).max(64),
+  gender: z.nativeEnum(Gender),
 }).required();
 
-export function SignUpForm() {
-    const form = useForm<z.infer<typeof FormSchema>>({
-        resolver: zodResolver(FormSchema),
-        defaultValues: {
-            username: "",
-            email: "",
-            password: "",
-            name: "",
-            address: "",
-            gender: Gender.MALE,
-        },
-    })
-
-    function onSubmit(data: z.infer<typeof FormSchema>) {
-        AuthService.signup(data as User);
+const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
+  if (issue.code === z.ZodIssueCode.too_small) {
+    if (issue.type === "string") {
+      return { message: capitalizeString(issue.path.toString()) +" is too short!" };
     }
+  }
+
+  return { message: ctx.defaultError };
+};
+
+z.setErrorMap(customErrorMap);
+
+export function SignUpForm() {
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      name: "",
+      address: "",
+      gender: Gender.FEMALE,
+    },
+  })
+
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const {status, message} = await AuthService.signup(data as User);
+
+    toast({
+      title: status === 200 ? "Success" : "Error",
+      variant: status === 200 ? "default" : "destructive",
+      description:
+      message,
+    })
+  }
+
   return (
     <div>
       <Form {...form}>
@@ -59,7 +81,7 @@ export function SignUpForm() {
               <FormField
                 control={form.control}
                 name="username"
-                render={({ field }) => (
+                render={({field}) => (
                   <FormItem>
                     <FormLabel className="text-darkgray tracking-wider">
                       Username
@@ -72,7 +94,7 @@ export function SignUpForm() {
                       />
                     </FormControl>
 
-                    <FormMessage />
+                    <FormMessage/>
                   </FormItem>
                 )}
               />
@@ -81,7 +103,7 @@ export function SignUpForm() {
               <FormField
                 control={form.control}
                 name="name"
-                render={({ field }) => (
+                render={({field}) => (
                   <FormItem>
                     <FormLabel className="text-darkgray tracking-wider">
                       Name
@@ -94,7 +116,7 @@ export function SignUpForm() {
                       />
                     </FormControl>
 
-                    <FormMessage />
+                    <FormMessage/>
                   </FormItem>
                 )}
               />
@@ -103,7 +125,7 @@ export function SignUpForm() {
               <FormField
                 control={form.control}
                 name="email"
-                render={({ field }) => (
+                render={({field}) => (
                   <FormItem>
                     <FormLabel className="text-darkgray tracking-wider">
                       Email
@@ -116,7 +138,7 @@ export function SignUpForm() {
                       />
                     </FormControl>
 
-                    <FormMessage />
+                    <FormMessage/>
                   </FormItem>
                 )}
               />
@@ -127,7 +149,7 @@ export function SignUpForm() {
               <FormField
                 control={form.control}
                 name="password"
-                render={({ field }) => (
+                render={({field}) => (
                   <FormItem>
                     <FormLabel className="text-darkgray tracking-wider">
                       Password
@@ -141,7 +163,7 @@ export function SignUpForm() {
                       />
                     </FormControl>
 
-                    <FormMessage />
+                    <FormMessage/>
                   </FormItem>
                 )}
               />
@@ -150,7 +172,7 @@ export function SignUpForm() {
               <FormField
                 control={form.control}
                 name="address"
-                render={({ field }) => (
+                render={({field}) => (
                   <FormItem>
                     <FormLabel className="text-darkgray tracking-wider">
                       Address
@@ -163,7 +185,7 @@ export function SignUpForm() {
                       />
                     </FormControl>
 
-                    <FormMessage />
+                    <FormMessage/>
                   </FormItem>
                 )}
               />
@@ -172,7 +194,7 @@ export function SignUpForm() {
               <FormField
                 control={form.control}
                 name="gender"
-                render={({ field }) => (
+                render={({field}) => (
                   <FormItem>
                     <FormLabel className="text-darkgray tracking-wider">
                       Gender
@@ -184,7 +206,7 @@ export function SignUpForm() {
                         defaultValue={field.value}
                       >
                         <SelectTrigger className="border-lightblu rounded-full border-[1px]">
-                          <SelectValue placeholder="Choose" />
+                          <SelectValue placeholder="Choose"/>
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value={Gender.MALE}>Male</SelectItem>
@@ -192,7 +214,7 @@ export function SignUpForm() {
                         </SelectContent>
                       </Select>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage/>
                   </FormItem>
                 )}
               />

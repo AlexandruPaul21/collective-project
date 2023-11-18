@@ -1,6 +1,7 @@
 import SignUpForm from "@/components/SignUpForm";
 import logo from "./LoginImage.png";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+import {Toaster} from "@/components/ui/toaster.tsx";
 
 const SignUpPage = () => {
   return (
@@ -33,8 +34,9 @@ const SignUpPage = () => {
                 Sign in
               </Link>
             </div>
-            <SignUpForm />
+            <SignUpForm/>
           </div>
+          <Toaster/>
         </div>
       </div>
     </div>

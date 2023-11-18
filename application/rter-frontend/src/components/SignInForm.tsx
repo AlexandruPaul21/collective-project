@@ -14,13 +14,30 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {AuthService} from "@/apis/auth/AuthService.ts";
+//import {AuthService} from "@/apis/auth/AuthService.tsx";
+//import {LoginRequest} from "@/utils/types.tsx";
+import {toast} from "@/components/ui/use-toast.ts";
+import {AuthService} from "@/apis/auth/AuthService.tsx";
 import {LoginRequest} from "@/utils/types.tsx";
+import {capitalizeString} from "@/lib/utils.ts";
+//import {ToastAction} from "@radix-ui/react-toast";
+
+const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
+  if (issue.code === z.ZodIssueCode.too_small) {
+    if (issue.type === "string") {
+      return { message: capitalizeString(issue.path.toString()) +" is too short!" };
+    }
+  }
+
+  return { message: ctx.defaultError };
+};
 
 const FormSchema = z.object({
     username: z.string().min(3).max(64),
     password: z.string().min(3).max(64),
 })
+
+z.setErrorMap(customErrorMap);
 
 export function SignUpForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -31,8 +48,16 @@ export function SignUpForm() {
     },
   });
 
-    function onSubmit( data: z.infer<typeof FormSchema>) {
-        AuthService.login(data as LoginRequest);
+    async function onSubmit(data: z.infer<typeof FormSchema>) {
+
+      const {status,message} = await AuthService.login(data as LoginRequest);
+
+      toast({
+        title: status===200?"Success":"Error",
+        variant: status===200?"default":"destructive",
+        description:
+          message,
+      })
     }
 
   return (
@@ -78,7 +103,7 @@ export function SignUpForm() {
                     />
                   </FormControl>
 
-                  <FormMessage />
+                  <FormMessage/>
                 </FormItem>
               )}
             />
