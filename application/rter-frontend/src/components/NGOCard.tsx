@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Gift, LucideHeart, PlusSquare } from "lucide-react";
 import { Button } from "./ui/button";
-
+import { NGOProps } from "@/utils/types/ngoProps";
 import { useState } from "react";
 import {
   Dialog,
@@ -21,18 +21,14 @@ import {
 import { DialogHeader, DialogFooter } from "./ui/dialog";
 
 interface NGOCardProps {
-  ngoName: string;
-  ngoPhoto: string;
-  ngoDescription: string;
+  NGO: NGOProps;
   onDonateClick: () => void;
   onVolunteerClick: () => void;
 }
 
 const NGOCard: React.FC<NGOCardProps> = ({
   //the NGO card should receive through props an NGO object after it is implemented
-  ngoName,
-  ngoPhoto,
-  ngoDescription,
+  NGO,
   onDonateClick,
   onVolunteerClick,
 }) => {
@@ -43,18 +39,16 @@ const NGOCard: React.FC<NGOCardProps> = ({
     setIsFavourite(!isFavourite);
   };
 
-  console.log(ngoName)
-  console.log(ngoDescription)
   return (
     <>
-      <Card className="m-5 w-[300px]">
+      <Card className="m-5 flex h-[350px] w-[320px] flex-col">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle
               className="pt- cursor-pointer items-center justify-between transition-colors hover:text-cyan-500"
               onClick={(): void => setIsDialogOpen(true)}
             >
-              {ngoName}
+              {NGO.name}
             </CardTitle>{" "}
             <Button
               onClick={handleAddFavouriteClick}
@@ -67,20 +61,23 @@ const NGOCard: React.FC<NGOCardProps> = ({
             </Button>
           </div>
         </CardHeader>
-        <CardContent className="grid gap-4">
-          <img
-            src={ngoPhoto}
-            alt={`${ngoName} Logo`}
-            style={{ borderRadius: "10px" }}
-          />
-          <CardDescription>{ngoDescription}</CardDescription>
+        <CardContent className="grid max-h-20 gap-4 overflow-hidden overflow-ellipsis">
+          <CardDescription>{NGO.contact}</CardDescription>
         </CardContent>
-        <CardFooter className="flex items-center justify-between">
-          <Button onClick={onDonateClick} className="bg-red-500">
+        <CardFooter className="mt-auto flex items-center justify-between">
+          <Button
+            onClick={onDonateClick}
+            className="bg-red-500"
+            style={{ backgroundColor: "#ED254A" }}
+          >
             <Gift size={20} />
             <span className="ml-2">Donate</span>
           </Button>
-          <Button onClick={onVolunteerClick} className="bg-teal-400">
+          <Button
+            onClick={onVolunteerClick}
+            style={{ backgroundColor: "#39D0D1" }}
+            className="bg-teal-400"
+          >
             <PlusSquare size={20} />
             <span className="ml-2">Volunteer</span>
           </Button>
@@ -94,34 +91,24 @@ const NGOCard: React.FC<NGOCardProps> = ({
         <DialogOverlay />
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{ngoName}</DialogTitle>
+            <DialogTitle>{NGO.name}</DialogTitle>
           </DialogHeader>
-          <DialogDescription>
-            <span className="m-4 flex">
-              <img
-                src={ngoPhoto}
-                alt={`${ngoName} Logo`}
-                style={{
-                  borderRadius: "10px",
-                  maxWidth: "200px",
-                  maxHeight: "200px",
-                }}
-              />
-              Location <br />
-              Contact <br />
-              Website <br />
-              Social Media <br />
-              Cause <br />
-            </span>
-            {ngoDescription}
-          </DialogDescription>
+          <DialogDescription>{NGO.contact}</DialogDescription>
 
           <DialogFooter>
-            <Button onClick={onDonateClick} className="bg-red-500">
+            <Button
+              onClick={onDonateClick}
+              style={{ backgroundColor: "#ED254A" }}
+              className="bg-red-500"
+            >
               <Gift size={20} />
               <span className="ml-2">Donate</span>
             </Button>
-            <Button onClick={onVolunteerClick} className="bg-teal-400">
+            <Button
+              onClick={onVolunteerClick}
+              style={{ backgroundColor: "#39D0D1" }}
+              className="bg-teal-400"
+            >
               <PlusSquare size={20} />
               <span className="ml-2">Volunteer</span>
             </Button>
