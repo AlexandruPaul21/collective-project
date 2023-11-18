@@ -26,7 +26,7 @@ public class UserService {
     @Transactional
     public UserResponse save(UserRequest userRequest) {
         User userToSave = new User(userRequest.username(), userRequest.name(), userRequest.password(),
-                userRequest.email(), userRequest.address(), userRequest.gender(), userRequest.userType(),
+                userRequest.email(), userRequest.address(), userRequest.gender(),
                 LocalDateTime.now(), 10);
         return UserMapper.entityToDto(userRepo.save(userToSave));
     }
@@ -41,7 +41,6 @@ public class UserService {
         userToUpdate.setEmail(userRequest.email());
         userToUpdate.setAddress(userRequest.address());
         userToUpdate.setGender(userRequest.gender());
-        userToUpdate.setUserType(userRequest.userType());
 
         return UserMapper.entityToDto(userRepo.save(userToUpdate));
     }
