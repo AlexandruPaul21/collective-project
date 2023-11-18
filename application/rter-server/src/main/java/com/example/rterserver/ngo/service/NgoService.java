@@ -24,9 +24,13 @@ public class NgoService {
         this.ngoRepo = ngoRepo;
     }
 
-    public List<Ngo> fetchNGOs(int page) {
+    public List<Ngo> fetchNGOs(int nrOfNgos) {
         List<Ngo> fetchedNgos = new ArrayList<>();
-
+        //ngoRepo.deleteAll();
+        int page = nrOfNgos / 10;
+        if (nrOfNgos % 10 != 0) {
+            page = page + 1;
+        }
         int currentPage = 1;
         while (currentPage <= page) {
             String url = "https://www.sustinebinele.ro/organizatii" + "/pagina-" + currentPage;
@@ -70,7 +74,7 @@ public class NgoService {
                             } else {
                                 ngoToBeAdded.setWebsite("null");
                             }
-                            ngoRepo.save(ngoToBeAdded);
+                            //ngoRepo.save(ngoToBeAdded);
                             fetchedNgos.add(ngoToBeAdded);
                         } catch (Exception e) {
                             e.printStackTrace();

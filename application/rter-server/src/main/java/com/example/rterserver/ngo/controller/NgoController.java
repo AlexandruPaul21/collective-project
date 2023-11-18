@@ -26,7 +26,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ngos")
-@OpenAPIDefinition(info = @Info(title = "Ngo API", version = "v1"))
+@OpenAPIDefinition(info = @Info(title = "NGO API", version = "v1"))
 @Validated
 public class NgoController {
     private final NgoService ngoService;
@@ -36,10 +36,11 @@ public class NgoController {
         this.ngoService = ngoService;
     }
 
-    @Operation(summary = "Fetch ngos", description = "This endpoint is used to fetch ngos. Enter how many pages you " +
-            "want to fetch, considering that one page brings you 10 ngos.")
+    @Operation(summary = "Fetch NGOs", description = "This endpoint is used to fetch NGOs. " +
+            "Enter how many NGOs you want to fetch. The number must be a multiple of 10. " +
+            "Otherwise, the number will be rounded up to the next multiple of 10.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Ngos found successfully",
+            @ApiResponse(responseCode = "200", description = "NGOs found successfully",
                     content = {@Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = Ngo.class)))}),
             @ApiResponse(responseCode = "500", description = "Internal server error",
@@ -48,10 +49,10 @@ public class NgoController {
     })
     @GetMapping
     public ResponseEntity<List<Ngo>> fetchNgos(
-            @Parameter(description = "Page number (between 1 and 10)", example = "1")
-            @RequestParam(defaultValue = "1") @Min(1) @Max(10) int page
+            @Parameter(description = "Number of NGOs (multiple of 10)")
+            @RequestParam(defaultValue = "10") @Min(10) @Max(100) int nrOfNGOs
     ) {
-        List<Ngo> ngos = ngoService.fetchNGOs(page);
+        List<Ngo> ngos = ngoService.fetchNGOs(nrOfNGOs);
         return ResponseEntity.ok(ngos);
     }
 }
