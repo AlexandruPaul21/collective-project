@@ -23,7 +23,6 @@ repositories {
 
 dependencies {
     implementation(project(mapOf("path" to ":rter-api")))
-//    implementation("org.springframework.boot:spring-boot-starter-data-rest")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.postgresql:postgresql:42.6.0")
@@ -35,14 +34,13 @@ dependencies {
     implementation("org.springframework:spring-websocket:6.0.13")
     implementation("org.springframework:spring-messaging:6.0.13")
     implementation("io.springfox:springfox-swagger2:3.0.0")
-//    implementation("io.springfox:springfox-boot-starter:3.0.0")
-//    implementation("io.springfox:springfox-swagger-ui:3.0.0")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0"){
         exclude(group = "io.swagger.core.v3", module= "swagger-annotations")
     }
     implementation("io.swagger.core.v3:swagger-annotations:2.2.15")
     implementation("org.jsoup:jsoup:1.15.3")
     implementation("org.apache.commons:commons-lang3:3.12.0")
+    implementation("org.springframework.boot:spring-boot-starter-security")
 }
 
 tasks.withType<Test> {
