@@ -64,8 +64,16 @@ public class UserService {
         return userRepo.findByUsername(username).orElse(null);
     }
 
-    public List<UserResponse> getAllUsers() {
+    public List<UserResponse> getAllUserResponses() {
         List<User> users = userRepo.findAll();
         return UserMapper.entityListToDto(users);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepo.findAll();
+    }
+
+    public boolean checkIfUsernameOrEmailExists(String username, String email) {
+        return userRepo.existsByUsernameOrEmail(username, email);
     }
 }
