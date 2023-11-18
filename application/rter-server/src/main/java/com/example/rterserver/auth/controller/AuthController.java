@@ -6,6 +6,7 @@ import com.example.rterserver.user.dto.UserRequest;
 import com.example.rterserver.user.dto.UserResponse;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@OpenAPIDefinition(info = @io.swagger.v3.oas.annotations.info.Info(title = "Auth API", version = "v1"))
+@OpenAPIDefinition(info = @Info(title = "Auth API", version = "v1"))
 @Validated
 public class AuthController {
 
