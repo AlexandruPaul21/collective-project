@@ -13,6 +13,8 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class NgoService {
@@ -22,10 +24,12 @@ public class NgoService {
         this.ngoRepo = ngoRepo;
     }
 
-    public void fetchNGOs() {
-        int pages = 0;
-        while (pages < 6) {
-            String url = "https://www.sustinebinele.ro/organizatii" + "/pagina-" + pages;
+    public List<Ngo> fetchNGOs(int page) {
+        List<Ngo> fetchedNgos = new ArrayList<>();
+
+        int currentPage = 1;
+        while (currentPage <= page) {
+            String url = "https://www.sustinebinele.ro/organizatii" + "/pagina-" + currentPage;
             try {
                 try {
                     SSLContext sslContext = SSLContext.getInstance("TLS");
@@ -67,6 +71,7 @@ public class NgoService {
                                 ngoToBeAdded.setWebsite("null");
                             }
                             ngoRepo.save(ngoToBeAdded);
+                            fetchedNgos.add(ngoToBeAdded);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -75,11 +80,11 @@ public class NgoService {
                         ngoToBeAdded.setWebsite("null");
                     }
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            pages++;
+            currentPage++;
         }
+        return fetchedNgos;
     }
 }

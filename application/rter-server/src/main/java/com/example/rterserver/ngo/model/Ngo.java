@@ -1,5 +1,6 @@
 package com.example.rterserver.ngo.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,10 +10,13 @@ public class Ngo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, length = 64)
+    @Schema(description = "The name of the ngo")
     String name;
     @Column(nullable = false, length = 256)
+    @Schema(description = "The contact details of the ngo or null if not available")
     String contact;
     @Column(nullable = false, length = 64)
+    @Schema(description = "The website of the ngo or null if not available")
     String website;
 
     public Ngo(String name, String contact, String website) {
