@@ -43,6 +43,8 @@ const NGOCard: React.FC<NGOCardProps> = ({
     setIsFavourite(!isFavourite);
   };
 
+  console.log(ngoName)
+  console.log(ngoDescription)
   return (
     <>
       <Card className="m-5 w-[300px]">
