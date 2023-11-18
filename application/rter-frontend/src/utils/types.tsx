@@ -16,7 +16,7 @@ export type CategoryItem = {
   };
 
   export type LoginRequest = {
-    email: string;
+    username: string;
     password: string;
   }
 

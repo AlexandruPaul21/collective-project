@@ -4,7 +4,7 @@ import {LoginRequest, User} from "@/utils/types.tsx";
 const signup =  (data:User) => {
     handleSignup(data)
         .then((res) => {
-            return res.data.data;
+            return JSON.parse(res.data.data);
         })
         .then((data) => {
             console.log(data);

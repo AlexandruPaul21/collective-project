@@ -13,7 +13,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
-    setUsername(user?.email || "Username");
+    setUsername(user?.username || "Username");
   }, []);
 
   return (

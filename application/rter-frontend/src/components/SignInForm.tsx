@@ -18,7 +18,7 @@ import {AuthService} from "@/apis/auth/AuthService.ts";
 import {LoginRequest} from "@/utils/types.tsx";
 
 const FormSchema = z.object({
-    email: z.string().email().min(3).max(64),
+    username: z.string().min(3).max(64),
     password: z.string().min(3).max(64),
 })
 

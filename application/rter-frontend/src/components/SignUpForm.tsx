@@ -187,8 +187,8 @@ export function SignUpForm() {
                           <SelectValue placeholder="Choose" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="MALE">Male</SelectItem>
-                          <SelectItem value="FEMALE">Female</SelectItem>
+                          <SelectItem value={Gender.MALE}>Male</SelectItem>
+                          <SelectItem value={Gender.FEMALE}>Female</SelectItem>
                         </SelectContent>
                       </Select>
                     </FormControl>
