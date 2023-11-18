@@ -51,4 +51,44 @@
         </preConditions>
         <dropColumn tableName="app_user" columnName="user_type"/>
     </changeSet>
+
+    <changeSet id="20231118015500" author="daria">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ngo"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ngo">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contact" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="website" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20231118023001" author="daria">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="ngo" columnName="contact"/>
+        </preConditions>
+        <modifyDataType tableName="ngo" columnName="contact" newDataType="varchar(512)"/>
+    </changeSet>
+
+    <changeSet id="20231113023305" author="daria">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="ngo" columnName="name"/>
+            <columnExists tableName="ngo" columnName="website"/>
+        </preConditions>
+        <modifyDataType tableName="ngo" columnName="name" newDataType="varchar(512)"/>
+        <modifyDataType tableName="ngo" columnName="website" newDataType="varchar(512)"/>
+    </changeSet>
+
+
 </databaseChangeLog>

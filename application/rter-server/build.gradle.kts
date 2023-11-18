@@ -41,6 +41,8 @@ dependencies {
         exclude(group = "io.swagger.core.v3", module= "swagger-annotations")
     }
     implementation("io.swagger.core.v3:swagger-annotations:2.2.15")
+    implementation("org.jsoup:jsoup:1.15.3")
+    implementation("org.apache.commons:commons-lang3:3.12.0")
 }
 
 tasks.withType<Test> {
