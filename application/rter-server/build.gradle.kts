@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":rter-api")))
+    //implementation(project(mapOf("path" to ":rter-api")))
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.postgresql:postgresql:42.6.0")
