@@ -1,4 +1,5 @@
 import axios from "axios";
+import {UserProps} from "@/utils/types/userProps";
 
 const usersUrl = `http://localhost:8080/users`;
 
