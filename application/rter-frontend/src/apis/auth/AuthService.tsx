@@ -16,7 +16,7 @@ const signup =  (data:User) => {
     })
     .catch((err) => {
       console.log(err);
-      return {status:err.response.status,message:signupFail};
+      return {status:err.response.status,message:signupFail+err.response.data};
     });
 }
 
