@@ -22,11 +22,11 @@ public class NgoService {
 
     public NgoService(NgoRepo ngoRepo) {
         this.ngoRepo = ngoRepo;
+        fetchNGOs(50);
     }
 
-    public List<Ngo> fetchNGOs(int nrOfNgos) {
-        List<Ngo> fetchedNgos = new ArrayList<>();
-        //ngoRepo.deleteAll();
+    public void fetchNGOs(int nrOfNgos) {
+        ngoRepo.deleteAll();
         int page = nrOfNgos / 10;
         if (nrOfNgos % 10 != 0) {
             page = page + 1;
@@ -74,8 +74,7 @@ public class NgoService {
                             } else {
                                 ngoToBeAdded.setWebsite("null");
                             }
-                            //ngoRepo.save(ngoToBeAdded);
-                            fetchedNgos.add(ngoToBeAdded);
+                            ngoRepo.save(ngoToBeAdded);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -89,6 +88,10 @@ public class NgoService {
             }
             currentPage++;
         }
-        return fetchedNgos;
+    }
+
+    public List<Ngo> getAllNGOs()
+    {
+        return ngoRepo.findAll();
     }
 }
