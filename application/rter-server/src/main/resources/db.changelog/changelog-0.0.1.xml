@@ -90,5 +90,21 @@
         <modifyDataType tableName="ngo" columnName="website" newDataType="varchar(512)"/>
     </changeSet>
 
+    <changeSet id="20231118190501" author="oti">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="app_user"/>
+        </preConditions>
+        <insert tableName="app_user">
+            <column name="username" value="admin"/>
+            <column name="name" value="Admin Name"/>
+            <column name="password" value="admin"/>
+            <column name="email" value="admin@gmail.com"/>
+            <column name="address" value="Admin Address"/>
+            <column name="gender" value="MALE"/>
+            <column name="created_at" value="2023-11-13"/>
+            <column name="rating" value="10"/>
+        </insert>
+    </changeSet>
+
 
 </databaseChangeLog>

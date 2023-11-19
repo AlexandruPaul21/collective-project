@@ -5,7 +5,7 @@ const MainPage = () => {
   return (
     <div className="flex flex-col">
       <Navbar />
-      <div className="justify flex flex-row">
+      <div className="flex justify-center gap-7 mt-10">
         <FilterSidebar />
         <CardsSection />
       </div>
