@@ -7,7 +7,7 @@ const CardsSection = () => {
   const [ngos, setNgos] = useState<NGOProps[]>([]);
   useEffect(() => {
     (async () => {
-      setNgos(await getAllNGOs("admin", "admin", 10));
+      setNgos(await getAllNGOs("admin", "admin"));
     })();
   }, [ngos]);
   return (
