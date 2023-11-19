@@ -2,8 +2,8 @@ import axios from "axios";
 import {NGOProps} from "@/utils/types/ngoProps";
 const ngosUrl = `http://localhost:8080/ngos`;
 
-export const getAllNGOs: (username: string, password: string, nrOfNGOs: number) => Promise<NGOProps[]> = (username, password, nrOfNGOs) => {
-    const result = axios.get(`${ngosUrl}?nrOfNGOs=${nrOfNGOs}`, {
+export const getAllNGOs: (username: string, password: string) => Promise<NGOProps[]> = (username, password) => {
+    const result = axios.get(`${ngosUrl}`, {
         auth: {
             username: username,
             password: password

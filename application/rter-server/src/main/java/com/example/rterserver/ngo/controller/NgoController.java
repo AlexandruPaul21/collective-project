@@ -36,9 +36,7 @@ public class NgoController {
         this.ngoService = ngoService;
     }
 
-    @Operation(summary = "Fetch NGOs", description = "This endpoint is used to fetch NGOs. " +
-            "Enter how many NGOs you want to fetch. The number must be a multiple of 10. " +
-            "Otherwise, the number will be rounded up to the next multiple of 10.")
+    @Operation(summary = "Get all NGOs", description = "This endpoint is used to retrieve all NGOs. ")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "NGOs found successfully",
                     content = {@Content(mediaType = "application/json",
@@ -48,11 +46,8 @@ public class NgoController {
                             schema = @Schema(implementation = ResponseDto.class))})
     })
     @GetMapping
-    public ResponseEntity<List<Ngo>> fetchNgos(
-            @Parameter(description = "Number of NGOs (multiple of 10)")
-            @RequestParam(defaultValue = "10") @Min(10) @Max(100) int nrOfNGOs
-    ) {
-        List<Ngo> ngos = ngoService.fetchNGOs(nrOfNGOs);
+    public ResponseEntity<List<Ngo>> getAllNGOs() {
+        List<Ngo> ngos = ngoService.getAllNGOs();
         return ResponseEntity.ok(ngos);
     }
 }
