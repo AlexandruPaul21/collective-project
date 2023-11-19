@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Gift, LucideHeart, PlusSquare } from "lucide-react";
 import { Button } from "./ui/button";
-import { NGOProps } from "@/utils/types/ngoProps";
 import { useState } from "react";
 import {
   Dialog,
@@ -21,14 +20,19 @@ import {
 import { DialogHeader, DialogFooter } from "./ui/dialog";
 
 interface NGOCardProps {
-  NGO: NGOProps;
+  ngoName: string;
+  ngoURL: string;
+  ngoContact: string;
+  marginTop: string;
   onDonateClick: () => void;
   onVolunteerClick: () => void;
 }
 
 const NGOCard: React.FC<NGOCardProps> = ({
-  //the NGO card should receive through props an NGO object after it is implemented
-  NGO,
+  ngoName,
+  ngoURL,
+  ngoContact,
+  marginTop,
   onDonateClick,
   onVolunteerClick,
 }) => {
@@ -41,15 +45,17 @@ const NGOCard: React.FC<NGOCardProps> = ({
 
   return (
     <>
-      <Card className="m-5 flex h-[350px] w-[320px] flex-col">
+      <Card className={`m-5 ${marginTop} min-h-[400px] w-[300px]`}>
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex justify-between">
             <CardTitle
-              className="pt- cursor-pointer items-center justify-between transition-colors hover:text-cyan-500"
+              className={
+                "hover:text-cyan-500 line-clamp-2 cursor-pointer items-center justify-between overflow-hidden text-lg transition-colors"
+              }
               onClick={(): void => setIsDialogOpen(true)}
             >
-              {NGO.name}
-            </CardTitle>{" "}
+              {ngoName}
+            </CardTitle>
             <Button
               onClick={handleAddFavouriteClick}
               style={{ background: "transparent" }}
@@ -61,23 +67,19 @@ const NGOCard: React.FC<NGOCardProps> = ({
             </Button>
           </div>
         </CardHeader>
-        <CardContent className="grid max-h-20 gap-4 overflow-hidden overflow-ellipsis">
-          <CardDescription>{NGO.contact}</CardDescription>
+        <CardContent className="grid gap-4">
+          <img
+            src="https://img.freepik.com/premium-vector/charity-abstract-logo-healthy-lifestyle_660762-34.jpg"
+            alt={`${ngoName} Logo`}
+            className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
+          />
         </CardContent>
-        <CardFooter className="mt-auto flex items-center justify-between">
-          <Button
-            onClick={onDonateClick}
-            className="bg-red-500"
-            style={{ backgroundColor: "#ED254A" }}
-          >
+        <CardFooter className="flex items-center justify-between">
+          <Button  onClick={onDonateClick}>
             <Gift size={20} />
             <span className="ml-2">Donate</span>
           </Button>
-          <Button
-            onClick={onVolunteerClick}
-            style={{ backgroundColor: "#39D0D1" }}
-            className="bg-teal-400"
-          >
+          <Button onClick={onVolunteerClick} >
             <PlusSquare size={20} />
             <span className="ml-2">Volunteer</span>
           </Button>
@@ -91,24 +93,37 @@ const NGOCard: React.FC<NGOCardProps> = ({
         <DialogOverlay />
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{NGO.name}</DialogTitle>
+            <DialogTitle>{ngoName}</DialogTitle>
           </DialogHeader>
-          <DialogDescription>{NGO.contact}</DialogDescription>
+          <DialogDescription>
+            <div className="flex">
+              <img
+                src="https://img.freepik.com/premium-vector/charity-abstract-logo-healthy-lifestyle_660762-34.jpg"
+                alt={`${ngoName} Logo`}
+                style={{
+                  borderRadius: "10px",
+                  maxWidth: "200px",
+                  maxHeight: "200px",
+                }}
+              />
+              <div className="mb-10 ml-5 mt-2 flex flex-col justify-between">
+                <span className="">{ngoContact}</span>
+                <a
+                  href={ngoURL}
+                  className="hover:text-sky-800 text-lg hover:underline"
+                >
+                  Visit their website
+                </a>
+              </div>
+            </div>
+          </DialogDescription>
 
           <DialogFooter>
-            <Button
-              onClick={onDonateClick}
-              style={{ backgroundColor: "#ED254A" }}
-              className="bg-red-500"
-            >
+            <Button onClick={onDonateClick}>
               <Gift size={20} />
               <span className="ml-2">Donate</span>
             </Button>
-            <Button
-              onClick={onVolunteerClick}
-              style={{ backgroundColor: "#39D0D1" }}
-              className="bg-teal-400"
-            >
+            <Button onClick={onVolunteerClick} >
               <PlusSquare size={20} />
               <span className="ml-2">Volunteer</span>
             </Button>
