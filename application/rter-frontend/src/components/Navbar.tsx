@@ -5,8 +5,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Heart, CircleDollarSign, ChevronDown } from "lucide-react";
+import {useEffect, useState} from "react";
+import {capitalizeString} from "@/lib/utils.ts";
 
 const Navbar = () => {
+  const [username,setUsername] = useState("Username");
+
+  useEffect(() => {
+    const username = localStorage.getItem('username');
+    setUsername(capitalizeString(username||"") || "Username");
+  }, []);
+
   return (
     <div className="z-1 border-gray-200 bg-white h-[7vh] w-full justify-center overflow-hidden border-b-2">
       <div className="flex h-[7vh] flex-row items-center justify-between px-10 ">
@@ -35,7 +44,7 @@ const Navbar = () => {
           <DropdownMenu>
             <DropdownMenuTrigger>
               <div className="flex items-center gap-[2px]">
-                <span className="text-lg">Username</span>
+                <span className="text-lg">{username}</span>
                 <ChevronDown className="h-4 w-4" />
               </div>
             </DropdownMenuTrigger>
