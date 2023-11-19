@@ -9,7 +9,6 @@ import {useEffect, useState} from "react";
 import {capitalizeString} from "@/lib/utils.ts";
 
 const Navbar = () => {
-
   const [username,setUsername] = useState("Username");
 
   useEffect(() => {
@@ -18,14 +17,15 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="h-[7vh] w-full justify-center overflow-hidden bg-slate-100 z-1 border-b-2 border-gray-300">
+    <div className="z-1 border-gray-200 bg-white h-[7vh] w-full justify-center overflow-hidden border-b-2">
       <div className="flex h-[7vh] flex-row items-center justify-between px-10 ">
-        <div>
+        <div className="flex items-center gap-2">
           <img
-            src="/icon.svg"
+            src="/logo.png"
             alt="img"
             className="h-10 w-10 overflow-hidden"
           />
+          <h1 className="text-xl font-bold">CharityHub</h1>
         </div>
         <div className="flex flex-row items-center gap-4">
           <a href="/favourites" className="">
