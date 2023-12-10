@@ -3,20 +3,19 @@ package com.example.rterserver.donation.controller;
 import com.example.rterserver.common.ResponseDto;
 import com.example.rterserver.donation.model.Donation;
 import com.example.rterserver.donation.service.DonationService;
-import com.example.rterserver.user.dto.UserResponse;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.info.Info;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ import java.util.List;
 @OpenAPIDefinition(info = @Info(title=" Donation API",version = "v1"))
 @Validated
 public class DonationController {
-    private  final DonationService donationService;
+    private final DonationService donationService;
 
     @Autowired
     public DonationController(DonationService donationService) {
@@ -35,18 +34,18 @@ public class DonationController {
 
     @Operation(summary = "Create a new donation.", description = "This endpoint is used to create a new donation.")
     @ApiResponses(value = {
-            @ApiResponse( responseCode = "201",description = "Donation created successfuly",
+            @ApiResponse(responseCode = "201", description = "Donation created successfuly",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = Donation.class))}),
-            @ApiResponse( responseCode = "400",description ="Invalid request due to validation errors",
+            @ApiResponse(responseCode = "400", description = "Invalid request due to validation errors",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ResponseDto.class ))}),
-            @ApiResponse( responseCode = "500",description = "Internal server error",
+                            schema = @Schema(implementation = ResponseDto.class))}),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseDto.class))})
     })
     @PostMapping
-    public ResponseEntity<Donation> createDonation(@Valid @RequestBody Donation donation){
+    public ResponseEntity<Donation> createDonation(@Valid @RequestBody Donation donation) {
         Donation createdDonation = donationService.save(donation);
         return ResponseEntity.ok(createdDonation);
     }
@@ -92,10 +91,9 @@ public class DonationController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseDto.class))})
     })
-    @GetMapping("donations/idUser")
-    public ResponseEntity<List<Donation>> getDonationHistory(@PathVariable("idUser") Long idUser){
+    @GetMapping("/history/{idUser}")
+    public ResponseEntity<List<Donation>> getDonationHistory(@PathVariable("idUser") Long idUser) {
         List<Donation> donationHistory = donationService.getDonationHistory(idUser);
         return ResponseEntity.ok(donationHistory);
-
     }
 }
