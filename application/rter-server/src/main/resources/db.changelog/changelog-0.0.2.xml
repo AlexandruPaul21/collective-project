@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="67583924" author="flavius">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="donation"/>
+            </not>
+        </preConditions>
+        <createTable tableName="donation">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="amount" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="details" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="createdat" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="iduser" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="idngo" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+<!--
+
+        <addForeignKeyConstraint baseTableName="donation" baseColumnNames="iduser"
+                                 referencedTableName="app_user" referencedColumnNames="id"
+                                 constraintName="fk_donation_user"/>
+        <addForeignKeyConstraint baseTableName="donation" baseColumnNames="idngo"
+                                 referencedTableName="ngo" referencedColumnNames="id"
+                                 constraintName="fk_donation_ngo"/>
+-->
+
+        <insert tableName="donation">
+            <column name="id" value="1"/>
+            <column name="amount" value="100.00"/>
+            <column name="type" value="FOOD"/>
+            <column name="details" value="This is a sample donation"/>
+            <column name="createdat" value="09/12/2023"/>
+            <column name="iduser" value="1"/>
+            <column name="idngo" value="1066"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

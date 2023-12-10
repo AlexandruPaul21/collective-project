@@ -56,5 +56,13 @@ public class Ngo {
     public String toString() {
         return "Name: " + name + "\nContact: " + contact + "\nWebsite: " + website;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
 

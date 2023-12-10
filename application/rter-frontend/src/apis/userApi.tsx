@@ -1,7 +1,7 @@
 import axios from "axios";
 import {UserProps} from "@/utils/types/userProps";
 
-const usersUrl = `http://localhost:8080/users`;
+const usersUrl = `http://localhost:8082/users`;
 
 export const getAllUsers: (username: string, password: string) => Promise<UserProps[]> = (username, password) => {
     const result = axios.get(usersUrl, {
