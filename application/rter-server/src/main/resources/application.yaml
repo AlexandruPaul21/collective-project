@@ -15,3 +15,7 @@ spring:
 
   liquibase:
     change-log: classpath:db.changelog/changelog-master.xml
+
+  mail:
+    username: "runtimeterror35@gmail.com"
+    password: "vemi ehpw gutq sjiu"
