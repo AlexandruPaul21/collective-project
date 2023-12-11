@@ -11,10 +11,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -25,12 +24,18 @@ public class EmailController {
 
     @Operation(summary = "Send an email", description = "This endpoint is used to send an email. ")
     @PostMapping
-    public String sendEmail(@RequestBody EmailRequest emailRequest) {
-        String to = emailRequest.recipient();
-        String subject = emailRequest.subject();
-        String body = emailRequest.body();
+    public ResponseEntity<?> sendEmail(@RequestBody EmailRequest emailRequest) {
+        try{
+            String to = emailRequest.recipient();
+            String subject = emailRequest.subject();
+            String body = emailRequest.body();
 
-        emailService.sendEmail(to, subject, body);
-        return "Email sent successfully!";
+            emailService.sendEmail(to, subject, body);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (Exception ex) {
+            return new ResponseEntity<>("An error occurred while sending an email: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+                 }
+
     }
 }

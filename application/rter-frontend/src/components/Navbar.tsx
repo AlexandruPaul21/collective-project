@@ -17,8 +17,8 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="z-1 border-gray-200 bg-white h-[7vh] w-full justify-center overflow-hidden border-b-2">
-      <div className="flex h-[7vh] flex-row items-center justify-between px-10 ">
+    <div className="z-1 border-gray-200 bg-white h-[60px] w-full justify-center overflow-hidden border-b-2">
+      <div className="flex h-[60px] flex-row items-center justify-between px-10 ">
         <div className="flex items-center gap-2">
           <img
             src="/logo.png"
