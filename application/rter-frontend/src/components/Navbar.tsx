@@ -7,6 +7,7 @@ import {
 import { Heart, CircleDollarSign, ChevronDown } from "lucide-react";
 import {useEffect, useState} from "react";
 import {capitalizeString} from "@/lib/utils.ts";
+import {Link} from "react-router-dom";
 
 const Navbar = () => {
   const [username,setUsername] = useState("Username");
@@ -25,7 +26,9 @@ const Navbar = () => {
             alt="img"
             className="h-10 w-10 overflow-hidden"
           />
-          <h1 className="text-xl font-bold">CharityHub</h1>
+          <Link to="/">
+            <h1 className="text-xl font-bold" >CharityHub</h1>
+          </Link>
         </div>
         <div className="flex flex-row items-center gap-4">
           <a href="/favourites" className="">
@@ -49,7 +52,9 @@ const Navbar = () => {
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <Link to="/profile">
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+              </Link>
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Transactions</DropdownMenuItem>
             </DropdownMenuContent>

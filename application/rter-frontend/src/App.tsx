@@ -6,6 +6,7 @@ import FavouritesPage from "./pages/mainPage/FavouritesPage";
 
 import SignInPage from "@/pages/auth/SignInPage";
 import SignUpPage from "@/pages/auth/SignUpPage";
+import UserProfilePage from "@/pages/userPage/UserProfilePage";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
 
             <Route path="/sign-in" element={<SignInPage/>} />
             <Route path="/sign-up" element={<SignUpPage/>} />
+
+            <Route path="/profile" element={<UserProfilePage/>} />
           </Routes>
         </Suspense>
       </BrowserRouter>
