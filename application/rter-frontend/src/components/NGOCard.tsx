@@ -14,7 +14,7 @@ import {
   CardHeader,
   CardTitle,
   CardContent,
-  CardDescription,
+
   CardFooter,
 } from "./ui/card";
 import { DialogHeader, DialogFooter } from "./ui/dialog";
