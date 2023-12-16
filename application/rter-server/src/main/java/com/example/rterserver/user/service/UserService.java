@@ -59,6 +59,9 @@ public class UserService {
     public UserResponse findResponseById(Long id) {
         return UserMapper.entityToDto(findById(id));
     }
+    public UserResponse findResponseByUsername(String username) {
+        return UserMapper.entityToDto(findByUsername(username));
+    }
 
     public User findByUsername(String username) {
         return userRepo.findByUsername(username)
