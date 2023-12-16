@@ -7,6 +7,7 @@ package com.example.rterserver.user.controller;
 import com.example.rterserver.common.ResponseDto;
 import com.example.rterserver.user.dto.UserRequest;
 import com.example.rterserver.user.dto.UserResponse;
+import com.example.rterserver.user.dto.UserUpdateRequest;
 import com.example.rterserver.user.service.UserService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -77,10 +78,9 @@ public class UserController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseDto.class))})
     })
-    @PutMapping("/{userId}")
-    public ResponseEntity<UserResponse> updateUser(@PathVariable("userId") Long userId, @RequestBody UserRequest userRequest) {
-        userService.update(userRequest, userId);
-        return ResponseEntity.ok().build();
+    @PutMapping("/{username}")
+    public ResponseEntity<UserResponse> updateUser(@PathVariable("username") String username, @RequestBody UserUpdateRequest userRequest) {
+        return ResponseEntity.ok().body(userService.update(userRequest, username));
     }
 
     //    @Override

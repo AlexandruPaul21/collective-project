@@ -5,6 +5,7 @@ package com.example.rterserver.user.service;
 
 import com.example.rterserver.user.dto.UserRequest;
 import com.example.rterserver.user.dto.UserResponse;
+import com.example.rterserver.user.dto.UserUpdateRequest;
 import com.example.rterserver.user.exception.NotFoundException;
 import com.example.rterserver.user.mapper.UserMapper;
 import com.example.rterserver.user.model.User;
@@ -27,20 +28,19 @@ public class UserService {
     public UserResponse save(UserRequest userRequest) {
         User userToSave = new User(userRequest.username(), userRequest.name(), userRequest.password(),
                 userRequest.email(), userRequest.address(), userRequest.gender(),
-                LocalDateTime.now(), 10);
+                LocalDateTime.now(), 10,"You can add a description here.");
         return UserMapper.entityToDto(userRepo.save(userToSave));
     }
 
     @Transactional
-    public UserResponse update(UserRequest userRequest, Long id) {
-        User userToUpdate = findById(id);
+    public UserResponse update(UserUpdateRequest userRequest, String username) {
+        User userToUpdate = findByUsername(username);
 
-        userToUpdate.setUsername(userRequest.username());
         userToUpdate.setName(userRequest.name());
-        userToUpdate.setPassword(userRequest.password());
         userToUpdate.setEmail(userRequest.email());
         userToUpdate.setAddress(userRequest.address());
         userToUpdate.setGender(userRequest.gender());
+        userToUpdate.setDescription(userRequest.description());
 
         return UserMapper.entityToDto(userRepo.save(userToUpdate));
     }
@@ -61,7 +61,8 @@ public class UserService {
     }
 
     public User findByUsername(String username) {
-        return userRepo.findByUsername(username).orElse(null);
+        return userRepo.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("User not found with username: " + username));
     }
 
     public List<UserResponse> getAllUserResponses() {

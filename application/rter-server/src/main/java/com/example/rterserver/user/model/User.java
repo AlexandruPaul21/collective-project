@@ -47,7 +47,11 @@ public class User {
     @Schema(description = "The rating of the user")
     private int rating;
 
-    public User(String username, String name, String password, String email, String address, Gender gender, LocalDateTime createdAt, int rating) {
+    @Column(nullable = false)
+    @Schema(description = "The description of the user")
+    private String description;
+
+    public User(String username, String name, String password, String email, String address, Gender gender, LocalDateTime createdAt, int rating, String description) {
         this.username = username;
         this.name = name;
         this.password = password;
@@ -56,6 +60,7 @@ public class User {
         this.gender = gender;
         this.createdAt = createdAt;
         this.rating = rating;
+        this.description = description;
     }
 
     public User() {
@@ -128,5 +133,13 @@ public class User {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
