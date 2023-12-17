@@ -1,24 +1,25 @@
 import { Button } from "@/components/ui/button";
 import {useEffect, useState} from "react";
 import {UserService} from "@/apis/profile/UserService";
-import {Gender, User} from "@/utils/types";
+import {Gender} from "@/utils/types";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
+import {toast} from "@/components/ui/use-toast";
 
 const UserProfile: React.FC = () => {
 
   const [updateScreen, setUpdateScreen] = useState(false);
 
 
-  const [name, setName] = useState("ana");
-  const [email, setEmail] = useState("anaekool@gmail.yep");
-  const [address, setAddress] = useState("Santa Land, 123 Rudolph Street, 12345");
-  const [gender, setGender] = useState("FEMALE");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [gender, setGender] = useState("");
   const [description, setDescription] = useState("");
 
-  const [updateName, setUpdateName] = useState("ana");
-  const [updateEmail, setUpdateEmail] = useState("anaekool@gmail.yep");
-  const [updateAddress, setUpdateAddress] = useState("Santa Land, 123 Rudolph Street, 12345");
-  const [updateGender, setUpdateGender] = useState("FEMALE");
+  const [updateName, setUpdateName] = useState("");
+  const [updateEmail, setUpdateEmail] = useState("");
+  const [updateAddress, setUpdateAddress] = useState("");
+  const [updateGender, setUpdateGender] = useState("");
   const [updateDescription, setUpdateDescription] = useState("");
 
   useEffect(()=> {
@@ -51,19 +52,61 @@ const UserProfile: React.FC = () => {
     setUpdateScreen(false);
   }
 
+  function validateInput() {
+    let err="";
+    let c = 0;
+    if(updateName.length < 3) {
+      err = err + "Name, ";
+      c++;
+    }
+    if(updateEmail.length < 3){
+        err = err+"Email, ";
+        c++;
+    }
+    if(updateAddress.length < 3){
+        err = err+"Address, ";
+        c++;
+    }
+    if(updateDescription.length < 3){
+        err = err+"Description, ";
+        c++;
+    }
+    if(c>0){
+        err = err.substring(0,err.length-2);
+        c==1?showErrorToast(err+" is too short!"):showErrorToast(err+" are too short!");
+    }
+    return c==0;
+  }
+
+  const showErrorToast=(error:string)=>{
+    toast({
+      title: "Error",
+      variant: "destructive",
+      description: error,
+    })
+  }
+
   const saveChanges = async () => {
     // user validation
-
+    if(!validateInput()){
+      return;
+    }
     // send to srv
-    await UserService.updateCurrentUser({name:updateName, email:updateEmail, gender:updateGender, description:updateDescription, address:updateAddress  } as User)
-        .then((user)=> {
-          setName(user.name);
-          setEmail(user.email);
-          setAddress(user.address);
-          setGender(user.gender);
-          setDescription(user.description);
-        });
+    const {user,status, message} = await UserService.updateCurrentUser({name:updateName, email:updateEmail, gender:updateGender, description:updateDescription, address:updateAddress  });
 
+    if(status == 200){
+      setName(user.name);
+      setEmail(user.email);
+      setAddress(user.address);
+      setGender(user.gender);
+      setDescription(user.description);
+    }
+
+    toast({
+      title: status===200?"Success":"Error",
+      variant: status===200?"default":"destructive",
+      description: message,
+    })
     // go back to update screen
     setUpdateScreen(false);
   }
@@ -124,7 +167,7 @@ const UserProfile: React.FC = () => {
             <li>
               <Select
                 onValueChange={(e) => setUpdateGender(e)}
-                defaultValue={gender}
+                value={!updateScreen ? gender : updateGender}
                 disabled = {!updateScreen}
               >
                 <SelectTrigger className="font-nunito text-sm disabled:border-[1px]  disabled:border-red border-lightblu rounded-xl border-[1px]">

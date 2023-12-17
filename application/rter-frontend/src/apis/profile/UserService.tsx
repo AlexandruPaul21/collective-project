@@ -1,5 +1,6 @@
 import {handleGetUser,handleUpdateUser} from './userApi';
 import {User} from "@/utils/types";
+import {updateFail, updateSuccess} from "@/apis/auth/responseConstants";
 
 const getCurrentUser = () => {
     const username = localStorage.getItem("username");
@@ -17,8 +18,12 @@ const updateCurrentUser = (user) => {
     return handleUpdateUser(user,username,password)
         .then((response) => {
             console.log(response);
-            return response.data;
-        }) as Promise<User>;
+            return {status:response.status,user:response.data,message:updateSuccess};
+        })
+        .catch((err) => {
+            console.log(err);
+            return {user:null,status:err.status,message:updateFail};
+        });
 };
 
 export const UserService = {
