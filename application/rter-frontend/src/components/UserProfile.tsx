@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import {useEffect, useState} from "react";
 import {UserService} from "@/apis/profile/UserService";
-import {User} from "@/utils/types";
+import {Gender, User} from "@/utils/types";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 
 const UserProfile: React.FC = () => {
 
@@ -11,13 +12,13 @@ const UserProfile: React.FC = () => {
   const [name, setName] = useState("ana");
   const [email, setEmail] = useState("anaekool@gmail.yep");
   const [address, setAddress] = useState("Santa Land, 123 Rudolph Street, 12345");
-  const [gender, setGender] = useState("female");
+  const [gender, setGender] = useState("FEMALE");
   const [description, setDescription] = useState("");
 
   const [updateName, setUpdateName] = useState("ana");
   const [updateEmail, setUpdateEmail] = useState("anaekool@gmail.yep");
   const [updateAddress, setUpdateAddress] = useState("Santa Land, 123 Rudolph Street, 12345");
-  const [updateGender, setUpdateGender] = useState("female");
+  const [updateGender, setUpdateGender] = useState("FEMALE");
   const [updateDescription, setUpdateDescription] = useState("");
 
   useEffect(()=> {
@@ -69,15 +70,7 @@ const UserProfile: React.FC = () => {
 
   return (
     <div>
-
-      <div className=" rounded-lg border-[1px] border-gray-200 bg-white">
-
-        <div className="m-5">
-
-          <h3 className="text-md mb-2 mt-[30px] font-semibold  text-center">
-            User Profile
-          </h3>
-
+        <div>
           <ul>
             <li className="mt-3">
               <label className="text-sm">
@@ -87,7 +80,7 @@ const UserProfile: React.FC = () => {
             <li>
               <input
                 type="text"
-                className="border-lightblu marker:text-lightblu rounded-lg border-[1px] w-full"
+                className="font-nunito text-sm border-lightblu rounded-xl border-[1px] w-full p-1"
                 disabled = {!updateScreen}
                 value={ !updateScreen ? name : updateName}
                 onChange={(e) => setUpdateName(e.target.value)}
@@ -102,7 +95,7 @@ const UserProfile: React.FC = () => {
             <li>
               <input
                 type="text"
-                className="border-lightblu marker:text-lightblu rounded-lg border-[1px] w-full"
+                className="font-nunito text-sm border-lightblu  rounded-xl border-[1px] w-full p-1"
                 disabled = {!updateScreen}
                 value={ !updateScreen ? email : updateEmail}
                 onChange={(e) => setUpdateEmail(e.target.value)}
@@ -116,26 +109,32 @@ const UserProfile: React.FC = () => {
             </li>
             <li>
               <textarea
-                className="border-lightblu marker:text-lightblu rounded-lg  border-[1px] w-full"
+                className="font-nunito text-sm border-lightblu rounded-xl  border-[1px] w-full resize-none p-1"
                 disabled = {!updateScreen}
                 value={ !updateScreen ? address : updateAddress}
                 onChange={(e) => setUpdateAddress(e.target.value)}
               />
             </li>
 
-            <li className="mt-3">
+            <li className="mt-1">
               <label className="text-sm">
                 Gender:
               </label>
             </li>
             <li>
-              <input
-                type="text"
-                className="border-lightblu marker:text-lightblu rounded-lg border-[1px] w-full"
+              <Select
+                onValueChange={(e) => setUpdateGender(e)}
+                defaultValue={gender}
                 disabled = {!updateScreen}
-                value={ !updateScreen ? gender : updateGender}
-                onChange={(e) => setUpdateGender(e.target.value)}
-              />
+              >
+                <SelectTrigger className="font-nunito text-sm disabled:border-[1px]  disabled:border-red border-lightblu rounded-xl border-[1px]">
+                  <SelectValue placeholder="Choose"/>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={Gender.MALE}>Male</SelectItem>
+                  <SelectItem value={Gender.FEMALE}>Female</SelectItem>
+                </SelectContent>
+              </Select>
             </li>
 
             <li className="mt-3">
@@ -145,7 +144,9 @@ const UserProfile: React.FC = () => {
             </li>
             <li>
               <textarea
-                  className="border-lightblu marker:text-lightblu rounded-lg border-[1px] w-full"
+                  className="font-nunito text-sm border-lightblu rounded-xl border-[1px] w-full resize-none p-1"
+                  placeholder="Tell us about yourself"
+                  rows = {5}
                   disabled = {!updateScreen}
                   value={ !updateScreen ? description : updateDescription}
                   onChange={(e) => setUpdateDescription(e.target.value)}
@@ -154,13 +155,13 @@ const UserProfile: React.FC = () => {
 
             {
               updateScreen ? (
-                <div className="my-10 ml-auto mr-auto w-full">
-                  <button className="w-1/2 rounded border-[1px] p-2" onClick={switchToProfileScreenHandler}>
+                <div className="w-full">
+                  <Button  className="bg-[#5b9ed9] w-1/2 rounded-full hover:bg-[#195f9c]" onClick={switchToProfileScreenHandler}>
                     Cancel
-                  </button>
-                  <button className="w-1/2 rounded border-[1px] p-2" onClick={saveChanges}>
+                  </Button>
+                  <Button className="bg-[#2076C1] w-1/2 rounded-full hover:bg-[#195f9c]" onClick={saveChanges}>
                     Save
-                  </button>
+                  </Button>
                 </div>
               ) : (<> </>)
             }
@@ -169,14 +170,13 @@ const UserProfile: React.FC = () => {
 
           {
             !updateScreen ? (
-              <Button className="mt-10 ml-auto mr-auto w-full" onClick={switchToUpdateScreenHandler}>
+              <Button className="bg-[#2076C1] w-full rounded-full hover:bg-[#195f9c]" onClick={switchToUpdateScreenHandler}>
                 Update information
               </Button>
             ) : (<> </>)
           }
 
         </div>
-      </div>
     </div>
   );
 };
