@@ -13,6 +13,7 @@ export type CategoryItem = {
     password: string;
     gender: Gender;
     address: string;
+    description: string;
   };
 
   export type LoginRequest = {

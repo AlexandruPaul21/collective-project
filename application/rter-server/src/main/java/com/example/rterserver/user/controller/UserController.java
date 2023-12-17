@@ -7,6 +7,7 @@ package com.example.rterserver.user.controller;
 import com.example.rterserver.common.ResponseDto;
 import com.example.rterserver.user.dto.UserRequest;
 import com.example.rterserver.user.dto.UserResponse;
+import com.example.rterserver.user.dto.UserUpdateRequest;
 import com.example.rterserver.user.service.UserService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -77,10 +78,10 @@ public class UserController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseDto.class))})
     })
-    @PutMapping("/{userId}")
-    public ResponseEntity<UserResponse> updateUser(@PathVariable("userId") Long userId, @RequestBody UserRequest userRequest) {
-        userService.update(userRequest, userId);
-        return ResponseEntity.ok().build();
+    @PutMapping("/{username}")
+    public ResponseEntity<UserResponse> updateUser(@PathVariable("username") String username, @RequestBody UserUpdateRequest userRequest) {
+        UserResponse updatedUser = userService.update(userRequest, username);
+        return ResponseEntity.ok(updatedUser);
     }
 
     //    @Override
@@ -113,9 +114,9 @@ public class UserController {
                             schema = @Schema(implementation = ResponseDto.class))})
     })
     //    @Override
-    @GetMapping("/{userId}")
-    public ResponseEntity<UserResponse> getUserById(@PathVariable("userId") Long userId) {
-        UserResponse user = userService.findResponseById(userId);
+    @GetMapping("/{username}")
+    public ResponseEntity<UserResponse> getUserByUsername(@PathVariable("username") String username) {
+        UserResponse user = userService.findResponseByUsername(username);
         return ResponseEntity.ok(user);
     }
 
