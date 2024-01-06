@@ -106,5 +106,63 @@
         </insert>
     </changeSet>
 
+    <changeSet id="20240106015900" author="daria">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="ngo"/>
+        </preConditions>
+        <addColumn tableName="ngo">
+            <column name="image" type="blob"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20240106020501" author="daria">
+        <preConditions>
+            <tableExists tableName="ngo"/>
+            <columnExists tableName="ngo" columnName="image"/>
+        </preConditions>
+        <addColumn tableName="ngo">
+            <column name="new_image" type="bytea"></column>
+        </addColumn>
+        <sql>
+            UPDATE ngo
+            SET new_image = encode(lo_get(image), 'escape')::bytea
+            WHERE image IS NOT NULL;
+        </sql>
+        <dropColumn tableName="ngo" columnName="image"/>
+        <renameColumn tableName="ngo" oldColumnName="new_image" newColumnName="image"/>
+    </changeSet>
+
+    <changeSet id="20240106021800" author="daria">
+        <preConditions>
+            <tableExists tableName="ngo"/>
+            <not>
+                <columnExists tableName="ngo" columnName="image_url"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="ngo">
+            <column name="image_url" type="varchar(512)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20240106022200" author="daria">
+        <preConditions>
+            <tableExists tableName="ngo"/>
+            <columnExists tableName="ngo" columnName="image_url"/>
+        </preConditions>
+        <sql>
+            UPDATE ngo
+            SET image_url = 'https://img.freepik.com/premium-vector/charity-abstract-logo-healthy-lifestyle_660762-34.jpg'
+            WHERE image_url IS NULL;
+        </sql>
+        <addNotNullConstraint tableName="ngo" columnName="image_url"/>
+    </changeSet>
+
+    <changeSet id="20230106024700" author="daria">
+        <preConditions>
+            <tableExists tableName="ngo"/>
+            <columnExists tableName="ngo" columnName="image"/>
+        </preConditions>
+        <dropColumn tableName="ngo" columnName="image"/>
+    </changeSet>
 
 </databaseChangeLog>

@@ -22,6 +22,7 @@ interface NGOCardProps {
   ngoName: string;
   ngoURL: string;
   ngoContact: string;
+  ngoImage: string;
   marginTop: string;
   onDonateClick: () => void;
   onVolunteerClick: () => void;
@@ -31,6 +32,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
   ngoName,
   ngoURL,
   ngoContact,
+  ngoImage,
   marginTop,
   onDonateClick,
   onVolunteerClick,
@@ -68,7 +70,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
         </CardHeader>
         <CardContent className="grid gap-4">
           <img
-            src="https://img.freepik.com/premium-vector/charity-abstract-logo-healthy-lifestyle_660762-34.jpg"
+            src={ngoImage}
             alt={`${ngoName} Logo`}
             className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
           />

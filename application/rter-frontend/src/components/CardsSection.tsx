@@ -26,6 +26,7 @@ const CardsSection = () => {
               ngoName={ngo.name}
               ngoURL={ngo.website}
               ngoContact={ngo.contact}
+              ngoImage={ngo.imageUrl}
               marginTop={
                 index === 0 || index === 1 || index === 2 ? "mt-0" : "mt-5"
               }

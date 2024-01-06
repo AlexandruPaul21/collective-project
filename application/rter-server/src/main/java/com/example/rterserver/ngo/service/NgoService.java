@@ -13,6 +13,8 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,10 @@ public class NgoService {
 
     public NgoService(NgoRepo ngoRepo) {
         this.ngoRepo = ngoRepo;
-        fetchNGOs(50);
+        // am o rugaminte, sa rulati toti o data cu linia 28 comentata/stearsa pentru a se repopula corect baza de date
+        // cu ong urile si imaginile lor, iar dupa sa o decomentati
+        if (ngoRepo.count() == 0)
+            fetchNGOs(50);
     }
 
     public void fetchNGOs(int nrOfNgos) {
@@ -74,6 +79,14 @@ public class NgoService {
                             } else {
                                 ngoToBeAdded.setWebsite("null");
                             }
+                            Element imageElement = ngo.selectFirst("img");
+                            if (imageElement != null) {
+                                String imageUrl = "https://www.sustinebinele.ro/" + imageElement.attr("src");
+                                ngoToBeAdded.setImageUrl(imageUrl);
+                            }
+                            else {
+                                ngoToBeAdded.setImageUrl("https://img.freepik.com/premium-vector/charity-abstract-logo-healthy-lifestyle_660762-34.jpg");
+                            }
                             ngoRepo.save(ngoToBeAdded);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -90,8 +103,7 @@ public class NgoService {
         }
     }
 
-    public List<Ngo> getAllNGOs()
-    {
+    public List<Ngo> getAllNGOs() {
         return ngoRepo.findAll();
     }
 }
