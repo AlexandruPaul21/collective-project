@@ -157,4 +157,12 @@
         <addNotNullConstraint tableName="ngo" columnName="image_url"/>
     </changeSet>
 
+    <changeSet id="20230106024700" author="daria">
+        <preConditions>
+            <tableExists tableName="ngo"/>
+            <columnExists tableName="ngo" columnName="image"/>
+        </preConditions>
+        <dropColumn tableName="ngo" columnName="image"/>
+    </changeSet>
+
 </databaseChangeLog>

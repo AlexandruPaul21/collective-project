@@ -82,16 +82,9 @@ public class NgoService {
                             Element imageElement = ngo.selectFirst("img");
                             if (imageElement != null) {
                                 String imageUrl = "https://www.sustinebinele.ro/" + imageElement.attr("src");
-                                try {
-                                    byte[] imageBytes = downloadImage(imageUrl);
-                                    ngoToBeAdded.setImage(imageBytes);
-                                    ngoToBeAdded.setImageUrl(imageUrl);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                                ngoToBeAdded.setImageUrl(imageUrl);
                             }
                             else {
-                                ngoToBeAdded.setImage(null);
                                 ngoToBeAdded.setImageUrl("https://img.freepik.com/premium-vector/charity-abstract-logo-healthy-lifestyle_660762-34.jpg");
                             }
                             ngoRepo.save(ngoToBeAdded);
@@ -107,13 +100,6 @@ public class NgoService {
                 e.printStackTrace();
             }
             currentPage++;
-        }
-    }
-
-    private byte[] downloadImage(String imageUrl) throws IOException {
-        URL url = new URL(imageUrl);
-        try (InputStream in = url.openStream()) {
-            return in.readAllBytes();
         }
     }
 

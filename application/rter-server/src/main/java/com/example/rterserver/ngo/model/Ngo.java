@@ -19,23 +19,18 @@ public class Ngo {
     @Schema(description = "The website of the ngo or null if not available")
     String website;
 
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private byte[] image;
-
     @Column(nullable = false, length = 512)
     @Schema(description = "The image url of the ngo or null if not available")
     String imageUrl;
 
-    public Ngo(String name, String contact, String website, byte[] image, String imageUrl) {
+    public Ngo(String name, String contact, String website, String imageUrl) {
         this.name = name;
         this.contact = contact;
         this.website = website;
-        this.image = image;
         this.imageUrl = imageUrl;
     }
 
     public Ngo() {
-
     }
 
     public String getName() {
@@ -60,14 +55,6 @@ public class Ngo {
 
     public void setWebsite(String website) {
         this.website = website;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
     }
 
     public String getImageUrl() {
