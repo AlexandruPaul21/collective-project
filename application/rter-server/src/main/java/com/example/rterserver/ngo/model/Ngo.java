@@ -9,20 +9,29 @@ public class Ngo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 512)
     @Schema(description = "The name of the ngo")
     String name;
-    @Column(nullable = false, length = 256)
+    @Column(nullable = false, length = 512)
     @Schema(description = "The contact details of the ngo or null if not available")
     String contact;
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 512)
     @Schema(description = "The website of the ngo or null if not available")
     String website;
 
-    public Ngo(String name, String contact, String website) {
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private byte[] image;
+
+    @Column(nullable = false, length = 512)
+    @Schema(description = "The image url of the ngo or null if not available")
+    String imageUrl;
+
+    public Ngo(String name, String contact, String website, byte[] image, String imageUrl) {
         this.name = name;
         this.contact = contact;
         this.website = website;
+        this.image = image;
+        this.imageUrl = imageUrl;
     }
 
     public Ngo() {
@@ -51,6 +60,22 @@ public class Ngo {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String toString() {
