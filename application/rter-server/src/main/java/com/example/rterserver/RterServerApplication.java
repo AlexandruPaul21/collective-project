@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfigurati
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 @SpringBootApplication(exclude = {LiquibaseAutoConfiguration.class, SecurityAutoConfiguration.class})
-public class RterServerApplication {
+public class   RterServerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RterServerApplication.class, args);

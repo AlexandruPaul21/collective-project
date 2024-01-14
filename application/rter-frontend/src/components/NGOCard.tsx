@@ -46,7 +46,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
 
   return (
     <>
-      <Card className={`m-5 ${marginTop} min-h-[400px] w-[300px]`}>
+      <Card className={`m-5 ${marginTop} h-[400px] w-[300px]`}>
         <CardHeader>
           <div className="flex justify-between">
             <CardTitle
@@ -68,12 +68,14 @@ const NGOCard: React.FC<NGOCardProps> = ({
             </Button>
           </div>
         </CardHeader>
-        <CardContent className="grid gap-4">
+        <CardContent className="grid gap-4 ">
+        <div className="flex items-center justify-center h-[200px]"> 
           <img
             src={ngoImage}
             alt={`${ngoName} Logo`}
             className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
           />
+        </div>
         </CardContent>
         <CardFooter className="flex items-center justify-between">
           <Button  onClick={onDonateClick}>
@@ -99,14 +101,10 @@ const NGOCard: React.FC<NGOCardProps> = ({
           <DialogDescription>
             <div className="flex">
               <img
-                src="https://img.freepik.com/premium-vector/charity-abstract-logo-healthy-lifestyle_660762-34.jpg"
-                alt={`${ngoName} Logo`}
-                style={{
-                  borderRadius: "10px",
-                  maxWidth: "200px",
-                  maxHeight: "200px",
-                }}
-              />
+              src={ngoImage}
+              alt={`${ngoName} Logo`}
+              className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
+            />
               <div className="mb-10 ml-5 mt-2 flex flex-col justify-between">
                 <span className="">{ngoContact}</span>
                 <a

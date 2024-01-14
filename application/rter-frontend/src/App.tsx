@@ -2,7 +2,7 @@ import MainPage from "./pages/mainPage/MainPage";
 import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DonationsPage from "./pages/donationsPage/DonationsPage";
-import FavouritesPage from "./pages/fauvoritesPage/FavouritesPage";
+import FavouritesPage from "./pages/favouritesPage/FavouritesPage";
 
 import SignInPage from "@/pages/auth/SignInPage";
 import SignUpPage from "@/pages/auth/SignUpPage";

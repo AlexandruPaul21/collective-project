@@ -1,16 +1,14 @@
-import DonationCards from "@/components/DonationCards"
 import Navbar from "@/components/Navbar"
 
-
-const DonationsPage = () => {
+const FavouritesPage = () => {
   return (
     <div className="flex flex-col">
       <Navbar />
       <div className="flex justify-center gap-7 mt-10">
-        <DonationCards />
+        <h1>Favourites Page</h1>
       </div>
     </div>
   )
 }
 
-export default DonationsPage
+export default FavouritesPage

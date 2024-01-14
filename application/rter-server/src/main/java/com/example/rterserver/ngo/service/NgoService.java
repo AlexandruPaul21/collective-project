@@ -26,7 +26,7 @@ public class NgoService {
         this.ngoRepo = ngoRepo;
         // am o rugaminte, sa rulati toti o data cu linia 28 comentata/stearsa pentru a se repopula corect baza de date
         // cu ong urile si imaginile lor, iar dupa sa o decomentati
-        if (ngoRepo.count() == 0)
+        //if (ngoRepo.count() == 0)
             fetchNGOs(50);
     }
 
