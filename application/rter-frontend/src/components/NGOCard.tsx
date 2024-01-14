@@ -94,7 +94,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
         onOpenChange={(): void => setIsDialogOpen(!isDialogOpen)}
       >
         <DialogOverlay />
-        <DialogContent>
+        <DialogContent className="max-w-[700px] min-h-[400px]">
           <DialogHeader>
             <DialogTitle>{ngoName}</DialogTitle>
           </DialogHeader>
@@ -106,7 +106,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
               className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
             />
               <div className="mb-10 ml-5 mt-2 flex flex-col justify-between">
-                <span className="">{ngoContact}</span>
+                <span className="overflow-hidden">{ngoContact}</span>
                 <a
                   href={ngoURL}
                   className="hover:text-sky-800 text-lg hover:underline"
