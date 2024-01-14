@@ -9,7 +9,7 @@ const UserProfilePage: React.FC = () => {
         <Navbar/>
 
         <div >
-          <div className="flex h-screen w-full">
+          <div className="flex  w-full">
 
 
             {/* USERPROFILE FORM */}
