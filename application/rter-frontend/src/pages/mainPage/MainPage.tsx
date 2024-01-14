@@ -1,10 +1,10 @@
 import CardsSection from "@/components/CardsSection";
-import Navbar from "@/components/Navbar";
+import NavbarWithSearch from "@/components/NavbarWithSearch";
 const MainPage = () => {
   return (
     <div className="flex flex-col">
-      <Navbar />
-      <div className="flex justify-center gap-7 mt-10">
+      <NavbarWithSearch />
+      <div className="mt-10 flex justify-center gap-7">
         <CardsSection />
       </div>
     </div>
