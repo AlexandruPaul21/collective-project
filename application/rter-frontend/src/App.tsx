@@ -9,25 +9,28 @@ import SignUpPage from "@/pages/auth/SignUpPage";
 import VolunteerPage from "./pages/volunteerPage/VolunteerPage";
 import { Toaster } from "sonner";
 import UserProfilePage from "@/pages/userPage/UserProfilePage";
+import { SearchProvider } from "./components/providers/SearchProvider";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Toaster />
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/donations" element={<DonationsPage />} />
-            <Route path="/favourites" element={<FavouritesPage />} />
+      <SearchProvider>
+        <BrowserRouter>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Toaster />
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/donations" element={<DonationsPage />} />
+              <Route path="/favourites" element={<FavouritesPage />} />
 
-            <Route path="/sign-in" element={<SignInPage />} />
-            <Route path="/sign-up" element={<SignUpPage />} />
-            <Route path="/volunteer" element={<VolunteerPage />} />
-            <Route path="/profile" element={<UserProfilePage/>} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
+              <Route path="/sign-in" element={<SignInPage />} />
+              <Route path="/sign-up" element={<SignUpPage />} />
+              <Route path="/volunteer" element={<VolunteerPage />} />
+              <Route path="/profile" element={<UserProfilePage />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </SearchProvider>
     </>
   );
 }
