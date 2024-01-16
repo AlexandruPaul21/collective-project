@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Gift, LucideHeart, PlusSquare } from "lucide-react";
+import { Gift, LucideHeart, Phone } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import {
@@ -23,7 +23,6 @@ interface NGOCardProps {
   ngoURL: string;
   ngoContact: string;
   ngoImage: string;
-  marginTop: string;
   onDonateClick: () => void;
   onVolunteerClick: () => void;
 }
@@ -33,7 +32,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
   ngoURL,
   ngoContact,
   ngoImage,
-  marginTop,
+
   onDonateClick,
   onVolunteerClick,
 }) => {
@@ -46,12 +45,12 @@ const NGOCard: React.FC<NGOCardProps> = ({
 
   return (
     <>
-      <Card className={`m-5 ${marginTop} h-[400px] w-[300px]`}>
+      <Card className={`h-[400px] w-[300px]`}>
         <CardHeader>
           <div className="flex justify-between">
             <CardTitle
               className={
-                "hover:text-cyan-500 line-clamp-2 cursor-pointer items-center justify-between overflow-hidden text-lg transition-colors"
+                "hover:text-cyan-500 line-clamp-2 h-[56px] cursor-pointer items-center justify-between overflow-hidden text-lg transition-colors"
               }
               onClick={(): void => setIsDialogOpen(true)}
             >
@@ -69,22 +68,22 @@ const NGOCard: React.FC<NGOCardProps> = ({
           </div>
         </CardHeader>
         <CardContent className="grid gap-4 ">
-        <div className="flex items-center justify-center h-[200px]"> 
-          <img
-            src={ngoImage}
-            alt={`${ngoName} Logo`}
-            className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
-          />
-        </div>
+          <div className="flex h-[200px] items-center justify-center">
+            <img
+              src={ngoImage}
+              alt={`${ngoName} Logo`}
+              className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
+            />
+          </div>
         </CardContent>
         <CardFooter className="flex items-center justify-between">
-          <Button  onClick={onDonateClick}>
+          <Button onClick={onDonateClick}>
             <Gift size={20} />
             <span className="ml-2">Donate</span>
           </Button>
-          <Button onClick={onVolunteerClick} >
-            <PlusSquare size={20} />
-            <span className="ml-2">Volunteer</span>
+          <Button onClick={onVolunteerClick}>
+            <Phone size={20} />
+            <span className="ml-2">Contact</span>
           </Button>
         </CardFooter>
       </Card>
@@ -94,17 +93,17 @@ const NGOCard: React.FC<NGOCardProps> = ({
         onOpenChange={(): void => setIsDialogOpen(!isDialogOpen)}
       >
         <DialogOverlay />
-        <DialogContent className="max-w-[700px] min-h-[400px]">
+        <DialogContent className="min-h-[400px] max-w-[700px]">
           <DialogHeader>
             <DialogTitle>{ngoName}</DialogTitle>
           </DialogHeader>
           <DialogDescription>
             <div className="flex">
               <img
-              src={ngoImage}
-              alt={`${ngoName} Logo`}
-              className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
-            />
+                src={ngoImage}
+                alt={`${ngoName} Logo`}
+                className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
+              />
               <div className="mb-10 ml-5 mt-2 flex flex-col justify-between">
                 <span className="overflow-hidden">{ngoContact}</span>
                 <a
@@ -122,9 +121,9 @@ const NGOCard: React.FC<NGOCardProps> = ({
               <Gift size={20} />
               <span className="ml-2">Donate</span>
             </Button>
-            <Button onClick={onVolunteerClick} >
-              <PlusSquare size={20} />
-              <span className="ml-2">Volunteer</span>
+            <Button onClick={onVolunteerClick}>
+              <Phone size={20} />
+              <span className="ml-2">Contact Us</span>
             </Button>
           </DialogFooter>
         </DialogContent>
