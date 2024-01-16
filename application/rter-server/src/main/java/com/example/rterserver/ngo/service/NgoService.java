@@ -6,6 +6,7 @@ import com.example.rterserver.ngo.model.FavoriteNgo;
 import com.example.rterserver.ngo.model.Ngo;
 import com.example.rterserver.ngo.repository.FavoriteNgoRepo;
 import com.example.rterserver.ngo.repository.NgoRepo;
+import com.example.rterserver.user.exception.NotFoundException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -143,5 +144,10 @@ public class NgoService {
         FavoriteNgo favoriteNgoToDelete = favoriteNgoRepo.findByIdUserAndIdNgo(favoriteNgo.getIdUser(),
                 favoriteNgo.getIdNgo()).orElseThrow();
         favoriteNgoRepo.delete(favoriteNgoToDelete);
+    }
+
+    public Ngo findByName(String name) {
+        return ngoRepo.findByName(name)
+                .orElseThrow(() -> new NotFoundException("Ngo not found with name: " + name));
     }
 }
