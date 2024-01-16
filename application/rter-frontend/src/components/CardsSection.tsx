@@ -38,11 +38,8 @@ const CardsSection = () => {
         {filteredNgos.map((ngo, index) => (
           <div key={index} className="m-2">
             <NGOCard
-              ngoName={ngo.name}
-              ngoURL={ngo.website}
-              ngoContact={ngo.contact}
-              ngoImage={ngo.imageUrl}
-              onDonateClick={onDonateClick}
+              ngo={ngo}
+              onDonateClick={onVolunteerClick}
               onVolunteerClick={onVolunteerClick}
             />
           </div>

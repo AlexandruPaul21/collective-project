@@ -23,10 +23,7 @@ const DonationCards = () => {
         {ngos.map((ngo, index) => (
           <div key={index} className="m-2 ">
             <NGOCard
-              ngoName={ngo.name}
-              ngoURL={ngo.website}
-              ngoContact={ngo.contact}
-              ngoImage={ngo.imageUrl}
+              ngo={ngo}
               onDonateClick={onVolunteerClick}
               onVolunteerClick={onVolunteerClick}
             />

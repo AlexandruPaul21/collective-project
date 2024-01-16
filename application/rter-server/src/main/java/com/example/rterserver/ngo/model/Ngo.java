@@ -18,7 +18,6 @@ public class Ngo {
     @Column(nullable = false, length = 512)
     @Schema(description = "The website of the ngo or null if not available")
     String website;
-
     @Column(nullable = false, length = 512)
     @Schema(description = "The image url of the ngo or null if not available")
     String imageUrl;

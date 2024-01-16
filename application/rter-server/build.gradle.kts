@@ -43,6 +43,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-mail")
     implementation("com.sun.mail:javax.mail:1.6.2")
+    implementation("com.stripe:stripe-java:24.11.0")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.16.1")
+
 }
 
 tasks.withType<Test> {
