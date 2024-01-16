@@ -1,12 +1,15 @@
 package com.example.rterserver.config;
 
-import javax.sql.DataSource;
-
+import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
-import liquibase.integration.spring.SpringLiquibase;
 
+import javax.sql.DataSource;
+
+/**
+ * This class is used to configure the liquibase.
+ */
 @Configuration
 public class LiquibaseConfig {
 

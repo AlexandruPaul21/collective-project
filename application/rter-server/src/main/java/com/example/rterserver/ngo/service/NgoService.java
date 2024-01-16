@@ -72,8 +72,19 @@ public class NgoService {
                             if (contact != null) {
                                 String contactText = contact.select("#contact > *:not(:first-child)").text();
                                 ngoToBeAdded.setContact(contactText);
+                                String[] words = contactText.split(" ");
+                                String foundEmail = "null";
+                                for (String word : words) {
+                                    if (word.contains("@")) {
+                                        foundEmail = word.trim();
+                                        System.out.println(foundEmail);
+                                        break;
+                                    }
+                                }
+                                ngoToBeAdded.setEmail(foundEmail);
                             } else {
                                 ngoToBeAdded.setContact("null");
+                                ngoToBeAdded.setEmail("null");
                             }
                             Element website = linkedDocument.selectFirst("#main-website");
                             if (website != null) {
