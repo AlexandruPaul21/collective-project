@@ -34,10 +34,7 @@ const CardsSection = () => {
         {filteredNgos.map((ngo, index) => (
           <div key={index} className="m-2">
             <NGOCard
-              ngoName={ngo.name}
-              ngoURL={ngo.website}
-              ngoContact={ngo.contact}
-              ngoImage={ngo.imageUrl}
+              ngo={ngo}
               marginTop={
                 index === 0 || index === 1 || index === 2 || index === 3 || index === 4 ? "mt-0" : "mt-5"
               }
