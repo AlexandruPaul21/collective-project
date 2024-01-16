@@ -23,10 +23,9 @@ const DonationCards = () => {
         {ngos.map((ngo, index) => (
           <div key={index} className="m-2 ">
             <NGOCard
-              ngoName={ngo.name}
-              ngoURL={ngo.website}
-              ngoContact={ngo.contact}
-              ngoImage={ngo.imageUrl}
+              ngo={ngo}
+              isFavorite={false}
+              currentUserId={0}
               marginTop={
                 index === 0 || index === 1 || index === 2 ? "mt-0" : "mt-5"
               }

@@ -17,31 +17,51 @@ import {
   CardFooter,
 } from "./ui/card";
 import { DialogHeader, DialogFooter } from "./ui/dialog";
+import { NGOProps } from "@/utils/types/ngoProps";
+import { addNgoToFavorites, removeNgoFromFavorites } from "@/apis/ngoApi";
+import { FavoriteNgoProps } from "@/utils/types/favoriteNgoProps";
 
 interface NGOCardProps {
-  ngoName: string;
-  ngoURL: string;
-  ngoContact: string;
-  ngoImage: string;
+  ngo: NGOProps;
   marginTop: string;
+  isFavorite: boolean; // Pass the favorite status as a prop
+  currentUserId: number;
   onDonateClick: () => void;
   onVolunteerClick: () => void;
 }
 
 const NGOCard: React.FC<NGOCardProps> = ({
-  ngoName,
-  ngoURL,
-  ngoContact,
-  ngoImage,
+  ngo,
   marginTop,
+  currentUserId,
   onDonateClick,
   onVolunteerClick,
+  isFavorite,
 }) => {
-  const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [isFavoriteNGO, setIsFavoriteNGO] = useState<boolean>(isFavorite);
 
-  const handleAddFavouriteClick = (): void => {
-    setIsFavourite(!isFavourite);
+  const handleFavoriteClick = async () => {
+    const favoriteNgoData: FavoriteNgoProps = {
+      idNgo: ngo.id,
+      idUser: currentUserId,
+    };
+
+    try {
+      if (isFavoriteNGO) {
+        // If it's already a favorite, remove it
+        await removeNgoFromFavorites(favoriteNgoData);
+      } else {
+        // If it's not a favorite, add it
+        await addNgoToFavorites("admin", "admin",favoriteNgoData);
+        console.log("Added to favorites");
+      }
+      // Toggle the favorite status
+      setIsFavoriteNGO(!isFavoriteNGO);
+    } catch (error) {
+      // Handle errors
+      console.error("Error toggling favorite status", error);
+    }
   };
 
   return (
@@ -55,34 +75,35 @@ const NGOCard: React.FC<NGOCardProps> = ({
               }
               onClick={(): void => setIsDialogOpen(true)}
             >
-              {ngoName}
+              {ngo.name}
             </CardTitle>
             <Button
-              onClick={handleAddFavouriteClick}
+              onClick={handleFavoriteClick}
               style={{ background: "transparent" }}
             >
-              <LucideHeart
-                size={20}
-                style={{ color: isFavourite ? "red" : "black" }}
-              />
+              {isFavoriteNGO ? (
+                <LucideHeart size={20} style={{ color: "red" }} />
+              ) : (
+                <LucideHeart size={20} style={{ color: "black" }} />
+              )}
             </Button>
           </div>
         </CardHeader>
         <CardContent className="grid gap-4 ">
-        <div className="flex items-center justify-center h-[200px]"> 
-          <img
-            src={ngoImage}
-            alt={`${ngoName} Logo`}
-            className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
-          />
-        </div>
+          <div className="flex items-center justify-center h-[200px]">
+            <img
+              src={ngo.imageUrl}
+              alt={`${ngo.name} Logo`}
+              className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
+            />
+          </div>
         </CardContent>
         <CardFooter className="flex items-center justify-between">
-          <Button  onClick={onDonateClick}>
+          <Button onClick={onDonateClick}>
             <Gift size={20} />
             <span className="ml-2">Donate</span>
           </Button>
-          <Button onClick={onVolunteerClick} >
+          <Button onClick={onVolunteerClick}>
             <PlusSquare size={20} />
             <span className="ml-2">Volunteer</span>
           </Button>
@@ -96,19 +117,19 @@ const NGOCard: React.FC<NGOCardProps> = ({
         <DialogOverlay />
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{ngoName}</DialogTitle>
+            <DialogTitle>{ngo.name}</DialogTitle>
           </DialogHeader>
           <DialogDescription>
             <div className="flex">
               <img
-              src={ngoImage}
-              alt={`${ngoName} Logo`}
-              className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
-            />
+                src={ngo.imageUrl}
+                alt={`${ngo.name} Logo`}
+                className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
+              />
               <div className="mb-10 ml-5 mt-2 flex flex-col justify-between">
-                <span className="">{ngoContact}</span>
+                <span className="">{ngo.contact}</span>
                 <a
-                  href={ngoURL}
+                  href={ngo.website}
                   className="hover:text-sky-800 text-lg hover:underline"
                 >
                   Visit their website
@@ -122,7 +143,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
               <Gift size={20} />
               <span className="ml-2">Donate</span>
             </Button>
-            <Button onClick={onVolunteerClick} >
+            <Button onClick={onVolunteerClick}>
               <PlusSquare size={20} />
               <span className="ml-2">Volunteer</span>
             </Button>
