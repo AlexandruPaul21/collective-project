@@ -29,15 +29,16 @@ const CardsSection = () => {
     navigate("/volunteer");
   };
 
+  const onDonateClick = () => {
+    navigate("/donate");
+  }
+
   return (
       <div className="flex flex-wrap justify-center">
         {filteredNgos.map((ngo, index) => (
           <div key={index} className="m-2">
             <NGOCard
               ngo={ngo}
-              marginTop={
-                index === 0 || index === 1 || index === 2 || index === 3 || index === 4 ? "mt-0" : "mt-5"
-              }
               onDonateClick={onVolunteerClick}
               onVolunteerClick={onVolunteerClick}
             />

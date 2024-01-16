@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Gift, LucideHeart, PlusSquare } from "lucide-react";
+import { Gift, LucideHeart, Phone } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import {
@@ -21,14 +21,12 @@ import { NGOProps } from "@/utils/types/ngoProps";
 
 interface NGOCardProps {
   ngo: NGOProps;
-  marginTop: string;
   onDonateClick: () => void;
   onVolunteerClick: () => void;
 }
 
 const NGOCard: React.FC<NGOCardProps> = ({
   ngo,
-  marginTop,
   onDonateClick,
   onVolunteerClick,
 }) => {
@@ -41,12 +39,12 @@ const NGOCard: React.FC<NGOCardProps> = ({
 
   return (
     <>
-      <Card className={`m-5 ${marginTop} h-[400px] w-[300px]`}>
+      <Card className={`h-[400px] w-[300px]`}>
         <CardHeader>
           <div className="flex justify-between">
             <CardTitle
               className={
-                "hover:text-cyan-500 line-clamp-2 cursor-pointer items-center justify-between overflow-hidden text-lg transition-colors"
+                "hover:text-cyan-500 line-clamp-2 h-[56px] cursor-pointer items-center justify-between overflow-hidden text-lg transition-colors"
               }
               onClick={(): void => setIsDialogOpen(true)}
             >
@@ -73,13 +71,13 @@ const NGOCard: React.FC<NGOCardProps> = ({
         </div>
         </CardContent>
         <CardFooter className="flex items-center justify-between">
-          <Button  onClick={onDonateClick}>
+          <Button onClick={onDonateClick}>
             <Gift size={20} />
             <span className="ml-2">Donate</span>
           </Button>
-          <Button onClick={onVolunteerClick} >
-            <PlusSquare size={20} />
-            <span className="ml-2">Volunteer</span>
+          <Button onClick={onVolunteerClick}>
+            <Phone size={20} />
+            <span className="ml-2">Contact</span>
           </Button>
         </CardFooter>
       </Card>
@@ -89,7 +87,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
         onOpenChange={(): void => setIsDialogOpen(!isDialogOpen)}
       >
         <DialogOverlay />
-        <DialogContent className="max-w-[700px] min-h-[400px]">
+        <DialogContent className="min-h-[400px] max-w-[700px]">
           <DialogHeader>
             <DialogTitle>{ngo.name}</DialogTitle>
           </DialogHeader>
@@ -117,9 +115,9 @@ const NGOCard: React.FC<NGOCardProps> = ({
               <Gift size={20} />
               <span className="ml-2">Donate</span>
             </Button>
-            <Button onClick={onVolunteerClick} >
-              <PlusSquare size={20} />
-              <span className="ml-2">Volunteer</span>
+            <Button onClick={onVolunteerClick}>
+              <Phone size={20} />
+              <span className="ml-2">Contact Us</span>
             </Button>
           </DialogFooter>
         </DialogContent>

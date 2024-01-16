@@ -24,9 +24,6 @@ const DonationCards = () => {
           <div key={index} className="m-2 ">
             <NGOCard
               ngo={ngo}
-              marginTop={
-                index === 0 || index === 1 || index === 2 ? "mt-0" : "mt-5"
-              }
               onDonateClick={onVolunteerClick}
               onVolunteerClick={onVolunteerClick}
             />
