@@ -1,8 +1,12 @@
 package com.example.rterserver.donation.controller;
 
 import com.example.rterserver.common.ResponseDto;
+import com.example.rterserver.donation.dto.PaymentRequest;
+import com.example.rterserver.donation.dto.PaymentResponse;
 import com.example.rterserver.donation.model.Donation;
 import com.example.rterserver.donation.service.DonationService;
+import com.example.rterserver.donation.service.StripeService;
+import com.stripe.exception.StripeException;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -25,10 +29,12 @@ import java.util.List;
 @Validated
 public class DonationController {
     private final DonationService donationService;
+    private final StripeService stripeService;
 
     @Autowired
-    public DonationController(DonationService donationService) {
+    public DonationController(DonationService donationService, StripeService stripeService) {
         this.donationService = donationService;
+        this.stripeService = stripeService;
     }
 
 
@@ -96,4 +102,30 @@ public class DonationController {
         List<Donation> donationHistory = donationService.getDonationHistory(idUser);
         return ResponseEntity.ok(donationHistory);
     }
+
+
+    @Operation(summary = "Donate payment", description = "This endpoint is used to make a payment donation.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Payment successful",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PaymentResponse.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid request due to validation errors",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PaymentResponse.class))}),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PaymentResponse.class))})
+    })
+    @PostMapping("/payment")
+    public ResponseEntity<PaymentResponse> donatePayment(@Valid @RequestBody PaymentRequest paymentRequest) {
+        PaymentResponse paymentResponse = stripeService.charge(paymentRequest);
+        return ResponseEntity.ok(paymentResponse);
+    }
+
+    @ExceptionHandler(StripeException.class)
+    public ResponseEntity<ResponseDto> handleException(Exception e) {
+        ResponseDto responseDto = new ResponseDto(e.getMessage());
+        return ResponseEntity.badRequest().body(responseDto);
+    }
+
 }
