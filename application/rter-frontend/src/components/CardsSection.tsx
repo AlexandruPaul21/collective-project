@@ -25,7 +25,7 @@ const CardsSection = () => {
     setFilteredNgos(result);
   }, [ngos, searchValue]);
 
-  const onVolunteerClick = () => {
+  const onContactClick = () => {
     navigate("/volunteer");
   };
 
@@ -34,17 +34,17 @@ const CardsSection = () => {
   }
 
   return (
-      <div className="flex flex-wrap justify-center px-2 pt-5">
-        {filteredNgos.map((ngo, index) => (
-          <div key={index} className="m-2">
-            <NGOCard
-              ngo={ngo}
-              onDonateClick={onVolunteerClick}
-              onVolunteerClick={onVolunteerClick}
-            />
-          </div>
-        ))}
-      </div>
+    <div className="flex flex-wrap justify-center px-2 pt-5">
+      {filteredNgos.map((ngo, index) => (
+        <div key={index} className="m-2">
+          <NGOCard
+            ngo={ngo}
+            onDonateClick={onDonateClick}
+            onContactClick={onContactClick}
+          />
+        </div>
+      ))}
+    </div>
   );
 };
 
