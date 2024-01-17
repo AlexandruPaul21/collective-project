@@ -20,19 +20,6 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
-    @Operation(summary = "Send a donation email for food or item", description = "This endpoint is used to send a donation email. ")
-    @PostMapping("/donation")
-    public ResponseEntity<?> sendDonationEmail(@RequestBody DonationEmailRequest donationEmailRequest) {
-        try {
-            emailService.sendDonationEmail(donationEmailRequest);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception ex) {
-            return new ResponseEntity<>("An error occurred while sending an email for the donation: " + ex.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
-
     @Operation(summary = "Send an email", description = "This endpoint is used to send an email. ")
     @PostMapping
     public ResponseEntity<?> sendEmail(@RequestBody EmailRequest emailRequest) {
