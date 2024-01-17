@@ -13,7 +13,7 @@ const CardsSection = () => {
 
   useEffect(() => {
     (async () => {
-      const allNgos = await getAllNGOs("admin", "admin");
+      const allNgos = await getAllNGOs();
       setNgos(allNgos);
     })();
   }, []);
