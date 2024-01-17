@@ -32,7 +32,7 @@ public class NgoService {
         if (ngoRepo.count() == 0)
             fetchNGOs(50);
     }
-    
+
 
     public void fetchNGOs(int nrOfNgos) {
         ngoRepo.deleteAll();

@@ -1,7 +1,10 @@
+import Navbar from "@/components/Navbar"
 
 const DonateItems = () => {
   return (
-    <div>DonateItems</div>
+    <div>
+      <Navbar/>
+    </div>
   )
 }
 

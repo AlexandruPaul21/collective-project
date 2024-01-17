@@ -10,7 +10,7 @@ import { capitalizeString } from "@/lib/utils.ts";
 import { Link } from "react-router-dom";
 import SandwichMenu from "./HamburgerMenu";
 
-const NavbarWithSearch = () => {
+const Navbar = () => {
   const [username, setUsername] = useState("Username");
 
 
@@ -73,4 +73,4 @@ const NavbarWithSearch = () => {
   );
 };
 
-export default NavbarWithSearch;
+export default Navbar;
