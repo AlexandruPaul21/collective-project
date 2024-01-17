@@ -34,7 +34,7 @@ const CardsSection = () => {
   }
 
   return (
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center px-2 pt-5">
         {filteredNgos.map((ngo, index) => (
           <div key={index} className="m-2">
             <NGOCard
