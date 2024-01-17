@@ -1,7 +1,6 @@
 package com.example.rterserver.email.service;
 
 import com.example.rterserver.donation.model.Donation;
-import com.example.rterserver.email.dto.DonationEmailRequest;
 import com.example.rterserver.email.dto.EmailRequest;
 import com.example.rterserver.enums.DonationType;
 import com.example.rterserver.ngo.model.Ngo;
@@ -48,7 +47,7 @@ public class EmailService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
         // Add a prefix to the email address to avoid sending emails to real NGOs
-        String to = "testruntimeterror123-" + ngo.getEmail() ;
+        String to = "testruntimeterror123-" + ngo.getEmail();
 
         // Create a Properties object to store mail-related configuration settings
         Properties prop = new Properties();
@@ -121,8 +120,8 @@ public class EmailService {
         User user = userRepo.findById(idUser).orElseThrow(() -> new RuntimeException("User not found"));
         Ngo ngo = ngoRepo.findById(idNgo).orElseThrow(() -> new RuntimeException("Ngo not found"));
 
-        // Add a prefix to the email address to avoid sending emails to real NGOs :)
-        String to = "testruntimeterror123-" + ngo.getEmail() ;
+        // Add a prefix to the email address to avoid sending emails to real NGOs and spamming them :)
+        String to = "testruntimeterror123-" + ngo.getEmail();
 
         // Create a Properties object to store mail-related configuration settings
         Properties prop = new Properties();
@@ -153,9 +152,10 @@ public class EmailService {
             String subject = "New message from a user within our platform";
             message.setSubject(subject);
 
-            // We are using a multipart message because we want to format the email as HTML.
+            // We are using a multipart message because we want to format the email as HTML
             MimeMultipart multipart = new MimeMultipart();
             BodyPart htmlBodyPart = new MimeBodyPart();
+
             // Compose the HTML content of the email
             String htmlContent = "<html><body><p>Dear <strong>" + ngo.getName() + "</strong> Team,</p>"
                     + "<p>We hope this email finds you well. </p>"

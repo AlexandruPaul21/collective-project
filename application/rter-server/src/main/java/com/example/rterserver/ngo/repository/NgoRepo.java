@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * This interface represents the repository for the Ngo entity.
+ */
 @Repository
 public interface NgoRepo extends JpaRepository<Ngo, Long> {
     Optional<Ngo> findByName(String name);

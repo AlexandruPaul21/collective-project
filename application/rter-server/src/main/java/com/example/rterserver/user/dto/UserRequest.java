@@ -5,6 +5,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+/**
+ * This class represents the user request.
+ */
 public record UserRequest(
         @Schema(description = "The username of the user (required)")
         @NotBlank(message = "Username cannot be blank")

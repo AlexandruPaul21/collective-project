@@ -3,6 +3,13 @@ package com.example.rterserver.email.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 
+/**
+ * This class represents the request body for the 'contact us' email endpoint.
+ *
+ * @param body
+ * @param idUser
+ * @param idNgo
+ */
 public record EmailRequest(
         @Schema(description = "The body of the email (required)")
         @NotBlank(message = "Body cannot be blank")

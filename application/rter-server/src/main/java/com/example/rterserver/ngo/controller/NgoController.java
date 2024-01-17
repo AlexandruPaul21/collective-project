@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * This class represents the controller for the NGO endpoints.
+ */
 @RestController
 @RequestMapping("/ngos")
 @OpenAPIDefinition(info = @Info(title = "NGO API", version = "v1"))

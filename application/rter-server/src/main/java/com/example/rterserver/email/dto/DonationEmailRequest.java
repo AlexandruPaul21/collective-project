@@ -4,8 +4,6 @@ import com.example.rterserver.enums.DonationType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 
-import java.time.LocalDateTime;
-
 public record DonationEmailRequest(
         @Schema(description = "The id of the user that is sending the email (required)")
         @NotBlank(message = "User id cannot be blank")
