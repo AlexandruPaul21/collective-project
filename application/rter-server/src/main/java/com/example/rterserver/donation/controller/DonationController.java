@@ -1,6 +1,7 @@
 package com.example.rterserver.donation.controller;
 
 import com.example.rterserver.common.ResponseDto;
+import com.example.rterserver.donation.dto.DonationNgoDTO;
 import com.example.rterserver.donation.dto.PaymentRequest;
 import com.example.rterserver.donation.dto.PaymentResponse;
 import com.example.rterserver.donation.model.Donation;
@@ -98,8 +99,8 @@ public class DonationController {
                             schema = @Schema(implementation = ResponseDto.class))})
     })
     @GetMapping("/history/{idUser}")
-    public ResponseEntity<List<Donation>> getDonationHistory(@PathVariable("idUser") Long idUser) {
-        List<Donation> donationHistory = donationService.getDonationHistory(idUser);
+    public ResponseEntity<List<DonationNgoDTO>> getDonationHistory(@PathVariable("idUser") Long idUser) {
+        List<DonationNgoDTO> donationHistory = donationService.getDonationHistorywithNGO(idUser);
         return ResponseEntity.ok(donationHistory);
     }
 

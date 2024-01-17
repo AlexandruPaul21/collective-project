@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface NgoRepo extends JpaRepository<Ngo, Long> {
     Optional<Ngo> findByName(String name);
+    Optional<Ngo> findById(Long ID);
 }
