@@ -19,5 +19,10 @@ spring:
   mail:
     username: "runtimeterror35@gmail.com"
     password: "vemi ehpw gutq sjiu"
+
 server:
   port: 8082
+
+stripe:
+  public-key: "pk_test_51OZGIJBvOG8Oe6QO2aZKsfA7hpP0UAaZWsXFiSXltRkA3rtFon1YoGzAGYcry8MSJPqqLGWpEJVNUpNS0tGUGZey00O6EsT87h"
+  secret-key: "sk_test_51OZGIJBvOG8Oe6QObayKA9HuUHLjnGFfrNWcJDLOqxiYJF0comp0udQcqBHKWk3f3MuwIX2QGkVC4DGMGlq330ZD006H1bjZcB"

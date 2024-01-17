@@ -3,13 +3,8 @@ import {NGOProps} from "@/utils/types/ngoProps";
 import { ngosUrl } from "./urlConstants";
 import { FavoriteNgoProps } from "@/utils/types/favoriteNgoProps";
 
-export const getAllNGOs: (username: string, password: string) => Promise<NGOProps[]> = (username, password) => {
-    const result = axios.get(`${ngosUrl}`, {
-        auth: {
-            username: username,
-            password: password
-        }
-    });
+export const getAllNGOs: () => Promise<NGOProps[]> = () => {
+    const result = axios.get(`${ngosUrl}`);
     return result.then(x => x.data)
 }
 

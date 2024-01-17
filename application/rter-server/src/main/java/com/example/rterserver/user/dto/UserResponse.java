@@ -5,6 +5,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class represents the user response.
+ */
 public record UserResponse(
         @Schema(description = "The id of the user")
         Long id,

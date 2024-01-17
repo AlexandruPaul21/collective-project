@@ -1,9 +1,5 @@
 package com.example.rterserver.user.controller;
 
-//import com.example.api.user.api.UserApi;
-//import com.example.api.user.dto.UserRequest;
-//import com.example.api.user.dto.UserResponse;
-
 import com.example.rterserver.common.ResponseDto;
 import com.example.rterserver.user.dto.UserRequest;
 import com.example.rterserver.user.dto.UserResponse;
@@ -25,6 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * This class represents the controller for the User endpoints.
+ */
 @RestController
 @RequestMapping("/users")
 @OpenAPIDefinition(info = @Info(title = "User API", version = "v1"))
@@ -38,8 +37,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
-    //    @Override
     @Operation(summary = "Create a new user", description = "This endpoint is used to create a new user." +
             "The details of the user to be created are passed in the request body. " +
             "The response body contains the details of the created user.")
@@ -60,7 +57,6 @@ public class UserController {
         return ResponseEntity.ok(createdUser);
     }
 
-    //    @Override
     @Operation(summary = "Edit a user", description = "This endpoint is used to edit an existing user." +
             "The details of the user to be edited are passed in the request body. " +
             "The response body contains the details of the updated user.")
@@ -84,7 +80,6 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    //    @Override
     @Operation(summary = "Delete a user", description = "This endpoint is used to delete an existing user.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "User deleted successfully",
@@ -103,8 +98,8 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "Get user with specified uuid", description = "This endpoint is used to retrieve a user with " +
-            "specified id.")
+    @Operation(summary = "Get user with specified username", description = "This endpoint is used to retrieve a user with " +
+            "specified username.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User found successfully",
                     content = {@Content(mediaType = "application/json",
@@ -113,14 +108,12 @@ public class UserController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseDto.class))})
     })
-    //    @Override
     @GetMapping("/{username}")
     public ResponseEntity<UserResponse> getUserByUsername(@PathVariable("username") String username) {
         UserResponse user = userService.findResponseByUsername(username);
         return ResponseEntity.ok(user);
     }
 
-    //    @Override
     @Operation(summary = "Get all users", description = "This endpoint is used to retrieve all users.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Users found successfully",

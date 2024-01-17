@@ -5,7 +5,7 @@ const VolunteerPage = () => {
   return (
     <div className="h-screen">
       <Navbar />
-      <div className="h-[100vh]">
+      <div className="h-[calc(100vh-80px)]">
         <VolunteerForm />
       </div>
     </div>
