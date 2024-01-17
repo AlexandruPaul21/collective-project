@@ -16,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * This class represents the service for the User entity.
+ */
 @Service
 public class UserService {
     private final UserRepo userRepo;
@@ -28,7 +31,7 @@ public class UserService {
     public UserResponse save(UserRequest userRequest) {
         User userToSave = new User(userRequest.username(), userRequest.name(), userRequest.password(),
                 userRequest.email(), userRequest.address(), userRequest.gender(),
-                LocalDateTime.now(), 10,"You can add a description here.");
+                LocalDateTime.now(), 10, "You can add a description here.");
         return UserMapper.entityToDto(userRepo.save(userToSave));
     }
 
@@ -59,6 +62,7 @@ public class UserService {
     public UserResponse findResponseById(Long id) {
         return UserMapper.entityToDto(findById(id));
     }
+
     public UserResponse findResponseByUsername(String username) {
         return UserMapper.entityToDto(findByUsername(username));
     }

@@ -3,6 +3,9 @@ package com.example.rterserver.ngo.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
+/**
+ * This class represents the ngo entity.
+ */
 @Entity
 @Table(name = "ngo")
 public class Ngo {

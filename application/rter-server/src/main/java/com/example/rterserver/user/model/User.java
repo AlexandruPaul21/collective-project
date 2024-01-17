@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class represents the user.
+ */
 @Entity
 @Table(name = "app_user")
 public class User {

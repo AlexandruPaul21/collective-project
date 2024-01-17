@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This interface represents the repository for the FavoriteNgo entity.
+ */
 @Repository
 public interface FavoriteNgoRepo extends JpaRepository<FavoriteNgo, Long> {
     List<FavoriteNgo> findAllByIdUser(Long idUser);

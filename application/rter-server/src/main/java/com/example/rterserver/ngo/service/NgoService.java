@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This class represents the service for the Ngo entity.
+ */
 @Service
 public class NgoService {
     private final NgoRepo ngoRepo;
@@ -29,11 +32,19 @@ public class NgoService {
     public NgoService(NgoRepo ngoRepo, FavoriteNgoRepo favoriteNgoRepo) {
         this.ngoRepo = ngoRepo;
         this.favoriteNgoRepo = favoriteNgoRepo;
+        // we fetch the NGOs only if the database is empty, so we don't fetch them every time we start the application
         if (ngoRepo.count() == 0)
             fetchNGOs(50);
     }
 
-
+    /**
+     * This method is used to fetch NGOs from a website and save them in the database.
+     * The method uses Jsoup to parse the HTML of the website and a custom TrustManager to avoid SSLHandshakeException.
+     * We use web scraping to fetch the NGOs by their elements' class names.
+     * We preferred to fetch the NGOs from a website instead of using mock data because we wanted to have a more
+     * realistic scenario.
+     * @param nrOfNgos the number of NGOs to be fetched
+     */
     public void fetchNGOs(int nrOfNgos) {
         ngoRepo.deleteAll();
         int page = nrOfNgos / 10;
