@@ -1,5 +1,7 @@
 package com.example.rterserver.email.controller;
 
+import com.example.rterserver.donation.model.Donation;
+import com.example.rterserver.email.dto.DonationEmailRequest;
 import com.example.rterserver.email.dto.EmailRequest;
 import com.example.rterserver.email.service.EmailService;
 import io.swagger.v3.oas.annotations.Operation;

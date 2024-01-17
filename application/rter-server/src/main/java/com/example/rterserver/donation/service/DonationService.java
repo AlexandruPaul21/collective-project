@@ -3,6 +3,8 @@ package com.example.rterserver.donation.service;
 import com.example.rterserver.donation.dto.PaymentRequest;
 import com.example.rterserver.donation.model.Donation;
 import com.example.rterserver.donation.repository.DonationRepo;
+import com.example.rterserver.email.dto.DonationEmailRequest;
+import com.example.rterserver.email.service.EmailService;
 import com.example.rterserver.enums.DonationType;
 import com.example.rterserver.ngo.model.Ngo;
 import com.example.rterserver.ngo.service.NgoService;
@@ -26,6 +28,8 @@ public class DonationService {
     private NgoService ngoService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private EmailService emailService;
 
     public DonationService(DonationRepo donationRepo) {
         this.donationRepo = donationRepo;
@@ -33,7 +37,9 @@ public class DonationService {
 
     @Transactional
     public Donation  save(Donation donation){
-        Donation donationToSave = new Donation(donation.getAmount(),donation.getType(),donation.getDetails(), LocalDateTime.now(),donation.getIduser(),donation.getIdngo());
+        Donation donationToSave = new Donation(donation.getAmount(),donation.getType(),donation.getDetails(), donation.getCreatedat(),donation.getIduser(),donation.getIdngo());
+        if(donation.getType() == DonationType.FOOD || donation.getType() == DonationType.ITEM)
+            emailService.sendDonationEmail(donation);
         return donationRepo.save(donationToSave);
     }
 
