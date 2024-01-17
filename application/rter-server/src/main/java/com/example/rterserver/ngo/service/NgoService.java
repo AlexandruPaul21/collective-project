@@ -1,8 +1,12 @@
 package com.example.rterserver.ngo.service;
 
 import com.example.rterserver.config.TrustAllManager;
+import com.example.rterserver.ngo.exception.AlreadyExistsException;
+import com.example.rterserver.ngo.model.FavoriteNgo;
 import com.example.rterserver.ngo.model.Ngo;
+import com.example.rterserver.ngo.repository.FavoriteNgoRepo;
 import com.example.rterserver.ngo.repository.NgoRepo;
+import com.example.rterserver.user.exception.NotFoundException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,20 +17,18 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NgoService {
     private final NgoRepo ngoRepo;
+    private final FavoriteNgoRepo favoriteNgoRepo;
 
-    public NgoService(NgoRepo ngoRepo) {
+    public NgoService(NgoRepo ngoRepo, FavoriteNgoRepo favoriteNgoRepo) {
         this.ngoRepo = ngoRepo;
-
-        // am o rugaminte, sa rulati toti o data cu linia 28 comentata/stearsa pentru a se repopula corect baza de date
-        // cu ong urile si imaginile lor, iar dupa sa o decomentati
+        this.favoriteNgoRepo = favoriteNgoRepo;
         if (ngoRepo.count() == 0)
             fetchNGOs(50);
     }
@@ -72,8 +74,19 @@ public class NgoService {
                             if (contact != null) {
                                 String contactText = contact.select("#contact > *:not(:first-child)").text();
                                 ngoToBeAdded.setContact(contactText);
+                                String[] words = contactText.split(" ");
+                                String foundEmail = "null";
+                                for (String word : words) {
+                                    if (word.contains("@")) {
+                                        foundEmail = word.trim();
+                                        System.out.println(foundEmail);
+                                        break;
+                                    }
+                                }
+                                ngoToBeAdded.setEmail(foundEmail);
                             } else {
                                 ngoToBeAdded.setContact("null");
+                                ngoToBeAdded.setEmail("null");
                             }
                             Element website = linkedDocument.selectFirst("#main-website");
                             if (website != null) {
@@ -85,8 +98,7 @@ public class NgoService {
                             if (imageElement != null) {
                                 String imageUrl = "https://www.sustinebinele.ro/" + imageElement.attr("src");
                                 ngoToBeAdded.setImageUrl(imageUrl);
-                            }
-                            else {
+                            } else {
                                 ngoToBeAdded.setImageUrl("https://img.freepik.com/premium-vector/charity-abstract-logo-healthy-lifestyle_660762-34.jpg");
                             }
                             ngoRepo.save(ngoToBeAdded);
@@ -107,5 +119,36 @@ public class NgoService {
 
     public List<Ngo> getAllNGOs() {
         return ngoRepo.findAll();
+    }
+
+    public void addNgoToFavorites(FavoriteNgo favoriteNgo) {
+        Optional<FavoriteNgo> favoriteNgoOptional = favoriteNgoRepo.findByIdUserAndIdNgo(favoriteNgo.getIdUser(),
+                favoriteNgo.getIdNgo());
+        if (favoriteNgoOptional.isPresent()) {
+            throw new AlreadyExistsException("Ngo already added to favorites");
+        } else {
+            favoriteNgoRepo.save(favoriteNgo);
+        }
+    }
+
+    public List<Ngo> getFavoritesNgos(Long idUser) {
+        List<FavoriteNgo> favoriteNgos = favoriteNgoRepo.findAllByIdUser(idUser);
+        List<Ngo> ngos = new ArrayList<>();
+        for (FavoriteNgo favoriteNgo : favoriteNgos) {
+            Ngo ngo = ngoRepo.findById(favoriteNgo.getIdNgo()).orElseThrow();
+            ngos.add(ngo);
+        }
+        return ngos;
+    }
+
+    public void removeNgoFromFavorites(FavoriteNgo favoriteNgo) {
+        FavoriteNgo favoriteNgoToDelete = favoriteNgoRepo.findByIdUserAndIdNgo(favoriteNgo.getIdUser(),
+                favoriteNgo.getIdNgo()).orElseThrow();
+        favoriteNgoRepo.delete(favoriteNgoToDelete);
+    }
+
+    public Ngo findByName(String name) {
+        return ngoRepo.findByName(name)
+                .orElseThrow(() -> new NotFoundException("Ngo not found with name: " + name));
     }
 }

@@ -17,22 +17,16 @@ import {
   CardFooter,
 } from "./ui/card";
 import { DialogHeader, DialogFooter } from "./ui/dialog";
+import { NGOProps } from "@/utils/types/ngoProps";
 
 interface NGOCardProps {
-  ngoName: string;
-  ngoURL: string;
-  ngoContact: string;
-  ngoImage: string;
+  ngo: NGOProps;
   onDonateClick: () => void;
   onVolunteerClick: () => void;
 }
 
 const NGOCard: React.FC<NGOCardProps> = ({
-  ngoName,
-  ngoURL,
-  ngoContact,
-  ngoImage,
-
+  ngo,
   onDonateClick,
   onVolunteerClick,
 }) => {
@@ -54,7 +48,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
               }
               onClick={(): void => setIsDialogOpen(true)}
             >
-              {ngoName}
+              {ngo.name}
             </CardTitle>
             <Button
               onClick={handleAddFavouriteClick}
@@ -68,13 +62,13 @@ const NGOCard: React.FC<NGOCardProps> = ({
           </div>
         </CardHeader>
         <CardContent className="grid gap-4 ">
-          <div className="flex h-[200px] items-center justify-center">
-            <img
-              src={ngoImage}
-              alt={`${ngoName} Logo`}
-              className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
-            />
-          </div>
+        <div className="flex items-center justify-center h-[200px]"> 
+          <img
+            src={ngo.imageUrl}
+            alt={`${ngo.name} Logo`}
+            className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
+          />
+        </div>
         </CardContent>
         <CardFooter className="flex items-center justify-between">
           <Button onClick={onDonateClick}>
@@ -95,19 +89,19 @@ const NGOCard: React.FC<NGOCardProps> = ({
         <DialogOverlay />
         <DialogContent className="min-h-[400px] max-w-[700px]">
           <DialogHeader>
-            <DialogTitle>{ngoName}</DialogTitle>
+            <DialogTitle>{ngo.name}</DialogTitle>
           </DialogHeader>
           <DialogDescription>
             <div className="flex">
               <img
-                src={ngoImage}
-                alt={`${ngoName} Logo`}
-                className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
-              />
+              src={ngo.imageUrl}
+              alt={`${ngo.name} Logo`}
+              className="ml-auto mr-auto max-h-[200px] max-w-[200px] rounded-lg"
+            />
               <div className="mb-10 ml-5 mt-2 flex flex-col justify-between">
-                <span className="overflow-hidden">{ngoContact}</span>
+                <span className="overflow-hidden">{ngo.contact}</span>
                 <a
-                  href={ngoURL}
+                  href={ngo.website}
                   className="hover:text-sky-800 text-lg hover:underline"
                 >
                   Visit their website
