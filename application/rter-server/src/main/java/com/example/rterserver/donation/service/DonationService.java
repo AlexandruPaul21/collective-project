@@ -38,9 +38,8 @@ public class DonationService {
     @Transactional
     public Donation  save(Donation donation){
         Donation donationToSave = new Donation(donation.getAmount(),donation.getType(),donation.getDetails(), donation.getCreatedat(),donation.getIduser(),donation.getIdngo());
-        DonationEmailRequest donationEmailRequest = new DonationEmailRequest(donation.getIduser(), donation.getIdngo(), donation.getType(), donation.getCreatedat().toString());
         if(donation.getType() == DonationType.FOOD || donation.getType() == DonationType.ITEM)
-            emailService.sendDonationEmail(donationEmailRequest);
+            emailService.sendDonationEmail(donation);
         return donationRepo.save(donationToSave);
     }
 

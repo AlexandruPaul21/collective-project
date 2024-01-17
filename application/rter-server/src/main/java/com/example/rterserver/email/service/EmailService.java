@@ -1,5 +1,6 @@
 package com.example.rterserver.email.service;
 
+import com.example.rterserver.donation.model.Donation;
 import com.example.rterserver.email.dto.DonationEmailRequest;
 import com.example.rterserver.email.dto.EmailRequest;
 import com.example.rterserver.enums.DonationType;
@@ -34,14 +35,14 @@ public class EmailService {
         this.ngoRepo = ngoRepo;
     }
 
-    public void sendDonationEmail(DonationEmailRequest emailRequest) {
+    public void sendDonationEmail(Donation emailRequest) {
         // Extract the data from the email request
-        Long idUser = emailRequest.idUser();
+        Long idUser = emailRequest.getIduser();
         User user = userRepo.findById(idUser).orElseThrow(() -> new RuntimeException("User not found"));
-        Long idNgo = emailRequest.idNgo();
+        Long idNgo = emailRequest.getIdngo();
         Ngo ngo = ngoRepo.findById(idNgo).orElseThrow(() -> new RuntimeException("Ngo not found"));
-        DonationType donationType = emailRequest.donationType();
-        String deliveryDate = emailRequest.deliveryDate();
+        DonationType donationType = emailRequest.getType();
+        String deliveryDate = emailRequest.getCreatedat().toString();
 
         // Define the desired date-time format
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
