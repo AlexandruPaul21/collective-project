@@ -25,7 +25,7 @@ const DonationCards = () => {
             <NGOCard
               ngo={ngo}
               onDonateClick={onVolunteerClick}
-              onVolunteerClick={onVolunteerClick}
+              onContactClick={onVolunteerClick}
             />
           </div>
         ))}
