@@ -97,4 +97,23 @@ public class NgoController {
         List<Ngo> ngos = ngoService.getFavoritesNgos(userId);
         return ResponseEntity.ok(ngos);
     }
+
+    @Operation(summary = "Get an NGO by ID", description = "This endpoint is used to retrieve an NGO by its ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "NGO found successfully",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Ngo.class))}),
+            @ApiResponse(responseCode = "404", description = "NGO not found",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseDto.class))}),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseDto.class))})
+    })
+    @GetMapping("/{ngoId}")
+    public ResponseEntity<?> getNgoById(@Parameter(description = "NGO id", required = true)
+                                        @PathVariable("ngoId") Long ngoId) {
+        Ngo ngo = ngoService.getNgoById(ngoId);
+        return ResponseEntity.ok(ngo);
+    }
 }

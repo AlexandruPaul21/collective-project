@@ -3,24 +3,26 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-import { Button } from './ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { donatePayment } from '@/apis/paymentApi';
 import { PaymentRequest, PaymentResponse } from '@/utils/types';
 import CheckoutForm from './CheckoutForm';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { getNgoById } from '@/apis/ngoApi';
+import { NGOProps } from '@/utils/types/ngoProps';
 
 const stripePromise = loadStripe("pk_test_51OZGIJBvOG8Oe6QO2aZKsfA7hpP0UAaZWsXFiSXltRkA3rtFon1YoGzAGYcry8MSJPqqLGWpEJVNUpNS0tGUGZey00O6EsT87h");
 
 const PaymentForm = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
+  const { ngoId } = useParams();
   const [password, setPassword] = useState('');
-  const [clientSecret, setClientSecret] = useState("");
+  const [ngo, setNgo] = useState<NGOProps | null>(null);
 
   const formSchema = z.object({
     amount: z.string().min(1, 'Amount must be greater than 0'),
@@ -45,10 +47,20 @@ const PaymentForm = () => {
   };
 
   useEffect(() => {
+    if(!ngoId || !username || !password) 
+      return;
+    getNgoById(username, password, Number(ngoId))
+      .then(data => {
+        setNgo(data);
+      });
+  }, [username, password, ngoId]);
+
+  useEffect(() => {
     const username = localStorage.getItem('username');
     setUsername(username || '');
     const password = localStorage.getItem('password');
     setPassword(password || '');
+  
   }, []);
 
   const donate = async (paymentRequest: PaymentRequest) => {
@@ -65,14 +77,16 @@ const PaymentForm = () => {
   };
 
   const handleToken = (token: any) => {
+    console.log(token);
     const paymentRequest: PaymentRequest = {
       token: token,
       amount: Number(form.getValues('amount')), // Assuming you have these fields in your form
       currency: form.getValues('currency'),
       description: form.getValues('description'),
       username: username,
-      ngoName: "Fundatia Doina Cornea"
+      ngoName: ngo!.name
     };
+    console.log(paymentRequest);
     donate(paymentRequest);
   };
 
@@ -146,7 +160,7 @@ const PaymentForm = () => {
             <Elements stripe={stripePromise}>
               <CheckoutForm onTokenReceived={handleToken} />
             </Elements>
-          
+
           </div>
         </form>
       </Form>

@@ -1,7 +1,5 @@
-import React from 'react';
-import { useStripe, useElements, CardElement, PaymentElement } from '@stripe/react-stripe-js';
+import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { Button } from './ui/button';
-import { StripePaymentElementOptions } from '@stripe/stripe-js';
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -26,12 +24,9 @@ const CheckoutForm = ({ onTokenReceived }: { onTokenReceived: (token: string) =>
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
 
-    if (!stripe || !elements) {
-      return;
-    }
-
-    const cardElement = elements.getElement(CardElement);
-    const { error, token } = await stripe.createToken(cardElement!);
+    const cardElement = elements!.getElement(CardElement);
+    const { error, token } = await stripe!.createToken(cardElement!);
+    console.log('token', token);
 
     if (error) {
       console.log('[error]', error);
@@ -40,10 +35,6 @@ const CheckoutForm = ({ onTokenReceived }: { onTokenReceived: (token: string) =>
       onTokenReceived(token.id);
     }
   };
-
-  const paymentElementOptions: StripePaymentElementOptions = {
-    layout: "tabs"
-  }
 
   return (
     <form onSubmit={handleSubmit}>
