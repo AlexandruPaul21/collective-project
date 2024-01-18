@@ -1,6 +1,6 @@
-export interface NGOProps{
+export interface NGOProps {
     id: number
-    name : string
+    name: string
     contact: string
     website: string
     email: string
