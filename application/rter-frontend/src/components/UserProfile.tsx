@@ -5,10 +5,14 @@ import {Gender} from "@/utils/types";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import {toast} from "@/components/ui/use-toast";
 
+
+// The profile page of a User
+// Initially shows the user's information in a read-only format
+// Provides a button to switch to update mode
+// In update mode, the user can edit their information and save it
 const UserProfile: React.FC = () => {
 
   const [updateScreen, setUpdateScreen] = useState(false);
-
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -44,7 +48,6 @@ const UserProfile: React.FC = () => {
     setUpdateAddress(address);
     setUpdateGender(gender);
     setUpdateDescription(description);
-
     setUpdateScreen(true);
   }
 

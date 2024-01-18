@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Gift, LucideHeart, Phone } from "lucide-react";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {
   Dialog,
   DialogOverlay,
@@ -24,9 +24,12 @@ import {
 } from "@/components/ui/tooltip";
 import { DialogHeader, DialogFooter } from "./ui/dialog";
 import { NGOProps } from "@/utils/types/ngoProps";
+import Map from "./Map";
+import {fromAddress, setKey, setLanguage, setRegion} from "react-geocode";
+import {GOOGLE_MAPS_API_KEY} from "@/utils/consts";
 import { addNgoToFavorites, removeNgoFromFavorites } from "@/apis/ngoApi";
 import { FavoriteNgoProps } from "@/utils/types/favoriteNgoProps";
-import { COLORS, User } from "@/utils/types";
+import { COLORS, User} from "@/utils/types";
 import { useNavigate } from "react-router";
 
 interface NGOCardProps {
@@ -103,6 +106,30 @@ const NGOCard: React.FC<NGOCardProps> = ({
       console.error("Error toggling favorite status", error);
     }
   };
+
+  // Grabbing the latitude and longitude from the ngo address
+  const [lat, setLat] = useState("0");
+  const [lng, setLng] = useState("0");
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Setting the Google Maps API key information
+  setKey(GOOGLE_MAPS_API_KEY);
+  setLanguage("en");
+  setRegion("ro");
+
+  // Searching for the address
+  useEffect(() => {
+    const fetchData = async () => {
+      await fromAddress(ngo.address)
+        .then(({results}) => {
+          setLat(results[0].geometry.location.lat);
+          setLng(results[0].geometry.location.lng);
+          setIsLoaded(true);
+        })
+        .catch(console.error);
+    }
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -201,6 +228,15 @@ const NGOCard: React.FC<NGOCardProps> = ({
                 ) : (
                   <span>No contact information provided</span>
                 )}
+
+                <span>Address : {ngo.address}</span>
+
+                { isLoaded ? (
+                  <Map lat = {lat} lng = {lng}/>
+                ) : (
+                  <></>
+                )}
+
                 <a
                   href={ngo.website}
                   className="hover:text-sky-800 text-lg hover:underline"
