@@ -63,7 +63,6 @@ const NGOCard: React.FC<NGOCardProps> = ({
   const navigate = useNavigate();
   const isContactDisabled = ngo.email === "null";
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const navigate = useNavigate();
   const onContactClick = () => {
     navigate("/volunteer");
   };
@@ -71,9 +70,6 @@ const NGOCard: React.FC<NGOCardProps> = ({
     const emailFlag = ngo.email ? "1" : "0";
     navigate("/donate/" + ngo.id + "/" + emailFlag);
   };
-  const handleAddFavouriteClick = (): void => {
-    setIsFavourite(!isFavourite);
-
   const handleFavoriteClick = async () => {
     if (!currentUser) {
       navigate("/sign-in");
