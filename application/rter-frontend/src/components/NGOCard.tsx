@@ -24,15 +24,21 @@ import {
 } from "@/components/ui/tooltip";
 import { DialogHeader, DialogFooter } from "./ui/dialog";
 import { NGOProps } from "@/utils/types/ngoProps";
-import { COLORS } from "@/utils/types";
 import Map from "./Map";
 import {fromAddress, setKey, setLanguage, setRegion} from "react-geocode";
 import {GOOGLE_MAPS_API_KEY} from "@/utils/consts";
+import { addNgoToFavorites, removeNgoFromFavorites } from "@/apis/ngoApi";
+import { FavoriteNgoProps } from "@/utils/types/favoriteNgoProps";
+import { COLORS, User} from "@/utils/types";
+import { useNavigate } from "react-router";
 
 interface NGOCardProps {
   ngo: NGOProps;
+  isFavorite: boolean;
+  currentUser: User;
   onDonateClick: () => void;
   onContactClick: () => void;
+  onFavoriteChange: () => void;
 }
 
 const styles = {
@@ -50,19 +56,55 @@ const styles = {
   },
 };
 
-
 const NGOCard: React.FC<NGOCardProps> = ({
   ngo,
+  isFavorite,
+  currentUser,
   onDonateClick,
   onContactClick,
+  onFavoriteChange,
 }) => {
-
+  const navigate = useNavigate();
   const isContactDisabled = ngo.email === "null";
-  const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
-  const handleAddFavouriteClick = (): void => {
-    setIsFavourite(!isFavourite);
+  const handleFavoriteClick = async () => {
+    if (!currentUser) {
+      navigate("/sign-in");
+      return;
+    }
+
+    const favoriteNgoData: FavoriteNgoProps = {
+      idNgo: ngo.id,
+      idUser: Number(currentUser?.id!),
+    };
+
+    try {
+      if (isFavorite) {
+        // If it's already a favorite, remove it
+        await removeNgoFromFavorites(
+          currentUser.username,
+          currentUser.password,
+          favoriteNgoData,
+        );
+        console.log("Removed from favorites" + favoriteNgoData);
+      } else {
+        // If it's not a favorite, add it
+        await addNgoToFavorites(
+          currentUser.username,
+          currentUser.password,
+          favoriteNgoData,
+        );
+        console.log("Added to favorites" + favoriteNgoData);
+      }
+      if (onFavoriteChange) {
+        onFavoriteChange();
+      }
+      // Toggle the favorite status
+    } catch (error) {
+      // Handle errors
+      console.error("Error toggling favorite status", error);
+    }
   };
 
   // Grabbing the latitude and longitude from the ngo address
@@ -103,13 +145,14 @@ const NGOCard: React.FC<NGOCardProps> = ({
               {ngo.name}
             </CardTitle>
             <Button
-              onClick={handleAddFavouriteClick}
+              onClick={handleFavoriteClick}
               style={{ background: "transparent" }}
             >
-              <LucideHeart
-                size={20}
-                style={{ color: isFavourite ? COLORS.RED : COLORS.BLACK }}
-              />
+              {isFavorite ? (
+                <LucideHeart size={20} style={{ color: "red" }} />
+              ) : (
+                <LucideHeart size={20} style={{ color: "black" }} />
+              )}
             </Button>
           </div>
         </CardHeader>

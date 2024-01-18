@@ -8,4 +8,4 @@ export interface UserProps{
     gender: string
     createdAt: string
     rating: number
-}
+} 
