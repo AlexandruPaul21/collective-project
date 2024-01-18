@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Gift, LucideHeart, Phone } from "lucide-react";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {
   Dialog,
   DialogOverlay,
@@ -25,6 +25,11 @@ import {
 import { DialogHeader, DialogFooter } from "./ui/dialog";
 import { NGOProps } from "@/utils/types/ngoProps";
 import { COLORS } from "@/utils/types";
+import Map from "./Map";
+import {fromAddress, setKey, setLanguage, setRegion} from "react-geocode";
+
+
+
 
 interface NGOCardProps {
   ngo: NGOProps;
@@ -59,6 +64,30 @@ const NGOCard: React.FC<NGOCardProps> = ({
   const handleAddFavouriteClick = (): void => {
     setIsFavourite(!isFavourite);
   };
+
+  const GOOGLE_MAPS_API_KEY = `AIzaSyC1SJWNoMsl0kJCghopMcztI7vh5yIdq1E`;
+
+  setKey(GOOGLE_MAPS_API_KEY);
+  setLanguage("en");
+  setRegion("ro");
+
+  const [lat, setLat] = useState("0");
+  const [lng, setLng] = useState("0");
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Get latitude & longitude from address.
+    const fetchData = async () => {
+      await fromAddress(ngo.address)
+        .then(({results}) => {
+          setLat(results[0].geometry.location.lat);
+          setLng(results[0].geometry.location.lng);
+          setIsLoaded(true);
+        })
+        .catch(console.error);
+    }
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -156,6 +185,16 @@ const NGOCard: React.FC<NGOCardProps> = ({
                 ) : (
                   <span>No contact information provided</span>
                 )}
+
+                <span>Adress ---: {ngo.address}</span>
+
+                { isLoaded ? (
+                  <Map lat = {lat} lng = {lng}/>
+                ) : (
+                  <></>
+                )}
+
+
                 <a
                   href={ngo.website}
                   className="hover:text-sky-800 text-lg hover:underline"

@@ -5,4 +5,5 @@ export interface NGOProps{
     website: string
     email: string
     imageUrl: string
+    address: string
 }

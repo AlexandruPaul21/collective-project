@@ -1,0 +1,14 @@
+
+
+/* Account page resizable */
+@media (max-width: 680px) {
+    .small-screen-login-container {
+       width: 400px;
+    }
+
+}
+@media (min-width: 680px) {
+    .small-screen-login-container {
+        width: 600px;
+    }
+}
