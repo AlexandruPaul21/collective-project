@@ -4,6 +4,11 @@ import logo from "@/pages/userPage/cogs-hd.jpg";
 import {Toaster} from "@/components/ui/toaster.tsx";
 import "./ProfilePage.css";
 
+
+// The user profile page
+// Contains the user profile form and an image
+// Has 2 different layouts for small and large screens
+// Shows a toast message if any modified data is invalid
 const UserProfilePage: React.FC = () => {
   return (
       <div className="flex flex-col justify-center items-center">
@@ -11,6 +16,7 @@ const UserProfilePage: React.FC = () => {
 
         {/* BIG SCREEN */}
         <div className="profilepageheight hidden lg:flex w-full">
+
             {/* USERPROFILE FORM */}
             <div
               className="profileheight flex w-2/5 flex-col items-center justify-center
@@ -27,16 +33,13 @@ const UserProfilePage: React.FC = () => {
               <Toaster/>
             </div>
 
-
             {/* IMAGE */}
-
             <div className="profileheight flex-column flex w-3/5 items-center justify-center ">
               <img
                 className="w-[500px] h-[500px]"
                 src={logo}
                 alt="user profile img"
               />
-
           </div>
         </div>
 
@@ -57,9 +60,7 @@ const UserProfilePage: React.FC = () => {
               </div>
               <Toaster/>
             </div>
-
           </div>
-
         </div>
 
 

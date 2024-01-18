@@ -90,7 +90,6 @@ public class NgoService {
                                 for (String word : words) {
                                     if (word.contains("@")) {
                                         foundEmail = word.trim();
-                                        //System.out.println(foundEmail);
                                         break;
                                     }
                                 }
@@ -102,10 +101,8 @@ public class NgoService {
 
 
                             Element location = linkedDocument.selectFirst("#ong-hero > div > div > div.col-12.col-sm-8.col-md-9.col-lg-10 > div > div.col > p");
-                            //System.out.println("l: " + location);
                             if (location != null) {
                                 String locationText = location.text();
-                               // System.out.println("LOCATION " + locationText);
                                 ngoToBeAdded.setAddress(locationText);
                             } else {
                                 ngoToBeAdded.setAddress(null);

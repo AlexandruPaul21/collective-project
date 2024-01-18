@@ -3,12 +3,19 @@ import logo from "./LoginImage.png";
 import {Link} from "react-router-dom";
 import {Toaster} from "@/components/ui/toaster.tsx";
 import "./Login.css";
-import SignInForm from "@/components/SignInForm.tsx";
+
+
+// The sign-up page
+// Contains the sign-up form, a link to the sign-in page and an image
+// Has 2 different layouts for small and large screens
+// Shows a toast message if any data is invalid
 const SignUpPage = () => {
   return (
-    <div className="">
+    <div>
+
+      {/* BIG SCREENS */}
       <div className="hidden lg:flex loginwrapper w-full">
-        {/* IMAGE */}
+
         <div className="flex-column flex w-3/5 items-center justify-center ">
           <img
             // className="sm:p-[80px] lg:p-[100px]"
@@ -43,7 +50,6 @@ const SignUpPage = () => {
 
 
       {/* SMALL SCREENS */}
-
       <div className="signupwrapper lg:hidden flex items-center justify-center">
         <div className="flex height-adjust justify-center">
           <div

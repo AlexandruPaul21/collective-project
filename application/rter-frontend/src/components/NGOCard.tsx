@@ -27,9 +27,7 @@ import { NGOProps } from "@/utils/types/ngoProps";
 import { COLORS } from "@/utils/types";
 import Map from "./Map";
 import {fromAddress, setKey, setLanguage, setRegion} from "react-geocode";
-
-
-
+import {GOOGLE_MAPS_API_KEY} from "@/utils/consts";
 
 interface NGOCardProps {
   ngo: NGOProps;
@@ -52,11 +50,13 @@ const styles = {
   },
 };
 
+
 const NGOCard: React.FC<NGOCardProps> = ({
   ngo,
   onDonateClick,
   onContactClick,
 }) => {
+
   const isContactDisabled = ngo.email === "null";
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -65,18 +65,18 @@ const NGOCard: React.FC<NGOCardProps> = ({
     setIsFavourite(!isFavourite);
   };
 
-  const GOOGLE_MAPS_API_KEY = `AIzaSyC1SJWNoMsl0kJCghopMcztI7vh5yIdq1E`;
-
-  setKey(GOOGLE_MAPS_API_KEY);
-  setLanguage("en");
-  setRegion("ro");
-
+  // Grabbing the latitude and longitude from the ngo address
   const [lat, setLat] = useState("0");
   const [lng, setLng] = useState("0");
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // Setting the Google Maps API key information
+  setKey(GOOGLE_MAPS_API_KEY);
+  setLanguage("en");
+  setRegion("ro");
+
+  // Searching for the address
   useEffect(() => {
-    // Get latitude & longitude from address.
     const fetchData = async () => {
       await fromAddress(ngo.address)
         .then(({results}) => {
@@ -186,14 +186,13 @@ const NGOCard: React.FC<NGOCardProps> = ({
                   <span>No contact information provided</span>
                 )}
 
-                <span>Adress ---: {ngo.address}</span>
+                <span>Address : {ngo.address}</span>
 
                 { isLoaded ? (
                   <Map lat = {lat} lng = {lng}/>
                 ) : (
                   <></>
                 )}
-
 
                 <a
                   href={ngo.website}

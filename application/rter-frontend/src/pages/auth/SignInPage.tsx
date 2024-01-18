@@ -4,6 +4,11 @@ import {Link} from "react-router-dom";
 import {Toaster} from "@/components/ui/toaster.tsx";
 import "./Login.css";
 
+
+// The sign-in page
+// Contains the sign-in form, a link to the sign-up page and an image
+// Has 2 different layouts for small and large screens
+// Shows a toast message if the credentials are invalid
 const SignInPage = () => {
   return (
     <div className="">
@@ -46,7 +51,6 @@ const SignInPage = () => {
       </div>
 
       {/* SMALL SCREENS */}
-
       <div className="loginwrapper lg:hidden flex items-center justify-center">
         <div className="flex h-[600px] justify-center">
           <div
@@ -72,6 +76,7 @@ const SignInPage = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };
