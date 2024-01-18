@@ -4,7 +4,6 @@ import com.example.rterserver.enums.DonationType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,7 +26,6 @@ public class Donation {
     @Column(nullable = false,length = 256)
     @Schema(description = "Details of the donation")
     private String details;
-
 
     @Column(nullable = false)
     @Schema(description = "The date and time when the donation was made")
