@@ -1,6 +1,6 @@
 import DonateCard from "@/components/DonateCard";
 import Navbar from "@/components/Navbar";
-
+import Background from "../../../public/donation-background.svg";
 const donateCards = [
   {
     title: "Donate Money",
@@ -21,9 +21,12 @@ const donateCards = [
 const ChooseDonationMethodPage = () => {
   const emailExists = true;
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex h-screen flex-col">
       <Navbar />
-      <div className="flex h-full w-full items-center justify-center gap-10">
+      <div
+        className="flex h-full w-full items-center justify-center gap-10 "
+        style={{ backgroundImage: `url(${Background})` }}
+      >
         {donateCards.map((card, id) => (
           <DonateCard
             key={id}
