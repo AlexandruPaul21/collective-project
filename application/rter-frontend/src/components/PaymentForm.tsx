@@ -10,18 +10,12 @@ import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
 import { donatePayment } from '@/apis/paymentApi';
 import { PaymentRequest, PaymentResponse } from '@/utils/types';
-import { NGOProps } from '@/utils/types/ngoProps';
 
-interface PaymentFormProps {
-  ngo: NGOProps;
-}
-
-const PaymentForm: React.FC<PaymentFormProps> = ({
-  ngo,
-}) => {
+const PaymentForm = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [clientSecret, setClientSecret] = useState("");
 
   const formSchema = z.object({
     amount: z.string().min(1, 'Amount must be greater than 0'),
@@ -44,6 +38,17 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
     form.reset();
     navigate('/');
   };
+
+  useEffect(() => {
+    // Create PaymentIntent as soon as the page loads
+    fetch("/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
+  }, []);
 
   useEffect(() => {
     const username = localStorage.getItem('username');
@@ -72,7 +77,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
       currency: values.currency,
       description: values.description,
       username: username,
-      ngoName: ngo.name,
+      ngoName: "Asociatia ",
     }
     donate(paymentRequest);
   };
@@ -152,6 +157,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
           </div>
         </form>
       </Form>
+      
     </div>
   );
 };
