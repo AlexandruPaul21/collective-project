@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/rter-api" />
             <option value="$PROJECT_DIR$/rter-server" />
           </set>
         </option>

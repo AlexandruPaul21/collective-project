@@ -10,6 +10,11 @@ import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
 import { donatePayment } from '@/apis/paymentApi';
 import { PaymentRequest, PaymentResponse } from '@/utils/types';
+import CheckoutForm from './CheckoutForm';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe("pk_test_51OZGIJBvOG8Oe6QO2aZKsfA7hpP0UAaZWsXFiSXltRkA3rtFon1YoGzAGYcry8MSJPqqLGWpEJVNUpNS0tGUGZey00O6EsT87h");
 
 const PaymentForm = () => {
   const navigate = useNavigate();
@@ -40,17 +45,6 @@ const PaymentForm = () => {
   };
 
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    fetch("/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
-  }, []);
-
-  useEffect(() => {
     const username = localStorage.getItem('username');
     setUsername(username || '');
     const password = localStorage.getItem('password');
@@ -61,7 +55,8 @@ const PaymentForm = () => {
     try {
       const paymentResponse: PaymentResponse = await donatePayment(username, password, paymentRequest);
       toast.success('Donation made successfully!');
-      console.log(paymentResponse);
+      console.log(paymentResponse.message);
+      console.log(paymentResponse.status);
       onClose();
     } catch (error) {
       console.error(error);
@@ -69,23 +64,23 @@ const PaymentForm = () => {
     }
   };
 
-  const onSubmit = (values: any) => {
-    values.amount = parseFloat(values.amount);
+  const handleToken = (token: any) => {
     const paymentRequest: PaymentRequest = {
-      token: "",
-      amount: values.amount,
-      currency: values.currency,
-      description: values.description,
+      token: token,
+      amount: Number(form.getValues('amount')), // Assuming you have these fields in your form
+      currency: form.getValues('currency'),
+      description: form.getValues('description'),
       username: username,
-      ngoName: "Asociatia ",
-    }
+      ngoName: "Fundatia Doina Cornea"
+    };
     donate(paymentRequest);
   };
+
 
   return (
     <div className="relative flex h-full w-full items-center justify-center overflow-auto">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form >
           <div className="flex flex-col gap-7">
             <FormField
               control={form.control}
@@ -148,16 +143,14 @@ const PaymentForm = () => {
                 </FormItem>
               )}
             />
-
-            <div className="flex items-center justify-center">
-              <Button className="w-[100px] bg-[#01608b] hover:bg-[#01608b]/90 md:w-[200px] xl:w-[300px]">
-                Donate
-              </Button>
-            </div>
+            <Elements stripe={stripePromise}>
+              <CheckoutForm onTokenReceived={handleToken} />
+            </Elements>
+          
           </div>
         </form>
       </Form>
-      
+
     </div>
   );
 };

@@ -10,6 +10,7 @@ export const donatePayment: (username:string, password:string, paymentRequest: P
       }
     })
       .then((response: AxiosResponse<PaymentResponse>) => response.data)
+      
       .catch((error) => {
         throw new Error(error.response.data.message);
       });
