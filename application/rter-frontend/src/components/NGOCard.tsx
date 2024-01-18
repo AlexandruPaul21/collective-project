@@ -64,7 +64,6 @@ const NGOCard: React.FC<NGOCardProps> = ({
   const navigate = useNavigate();
   const isContactDisabled = ngo.email === "null";
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-
   const handleFavoriteClick = async () => {
     if (!currentUser) {
       navigate("/sign-in");
