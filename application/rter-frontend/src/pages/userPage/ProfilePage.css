@@ -1,0 +1,18 @@
+/* Profile page big screen h > 785px */
+@media (min-height: 785px) {
+    .profilepageheight {
+        height: calc(100vh - 80px);
+    }
+}
+
+/* Profile page small screen h < 785px */
+@media (max-height: 785px) {
+    .profilepageheight {
+        height: 720px;
+    }
+    .profileheight {
+        height: 720px;
+    }
+}
+
+

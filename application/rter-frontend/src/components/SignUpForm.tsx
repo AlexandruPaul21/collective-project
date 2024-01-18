@@ -1,9 +1,7 @@
 "use client";
-
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 import * as z from "zod";
-
 import {Button} from "@/components/ui/button";
 import {
   Form,
@@ -25,6 +23,8 @@ import {Gender, User} from "@/utils/types.tsx";
 import {AuthService} from "@/apis/auth/AuthService.tsx";
 import {toast} from "@/components/ui/use-toast.ts";
 import {capitalizeString} from "@/lib/utils.ts";
+import "../pages/auth/Login.css";
+
 
 const FormSchema = z.object({
   username: z.string().min(3).max(64),
@@ -47,6 +47,10 @@ const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
 
 z.setErrorMap(customErrorMap);
 
+
+// The sign-up form
+// Contains username, email, password, name, address, gender fields
+// Throws a toast message to parent if any data is invalid
 export function SignUpForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -75,8 +79,8 @@ export function SignUpForm() {
     <div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="">
-          <div className="flex">
-            <div className="mr-2 w-full space-y-4">
+          <div className="widescreensdiv">
+            <div className=" widescreenmarginr w-full space-y-4">
               {/*  USERNAME  */}
               <FormField
                 control={form.control}
@@ -144,7 +148,7 @@ export function SignUpForm() {
               />
             </div>
 
-            <div className="ml-2 w-full space-y-4">
+            <div className="widescreenmarginl  w-full space-y-4">
               {/*  PASSWORD  */}
               <FormField
                 control={form.control}

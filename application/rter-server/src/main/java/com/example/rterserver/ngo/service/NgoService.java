@@ -90,7 +90,6 @@ public class NgoService {
                                 for (String word : words) {
                                     if (word.contains("@")) {
                                         foundEmail = word.trim();
-                                        System.out.println(foundEmail);
                                         break;
                                     }
                                 }
@@ -99,6 +98,16 @@ public class NgoService {
                                 ngoToBeAdded.setContact("null");
                                 ngoToBeAdded.setEmail("null");
                             }
+
+
+                            Element location = linkedDocument.selectFirst("#ong-hero > div > div > div.col-12.col-sm-8.col-md-9.col-lg-10 > div > div.col > p");
+                            if (location != null) {
+                                String locationText = location.text();
+                                ngoToBeAdded.setAddress(locationText);
+                            } else {
+                                ngoToBeAdded.setAddress(null);
+                            }
+
                             Element website = linkedDocument.selectFirst("#main-website");
                             if (website != null) {
                                 ngoToBeAdded.setWebsite(website.select("a").attr("href"));

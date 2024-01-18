@@ -56,14 +56,6 @@ const CardsSection = () => {
     );
     setFilteredNgos(result);
   }, [ngos, searchValue]);
-
-  const onContactClick = () => {
-    navigate("/volunteer");
-  };
-
-  const onDonateClick = () => {
-    navigate("/donate");
-  };
   const updateFavorites = (ngo: NGOProps, isFavorite: boolean) => {
     if (isFavorite) {
       setFavorites((prevFavorites) => [...prevFavorites, ngo]);
@@ -75,16 +67,13 @@ const CardsSection = () => {
   };
 
   return (
-    <div className="items-center lg:max-w-[715px] 2xl:max-w-[1069px]">
-      <div className="flex flex-wrap">
+    <div className="flex flex-wrap justify-center px-2 pt-5">
         {filteredNgos.map((ngo, index) => (
           <div key={index} className="m-2">
             <NGOCard
               ngo={ngo}
               isFavorite={favorites.some((favorite) => favorite.id === ngo.id)}
               currentUser={currentUser!}
-              onDonateClick={onDonateClick}
-              onContactClick={onContactClick}
               onFavoriteChange={() =>
                 updateFavorites(
                   ngo,
@@ -95,7 +84,6 @@ const CardsSection = () => {
           </div>
         ))}
       </div>
-    </div>
   );
 };
 

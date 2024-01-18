@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Gift, LucideHeart, Phone } from "lucide-react";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogOverlay,
@@ -24,6 +24,9 @@ import {
 } from "@/components/ui/tooltip";
 import { DialogHeader, DialogFooter } from "./ui/dialog";
 import { NGOProps } from "@/utils/types/ngoProps";
+import Map from "./Map";
+import { fromAddress, setKey, setLanguage, setRegion } from "react-geocode";
+import { GOOGLE_MAPS_API_KEY } from "@/utils/consts";
 import { addNgoToFavorites, removeNgoFromFavorites } from "@/apis/ngoApi";
 import { FavoriteNgoProps } from "@/utils/types/favoriteNgoProps";
 import { COLORS, User } from "@/utils/types";
@@ -33,8 +36,6 @@ interface NGOCardProps {
   ngo: NGOProps;
   isFavorite: boolean;
   currentUser: User;
-  onDonateClick: () => void;
-  onContactClick: () => void;
   onFavoriteChange: () => void;
 }
 
@@ -57,13 +58,24 @@ const NGOCard: React.FC<NGOCardProps> = ({
   ngo,
   isFavorite,
   currentUser,
-  onDonateClick,
-  onContactClick,
   onFavoriteChange,
 }) => {
   const navigate = useNavigate();
   const isContactDisabled = ngo.email === "null";
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+
+  const onContactClick = () => {
+    navigate("/volunteer");
+  };
+  const onDonateClick = () => {
+    if (!currentUser) {
+      navigate("/sign-in");
+      return;
+    }
+    const emailFlag = ngo.email === "null" ? "0" : "1";
+    navigate("/donate/" + ngo.id + "/" + emailFlag);
+  };
+
   const handleFavoriteClick = async () => {
     if (!currentUser) {
       navigate("/sign-in");
@@ -102,6 +114,30 @@ const NGOCard: React.FC<NGOCardProps> = ({
       console.error("Error toggling favorite status", error);
     }
   };
+
+  // Grabbing the latitude and longitude from the ngo address
+  const [lat, setLat] = useState("0");
+  const [lng, setLng] = useState("0");
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Setting the Google Maps API key information
+  setKey(GOOGLE_MAPS_API_KEY);
+  setLanguage("en");
+  setRegion("ro");
+
+  // Searching for the address
+  useEffect(() => {
+    const fetchData = async () => {
+      await fromAddress(ngo.address)
+        .then(({ results }: { results: any[] }) => {
+          setLat(results[0].geometry.location.lat);
+          setLng(results[0].geometry.location.lng);
+          setIsLoaded(true);
+        })
+        .catch(console.error);
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -200,6 +236,11 @@ const NGOCard: React.FC<NGOCardProps> = ({
                 ) : (
                   <span>No contact information provided</span>
                 )}
+
+                <span>Address : {ngo.address}</span>
+
+                {isLoaded ? <Map lat={lat} lng={lng} /> : <></>}
+
                 <a
                   href={ngo.website}
                   className="hover:text-sky-800 text-lg hover:underline"

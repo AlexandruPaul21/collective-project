@@ -1,9 +1,7 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,13 +12,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-//import {AuthService} from "@/apis/auth/AuthService.tsx";
-//import {LoginRequest} from "@/utils/types.tsx";
 import {toast} from "@/components/ui/use-toast.ts";
 import {AuthService} from "@/apis/auth/AuthService.tsx";
 import {LoginRequest} from "@/utils/types.tsx";
 import {capitalizeString} from "@/lib/utils.ts";
-//import {ToastAction} from "@radix-ui/react-toast";
+
 
 const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
   if (issue.code === z.ZodIssueCode.too_small) {
@@ -28,7 +24,6 @@ const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
       return { message: capitalizeString(issue.path.toString()) +" is too short!" };
     }
   }
-
   return { message: ctx.defaultError };
 };
 
@@ -39,7 +34,11 @@ const FormSchema = z.object({
 
 z.setErrorMap(customErrorMap);
 
-export function SignUpForm() {
+
+// The sign-in form
+// Contains username, password fields
+// Throws a toast message to parent if any data is invalid
+export function SignInForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -49,9 +48,7 @@ export function SignUpForm() {
   });
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
-
       const {status,message} = await AuthService.login(data as LoginRequest);
-
       toast({
         title: status===200?"Success":"Error",
         variant: status===200?"default":"destructive",
@@ -65,6 +62,7 @@ export function SignUpForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-5">
+
             {/*  USERNAME  */}
             <FormField
               control={form.control}
@@ -80,7 +78,6 @@ export function SignUpForm() {
                       className="border-lightblu rounded-full border-[1px]"
                     />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -102,14 +99,13 @@ export function SignUpForm() {
                       className="border-lightblu marker:text-lightblu rounded-full border-[1px]"
                     />
                   </FormControl>
-
                   <FormMessage/>
                 </FormItem>
               )}
             />
           </div>
 
-          {/*  SIBMIT BUTTON  */}
+          {/*  SUBMIT BUTTON  */}
           <Button
             className="bg-lightblu w-full rounded-full hover:bg-[#2076C1]"
             type="submit"
@@ -122,4 +118,4 @@ export function SignUpForm() {
   );
 }
 
-export default SignUpForm;
+export default SignInForm;
