@@ -1,9 +1,9 @@
 package com.example.rterserver.donation.service;
 
+import com.example.rterserver.donation.dto.NonPaymentRequest;
 import com.example.rterserver.donation.dto.PaymentRequest;
 import com.example.rterserver.donation.model.Donation;
 import com.example.rterserver.donation.repository.DonationRepo;
-import com.example.rterserver.email.dto.DonationEmailRequest;
 import com.example.rterserver.email.service.EmailService;
 import com.example.rterserver.enums.DonationType;
 import com.example.rterserver.ngo.model.Ngo;
@@ -36,8 +36,9 @@ public class DonationService {
     }
 
     @Transactional
-    public Donation  save(Donation donation){
-        Donation donationToSave = new Donation(donation.getAmount(),donation.getType(),donation.getDetails(), donation.getCreatedat(),donation.getIduser(),donation.getIdngo());
+    public Donation save(Donation donation){
+        Donation donationToSave = new Donation(donation.getAmount(),donation.getType(),donation.getDetails(),
+            donation.getCreatedat(),donation.getIduser(),donation.getIdngo());
         if(donation.getType() == DonationType.FOOD || donation.getType() == DonationType.ITEM)
             emailService.sendDonationEmail(donation);
         return donationRepo.save(donationToSave);
@@ -69,6 +70,17 @@ public class DonationService {
                 .collect(Collectors.toList());
     }
 
-
-
+    @Transactional
+    public Donation saveNonPayment(NonPaymentRequest nonPaymentRequest) {
+        Donation donation = new Donation();
+        donation.setAmount(0);
+        donation.setType(nonPaymentRequest.getType());
+        donation.setDetails("Donate other things.");
+        donation.setCreatedat(nonPaymentRequest.getCreatedAt());
+        donation.setIdngo(nonPaymentRequest.getIdngo());
+        donation.setIduser(nonPaymentRequest.getIduser());
+        donationRepo.save(donation);
+        emailService.sendDonationEmail(donation);
+        return donation;
+    }
 }
