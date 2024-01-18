@@ -16,7 +16,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Button } from "./ui/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PUBLIC_API_URL } from "@/utils/url";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -31,12 +31,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { UserService } from "@/apis/profile/UserService";
+import { User } from "@/utils/types";
 const DonateItemsForm = () => {
   enum ItemType {
     Food = "FOOD",
     Item = "ITEM",
+    Volunteer = "VOLUNTEER",
   }
   const navigate = useNavigate();
+  const { ngoId } = useParams();
+  const [currentUser, setCurrentUser] = useState<User>();
   const formSchema = z.object({
     date: z.date({
       required_error: "A date is required.",
@@ -62,6 +67,15 @@ const DonateItemsForm = () => {
     setPassword(password || "");
   }, []);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await UserService.getCurrentUser();
+      setCurrentUser(user);
+      console.log(user);
+    };
+    fetchUser();
+  }, []);
+
   const onClose = () => {
     form.reset();
     navigate("/");
@@ -70,18 +84,31 @@ const DonateItemsForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       // TODO: Modify this to send the email to the NGO
-      const stringifiedObject = JSON.stringify(values);
-      console.log(stringifiedObject);
-      await axios.post(`${PUBLIC_API_URL}/donate/non-payment`, stringifiedObject, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        auth: {
-          username: username,
-          password: password,
-        },
-      });
-      toast.success("Email sent successfully!");
+      if(currentUser){
+        const donationObject = {
+          type: values.type, 
+          createdAt: format(values.date, "yyyy-MM-dd'T'HH:mm:ss"),
+          iduser: currentUser.id,
+          idngo: ngoId, 
+        };
+  
+        const stringifiedObject = JSON.stringify(donationObject);
+        console.log(stringifiedObject);
+        await axios.post(
+          `${PUBLIC_API_URL}/donations/non-payment`,
+          stringifiedObject,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            auth: {
+              username: username,
+              password: password,
+            },
+          },
+        );
+        toast.success("Email sent successfully!");
+      }
       onClose();
     } catch (error: unknown) {
       console.log(error);
