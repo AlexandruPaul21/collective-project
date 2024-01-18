@@ -1,0 +1,16 @@
+@media (min-height: 785px) {
+    .profilepageheight {
+        height: calc(100vh - 80px);
+    }
+}
+
+@media (max-height: 785px) {
+    .profilepageheight {
+        height: 720px;
+    }
+    .profileheight {
+        height: 720px;
+    }
+}
+
+

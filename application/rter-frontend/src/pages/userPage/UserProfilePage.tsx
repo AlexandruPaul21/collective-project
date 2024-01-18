@@ -3,21 +3,23 @@ import UserProfile from "@/components/UserProfile";
 import logo from "@/pages/userPage/cogs-hd.jpg";
 import {Toaster} from "@/components/ui/toaster.tsx";
 import "./ProfilePage.css";
+
 const UserProfilePage: React.FC = () => {
   return (
       <div className="flex flex-col justify-center items-center">
         <Navbar/>
 
-        <div >
-          <div className="flex  w-full">
-
+        {/* BIG SCREEN */}
+        <div className="profilepageheight hidden lg:flex w-full">
             {/* USERPROFILE FORM */}
             <div
-              className="flex w-2/5 flex-col items-center justify-center rounded-r-[80px] border-b-[3px]  border-r-[3px] border-t-[3px]
+              className="profileheight flex w-2/5 flex-col items-center justify-center
+              rounded-r-[80px] border-b-[3px]  border-r-[3px] border-t-[3px]
          border-[#A1E7FF] bg-[#F5F5F5] shadow-2xl"
             >
-              <div className="w-1/2 scale-150 space-y-6">
-                <div className="font-overpass text-darkgray  text-2xl font-extrabold tracking-wider">
+              <div className="w-1/2 scale-125  space-y-6">
+                <div className="font-overpass text-darkgray
+                text-2xl font-extrabold tracking-wider">
                   My Profile
                 </div>
                 <UserProfile/>
@@ -27,15 +29,40 @@ const UserProfilePage: React.FC = () => {
 
 
             {/* IMAGE */}
-            <div className="flex-column flex w-3/5 items-center justify-center ">
+
+            <div className="profileheight flex-column flex w-3/5 items-center justify-center ">
               <img
-                className="sm:p-[80px] lg:p-[110px]"
+                className="w-[500px] h-[500px]"
                 src={logo}
                 alt="user profile img"
               />
-            </div>
+
           </div>
         </div>
+
+
+      {/*  SMALL SCREEN */}
+        <div className="profilepageheight  lg:hidden flex items-center justify-center">
+          <div className=" flex h-[600px] justify-center">
+            <div
+              className=" p-8 flex flex-col items-center justify-center
+              rounded-[80px] border-[3px] border-[#A1E7FF] bg-[#F5F5F5] shadow-2xl"
+            >
+              <div className="space-y-6">
+                <div className="font-overpass text-darkgray
+                text-2xl font-extrabold tracking-wider">
+                  My Profile
+                </div>
+                <UserProfile/>
+              </div>
+              <Toaster/>
+            </div>
+
+          </div>
+
+        </div>
+
+
       </div>
   );
 };

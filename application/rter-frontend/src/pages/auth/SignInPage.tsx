@@ -22,7 +22,8 @@ const SignInPage = () => {
 
         {/* SIGNIN FORM */}
         <div
-          className=" flex w-2/5 flex-col items-center justify-center rounded-l-[80px] border-b-4  border-l-4 border-t-4
+          className=" flex w-2/5 flex-col items-center justify-center
+          rounded-l-[80px] border-b-4  border-l-4 border-t-4
          border-[#88C8FB] bg-[#F5F5F5] shadow-2xl"
         >
           <div className="w-1/2 scale-150 space-y-6">
