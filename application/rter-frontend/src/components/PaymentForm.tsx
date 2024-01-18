@@ -76,8 +76,8 @@ const PaymentForm = () => {
     }
   };
 
-  const handleToken = (token: any) => {
-    console.log(token);
+  const handleToken = (token: string) => {
+  
     const paymentRequest: PaymentRequest = {
       token: token,
       amount: Number(form.getValues('amount')), // Assuming you have these fields in your form
@@ -86,7 +86,7 @@ const PaymentForm = () => {
       username: username,
       ngoName: ngo!.name
     };
-    console.log(paymentRequest);
+    
     donate(paymentRequest);
   };
 
@@ -129,10 +129,10 @@ const PaymentForm = () => {
                       className="w-[200px] md:w-[500px] xl:w-[800px] h-10 border border-gray-300 rounded-md md:px-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-muted-foreground"
                     >
                       <option value="">Select currency</option>
-                      <option value="RON">RON</option>
-                      <option value="USD">USD</option>
-                      <option value="EUR">EUR</option>
-                      <option value="GBP">GBP</option>
+                      <option value="ron">RON</option>
+                      <option value="usd">USD</option>
+                      <option value="eur">EUR</option>
+                      <option value="gbp">GBP</option>
                     </select>
                   </FormControl>
                   <FormMessage />
