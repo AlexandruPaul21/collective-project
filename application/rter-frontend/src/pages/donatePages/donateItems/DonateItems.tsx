@@ -1,11 +1,14 @@
-import Navbar from "@/components/Navbar"
+import Navbar from "@/components/Navbar";
 
 const DonateItems = () => {
   return (
-    <div>
-      <Navbar/>
+    <div className="h-screen">
+      <Navbar />
+      <div className="h-[calc(100vh-80px)]">
+        
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default DonateItems
+export default DonateItems;
