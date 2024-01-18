@@ -7,8 +7,20 @@
     }
 
 }
+@media (max-width: 420px) {
+    .small-screen-login-container {
+        width: 300px;
+    }
+
+}
+
 @media (min-width: 680px) {
     .small-screen-login-container {
         width: 600px;
     }
+}
+
+
+.big-screen {
+    display: none;
 }
