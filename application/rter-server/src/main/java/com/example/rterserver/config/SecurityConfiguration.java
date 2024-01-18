@@ -52,7 +52,7 @@ public class SecurityConfiguration {
         http.authorizeRequests(authorize -> {
                     authorize
                         // Allow access without authentication to these endpoints
-                        .requestMatchers("/signup", "/swagger-ui/**").permitAll()
+                        .requestMatchers("/signup", "/swagger-ui/**", "/ngos").permitAll()
                         .anyRequest().authenticated();// Require authentication for all other requests
                 }
             )

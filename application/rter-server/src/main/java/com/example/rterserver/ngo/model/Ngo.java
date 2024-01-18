@@ -3,6 +3,9 @@ package com.example.rterserver.ngo.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
+/**
+ * This class represents the ngo entity.
+ */
 @Entity
 @Table(name = "ngo")
 public class Ngo {
@@ -25,6 +28,10 @@ public class Ngo {
     @Column(nullable = false, length = 512)
     @Schema(description = "The website of the ngo or null if not available")
     String website;
+
+    @Column(nullable = true, length = 512)
+    @Schema(description = "The address of the ngo or null if not available")
+    String address;
 
     @Column(nullable = false, length = 512)
     @Schema(description = "The image url of the ngo or null if not available")
@@ -75,6 +82,14 @@ public class Ngo {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setImageUrl(String imageUrl) {

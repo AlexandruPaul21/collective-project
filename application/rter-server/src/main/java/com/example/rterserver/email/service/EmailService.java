@@ -1,7 +1,6 @@
 package com.example.rterserver.email.service;
 
 import com.example.rterserver.donation.model.Donation;
-import com.example.rterserver.email.dto.DonationEmailRequest;
 import com.example.rterserver.email.dto.EmailRequest;
 import com.example.rterserver.enums.DonationType;
 import com.example.rterserver.ngo.model.Ngo;
@@ -16,8 +15,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 @Service
@@ -42,13 +39,11 @@ public class EmailService {
         Long idNgo = emailRequest.getIdngo();
         Ngo ngo = ngoRepo.findById(idNgo).orElseThrow(() -> new RuntimeException("Ngo not found"));
         DonationType donationType = emailRequest.getType();
-        String deliveryDate = emailRequest.getCreatedat().toString();
+        String deliveryDate = emailRequest.getCreatedat().toString().substring(0, 10);
 
-        // Define the desired date-time format
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-
+        System.out.println(deliveryDate);
         // Add a prefix to the email address to avoid sending emails to real NGOs
-        String to = "testruntimeterror123-" + ngo.getEmail() ;
+        String to = "testruntimeterror123-" + ngo.getEmail();
 
         // Create a Properties object to store mail-related configuration settings
         Properties prop = new Properties();
@@ -91,9 +86,9 @@ public class EmailService {
                     + "<ul>\n" +
                     "        <li><strong>Donor:</strong> " + user.getName() + "</li>\n" +
                     "        <li><strong>Donation Type:</strong> " + donationType.toString() + "</li>\n" +
-                    "        <li><strong>Donation Date:</strong> " + LocalDateTime.parse(deliveryDate, formatter) + "</li>\n" +
+                    "        <li><strong>Donation Date:</strong> " + deliveryDate + "</li>\n" +
                     "    </ul>"
-                    + "<p>" + user.getName() + " will be coming to your location on " + LocalDateTime.parse(deliveryDate, formatter) + " to deliver the donation.</p>"
+                    + "<p>" + user.getName() + " will be coming to your location on " + deliveryDate + " to deliver the donation.</p>"
                     + "<p>We kindly request you to coordinate with the donor and ensure a smooth donation process.</p>"
                     + "<p>Our user can be contacted at <a href='mailto:" + user.getEmail() + "'>" + user.getEmail() + "</a>.</p>"
                     + "<p>If you have any questions or need further information, please feel free to contact us or the donor directly.</p>\n"
@@ -121,8 +116,8 @@ public class EmailService {
         User user = userRepo.findById(idUser).orElseThrow(() -> new RuntimeException("User not found"));
         Ngo ngo = ngoRepo.findById(idNgo).orElseThrow(() -> new RuntimeException("Ngo not found"));
 
-        // Add a prefix to the email address to avoid sending emails to real NGOs :)
-        String to = "testruntimeterror123-" + ngo.getEmail() ;
+        // Add a prefix to the email address to avoid sending emails to real NGOs and spamming them :)
+        String to = "testruntimeterror123-" + ngo.getEmail();
 
         // Create a Properties object to store mail-related configuration settings
         Properties prop = new Properties();
@@ -153,9 +148,10 @@ public class EmailService {
             String subject = "New message from a user within our platform";
             message.setSubject(subject);
 
-            // We are using a multipart message because we want to format the email as HTML.
+            // We are using a multipart message because we want to format the email as HTML
             MimeMultipart multipart = new MimeMultipart();
             BodyPart htmlBodyPart = new MimeBodyPart();
+
             // Compose the HTML content of the email
             String htmlContent = "<html><body><p>Dear <strong>" + ngo.getName() + "</strong> Team,</p>"
                     + "<p>We hope this email finds you well. </p>"

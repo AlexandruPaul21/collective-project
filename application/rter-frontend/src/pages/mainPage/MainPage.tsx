@@ -1,5 +1,6 @@
 import CardsSection from "@/components/CardsSection";
 import NavbarWithSearch from "@/components/NavbarWithSearch";
+
 const MainPage = () => {
   return (
     <div className="flex flex-col">

@@ -3,6 +3,9 @@ package com.example.rterserver.ngo.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
+/**
+ * This class represents the favorite ngo entity, which we use for adding ngos to a list of user's favorites.
+ */
 @Entity
 @Table(name = "favorite_ngo")
 public class FavoriteNgo {

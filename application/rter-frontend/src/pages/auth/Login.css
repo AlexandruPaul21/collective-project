@@ -1,0 +1,67 @@
+/* Sign-in page small screen for w < 680px */
+@media (max-width: 680px) {
+    .small-screen-login-container {
+       width: 400px;
+    }
+}
+
+/* Sign-in page small screen for w < 420px */
+@media (max-width: 420px) {
+    .small-screen-login-container {
+        width: 300px;
+    }
+    .widescreensdiv{
+        display: flex;
+        flex-direction: column;
+    }
+    .height-adjust{
+        height: 990px;
+    }
+}
+
+/* Sign-up form big screen for w > 420px */
+@media (min-width: 420px) {
+    .widescreensdiv{
+        display: flex;
+        flex-direction: row;
+    }
+    /* Spacing between the 2 columns */
+    .widescreenmarginl{
+        margin-left: 0.5rem;
+    }
+    .widescreenmargin5{
+        margin-right: 0.5rem;
+    }
+    /* Sign-up page small screen height */
+    .height-adjust {
+        height: 700px;
+    }
+}
+
+/* Sign-up page small screen h < 990px */
+@media (min-height: 990px)  {
+    .signupwrapper {
+        height: 100vh;
+    }
+}
+
+/* Sign-up page small screen w > 420px & h > 715px */
+@media (min-width: 420px) and (min-height: 715px) {
+    .signupwrapper {
+        height: 100vh;
+    }
+}
+
+/* Sign-in page small screen w < 680px */
+@media (min-width: 680px) {
+    .small-screen-login-container {
+        width: 600px;
+    }
+}
+
+/* Sign-in page height*/
+@media (min-height: 650px) {
+    .loginwrapper {
+        height: 100vh;
+    }
+}

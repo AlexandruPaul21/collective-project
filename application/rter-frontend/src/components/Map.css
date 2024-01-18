@@ -1,0 +1,21 @@
+/*.map{*/
+/*    height: 15vh;*/
+/*    width: 15vw;*/
+/*}*/
+
+.map-container{
+    height: 20vh;
+    width: 25vw;
+}
+
+/*!* Account page resizable *!*/
+/*@media (max-height: 1200px) {*/
+/*    .map-container {*/
+/*        min-height: 100vh;*/
+/*    }*/
+/*}*/
+/*@media (min-height: 1200px) {*/
+/*    .map-container {*/
+/*        height: calc(100vh - 80px);*/
+/*    }*/
+/*}*/

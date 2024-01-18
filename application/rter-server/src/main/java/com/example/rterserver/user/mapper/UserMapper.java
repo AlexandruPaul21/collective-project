@@ -1,6 +1,5 @@
 package com.example.rterserver.user.mapper;
 
-//import com.example.api.user.dto.UserResponse;
 
 import com.example.rterserver.user.dto.UserResponse;
 import com.example.rterserver.user.model.User;
@@ -8,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * This class represents the mapper for the User entity.
+ */
 @Component
 public final class UserMapper {
     public static UserResponse entityToDto(User user) {

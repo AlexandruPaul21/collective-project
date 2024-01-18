@@ -1,3 +1,4 @@
+import FavoriteCards from "@/components/FavoriteCards"
 import Navbar from "@/components/Navbar"
 
 const FavouritesPage = () => {
@@ -5,7 +6,7 @@ const FavouritesPage = () => {
     <div className="flex flex-col">
       <Navbar />
       <div className="flex justify-center gap-7 mt-10">
-        <h1>Favourites Page</h1>
+        <FavoriteCards />
       </div>
     </div>
   )
