@@ -7,12 +7,14 @@ import "./Login.css";
 const SignInPage = () => {
   return (
     <div className="">
+
       {/* BIG SCREENS */}
-      <div className="hidden lg:flex h-screen w-full">
+      <div className="hidden lg:flex loginwrapper w-full">
+
         {/* IMAGE */}
         <div className="flex-column flex w-3/5 items-center justify-center ">
           <img
-            className="sm:p-[80px] lg:p-[100px]"
+            // className="sm:p-[80px] lg:p-[100px]"
             src={logo}
             alt="login img"
           />
@@ -44,30 +46,30 @@ const SignInPage = () => {
 
       {/* SMALL SCREENS */}
 
-      <div className="lg:hidden flex items-center justify-center">
-      <div className="flex h-[600px]  justify-center">
-        <div
-          className=" flex small-screen-login-container  flex-col items-center justify-center rounded-[80px] border-4
+      <div className="loginwrapper lg:hidden flex items-center justify-center">
+        <div className="flex h-[600px] justify-center">
+          <div
+            className=" flex small-screen-login-container  flex-col items-center justify-center rounded-[80px] border-4
          border-[#88C8FB] bg-[#F5F5F5] shadow-2xl"
-        >
-          <div className="w-1/2 scale-125 space-y-6">
-            <div className="font-overpass text-darkgray  text-2xl font-extrabold tracking-wider">
-              WELCOME BACK!
+          >
+            <div className="w-1/2 scale-125 space-y-6">
+              <div className="font-overpass text-darkgray  text-2xl font-extrabold tracking-wider">
+                WELCOME BACK!
+              </div>
+              <div className="font-nunito text-darkgray  font] text-sm tracking-wider">
+                Don't have an account,{" "}
+                <Link
+                  to="/sign-up"
+                  className="text-lightblu font-semibold hover:text-[#2076C1]"
+                >
+                  Sign up
+                </Link>
+              </div>
+              <SignInForm/>
             </div>
-            <div className="font-nunito text-darkgray  font] text-sm tracking-wider">
-              Don't have an account,{" "}
-              <Link
-                to="/sign-up"
-                className="text-lightblu font-semibold hover:text-[#2076C1]"
-              >
-                Sign up
-              </Link>
-            </div>
-            <SignInForm/>
+            <Toaster/>
           </div>
-          <Toaster/>
         </div>
-      </div>
       </div>
     </div>
   );

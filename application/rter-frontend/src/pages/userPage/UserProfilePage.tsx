@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import UserProfile from "@/components/UserProfile";
 import logo from "@/pages/userPage/cogs-hd.jpg";
 import {Toaster} from "@/components/ui/toaster.tsx";
-
+import "./ProfilePage.css";
 const UserProfilePage: React.FC = () => {
   return (
       <div className="flex flex-col justify-center items-center">
@@ -10,7 +10,6 @@ const UserProfilePage: React.FC = () => {
 
         <div >
           <div className="flex  w-full">
-
 
             {/* USERPROFILE FORM */}
             <div

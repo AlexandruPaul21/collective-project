@@ -25,6 +25,7 @@ import {Gender, User} from "@/utils/types.tsx";
 import {AuthService} from "@/apis/auth/AuthService.tsx";
 import {toast} from "@/components/ui/use-toast.ts";
 import {capitalizeString} from "@/lib/utils.ts";
+import "../pages/auth/Login.css";
 
 const FormSchema = z.object({
   username: z.string().min(3).max(64),
@@ -75,8 +76,8 @@ export function SignUpForm() {
     <div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="">
-          <div className="flex">
-            <div className="mr-2 w-full space-y-4">
+          <div className="widescreensdiv">
+            <div className=" widescreenmarginr w-full space-y-4">
               {/*  USERNAME  */}
               <FormField
                 control={form.control}
@@ -144,7 +145,7 @@ export function SignUpForm() {
               />
             </div>
 
-            <div className="ml-2 w-full space-y-4">
+            <div className="widescreenmarginl  w-full space-y-4">
               {/*  PASSWORD  */}
               <FormField
                 control={form.control}
