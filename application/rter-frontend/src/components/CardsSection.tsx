@@ -75,8 +75,7 @@ const CardsSection = () => {
   };
 
   return (
-    <div className="items-center lg:max-w-[715px] 2xl:max-w-[1069px]">
-      <div className="flex flex-wrap">
+    <div className="flex flex-wrap justify-center px-2 pt-5">
         {filteredNgos.map((ngo, index) => (
           <div key={index} className="m-2">
             <NGOCard
@@ -95,7 +94,6 @@ const CardsSection = () => {
           </div>
         ))}
       </div>
-    </div>
   );
 };
 
