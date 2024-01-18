@@ -100,7 +100,7 @@ const VolunteerForm = () => {
     }
   };
   return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-auto">
+    <div className="flex h-full w-full items-center justify-center overflow-auto">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-7 p-5 bg-[#FFFFFF] rounded-xl border-2">

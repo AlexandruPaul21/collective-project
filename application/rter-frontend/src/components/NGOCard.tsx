@@ -25,11 +25,10 @@ import {
 import { DialogHeader, DialogFooter } from "./ui/dialog";
 import { NGOProps } from "@/utils/types/ngoProps";
 import { COLORS } from "@/utils/types";
+import { useNavigate } from "react-router-dom";
 
 interface NGOCardProps {
   ngo: NGOProps;
-  onDonateClick: () => void;
-  onContactClick: () => void;
 }
 
 const styles = {
@@ -47,15 +46,18 @@ const styles = {
   },
 };
 
-const NGOCard: React.FC<NGOCardProps> = ({
-  ngo,
-  onDonateClick,
-  onContactClick,
-}) => {
+const NGOCard: React.FC<NGOCardProps> = ({ ngo }) => {
   const isContactDisabled = ngo.email === "null";
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-
+  const navigate = useNavigate();
+  const onContactClick = () => {
+    navigate("/volunteer");
+  };
+  const onDonateClick = () => {
+    const emailFlag = ngo.email ? "1" : "0";
+    navigate("/donate/" + ngo.id + "/" + emailFlag);
+  };
   const handleAddFavouriteClick = (): void => {
     setIsFavourite(!isFavourite);
   };

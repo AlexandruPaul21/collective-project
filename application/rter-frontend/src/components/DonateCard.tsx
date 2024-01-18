@@ -27,7 +27,7 @@ const DonateCard = ({
   const navigate = useNavigate();
 
   const onClick = () => {
-    navigate(`${location.pathname}${buttonRedirect}`);
+    navigate(buttonRedirect);
   };
   return (
     <Card className="flex min-h-[460px] max-w-[350px] flex-col justify-between">

@@ -1,25 +1,26 @@
-import DonateCard from "@/components/DonateCard";
 import Navbar from "@/components/Navbar";
 import Background from "../../../public/donation-background.svg";
-const donateCards = [
-  {
-    title: "Donate Money",
-    description:
-      "Your financial support can make a big difference in the lives of those we serve. Monetary donations allow us to fund our programs and initiatives, helping us to provide essential services to those in need. Every dollar counts and we appreciate your generous support.",
-    buttonDescription: "Donate Now",
-    buttonRedirect: "/money",
-  },
-  {
-    title: "Donate Other Things",
-    description:
-      "In addition to monetary donations, we also accept donations of goods, food, and clothing. These items can be crucial resources for those we serve, providing them with essential items and improving their quality of life. Whether it's a warm meal, a winter coat, or a piece of furniture, your donations can make a real difference.",
-    buttonDescription: "Donate Items",
-    buttonRedirect: "/items",
-  },
-];
+import { useNavigate, useParams } from "react-router-dom";
+import { Button } from "../../components/ui/button";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "../../components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const ChooseDonationMethodPage = () => {
-  const emailExists = true;
+  const { ngoId, emailFlag } = useParams();
+  const navigate = useNavigate();
+  const emailExists = emailFlag === "1" ? true : false;
+
   return (
     <div className="flex h-screen flex-col">
       <Navbar />
@@ -27,16 +28,82 @@ const ChooseDonationMethodPage = () => {
         className="flex h-full w-full items-center justify-center gap-10 "
         style={{ backgroundImage: `url(${Background})` }}
       >
-        {donateCards.map((card, id) => (
-          <DonateCard
-            key={id}
-            title={card.title}
-            description={card.description}
-            buttonDescription={card.buttonDescription}
-            buttonRedirect={card.buttonRedirect}
-            emailExists={emailExists}
-          />
-        ))}
+        <Card className="flex min-h-[460px] max-w-[350px] flex-col justify-between">
+          <div>
+            <CardHeader>
+              <CardTitle className="mx-auto font-bold">Donate Money</CardTitle>
+            </CardHeader>
+            <CardContent className="my-6 text-center text-sm">
+              <p style={{ color: "#4e4e4e" }}>
+                Your financial support can make a big difference in the lives of
+                those we serve. Monetary donations allow us to fund our programs
+                and initiatives, helping us to provide essential services to
+                those in need. Every dollar counts and we appreciate your
+                generous support.
+              </p>
+            </CardContent>
+          </div>
+          <CardFooter>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger className="w-full">
+                  <Button
+                    onClick={() => navigate("/donate/money" + "/" + ngoId)}
+                    className=" w-full"
+                  >
+                    Donate Now
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <span className="text-sm">
+                    Donate money to this NGO
+                  </span>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </CardFooter>
+        </Card>
+        <Card className="flex min-h-[460px] max-w-[350px] flex-col justify-between">
+          <div>
+            <CardHeader>
+              <CardTitle className="mx-auto font-bold">
+                Donate Other Things
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="my-6 text-center text-sm">
+              <p style={{ color: "#4e4e4e" }}>
+                In addition to monetary donations, we also accept donations of
+                goods, food, and clothing. These items can be crucial resources
+                for those we serve, providing them with essential items and
+                improving their quality of life. Whether it's a warm meal, a
+                winter coat, or a piece of furniture, your donations can make a
+                real difference.
+              </p>
+            </CardContent>
+          </div>
+          <CardFooter>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger className="w-full">
+                  <Button
+                    onClick={() => navigate("/donate/items" + "/" + ngoId)}
+                    disabled={!emailExists}
+                    className=" w-full"
+                  >
+                    Donate Items
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <span className="text-sm">
+                    {emailExists
+                      ? "Donate items to this NGO"
+                      : "This NGO does not have the email address available"}
+                  </span>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </CardFooter>
+        </Card>
       </div>
     </div>
   );
