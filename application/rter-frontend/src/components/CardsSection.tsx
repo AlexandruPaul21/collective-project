@@ -56,14 +56,6 @@ const CardsSection = () => {
     );
     setFilteredNgos(result);
   }, [ngos, searchValue]);
-
-  const onContactClick = () => {
-    navigate("/volunteer");
-  };
-
-  const onDonateClick = () => {
-    navigate("/donate");
-  };
   const updateFavorites = (ngo: NGOProps, isFavorite: boolean) => {
     if (isFavorite) {
       setFavorites((prevFavorites) => [...prevFavorites, ngo]);
@@ -82,8 +74,6 @@ const CardsSection = () => {
               ngo={ngo}
               isFavorite={favorites.some((favorite) => favorite.id === ngo.id)}
               currentUser={currentUser!}
-              onDonateClick={onDonateClick}
-              onContactClick={onContactClick}
               onFavoriteChange={() =>
                 updateFavorites(
                   ngo,

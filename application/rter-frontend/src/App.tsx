@@ -25,9 +25,12 @@ function App() {
               <Route path="/" element={<MainPage />} />
               <Route path="/donations" element={<DonationsPage />} />
               <Route path="/favourites" element={<FavouritesPage />} />
-              <Route path="/donate" element={<ChooseDonationMethodPage/>}/>
-              <Route path="/donate/items" element={<DonateItems/>}/>
-              <Route path="/donate/money" element={<DonateMoney/>}/>
+              <Route
+                path="/donate/:ngoId/:emailFlag"
+                element={<ChooseDonationMethodPage />}
+              />
+              <Route path="/donate/items/:ngoId" element={<DonateItems />} />
+              <Route path="/donate/money" element={<DonateMoney />} />
               <Route path="/sign-in" element={<SignInPage />} />
               <Route path="/sign-up" element={<SignUpPage />} />
               <Route path="/volunteer" element={<VolunteerPage />} />
