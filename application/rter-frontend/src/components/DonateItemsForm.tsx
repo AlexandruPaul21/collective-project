@@ -84,14 +84,14 @@ const DonateItemsForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       // TODO: Modify this to send the email to the NGO
-      if(currentUser){
+      if (currentUser) {
         const donationObject = {
-          type: values.type, 
+          type: values.type,
           createdAt: format(values.date, "yyyy-MM-dd'T'HH:mm:ss"),
           iduser: currentUser.id,
-          idngo: ngoId, 
+          idngo: Number(ngoId),
         };
-  
+
         const stringifiedObject = JSON.stringify(donationObject);
         console.log(stringifiedObject);
         await axios.post(
