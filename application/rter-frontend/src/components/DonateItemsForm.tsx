@@ -42,6 +42,18 @@ const DonateItemsForm = () => {
   const navigate = useNavigate();
   const { ngoId } = useParams();
   const [currentUser, setCurrentUser] = useState<User>();
+  useEffect(() => {
+    loadUserInfo();
+  }, []);
+
+  const loadUserInfo = async () => {
+    await UserService.getCurrentUser().then((user) => {
+      setCurrentUser(user);
+      console.log(user);
+
+    });
+  };
+
   const formSchema = z.object({
     date: z.date({
       required_error: "A date is required.",
@@ -65,15 +77,6 @@ const DonateItemsForm = () => {
     setUsername(username || "");
     const password = localStorage.getItem("password");
     setPassword(password || "");
-  }, []);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const user = await UserService.getCurrentUser();
-      setCurrentUser(user);
-      console.log(user);
-    };
-    fetchUser();
   }, []);
 
   const onClose = () => {
@@ -137,7 +140,6 @@ const DonateItemsForm = () => {
       }
     }
   };
-
   return (
     <div className="flex h-full w-full items-center justify-center overflow-auto">
       <Form {...form}>

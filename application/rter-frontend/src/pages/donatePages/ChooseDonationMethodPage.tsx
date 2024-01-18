@@ -15,12 +15,36 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useEffect, useState } from "react";
+import { User } from "@/utils/types";
+import { UserService } from "@/apis/profile/UserService";
 
 const ChooseDonationMethodPage = () => {
   const { ngoId, emailFlag } = useParams();
   const navigate = useNavigate();
   const emailExists = emailFlag === "1" ? true : false;
+  const [currentUser, setCurrentUser] = useState<User>();
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    loadUserInfo();
+  }, []);
 
+  const loadUserInfo = async () => {
+    await UserService.getCurrentUser().then((user) => {
+      setCurrentUser(user);
+      setIsLoading(false);
+    });
+  };
+
+  const redirectTo = async () => {
+    if (!currentUser) {
+      navigate("/sign-in");
+      return;
+    }
+  }
+  useEffect(() => {
+    redirectTo();
+  }, [currentUser, navigate]);
   return (
     <div className="flex h-screen flex-col">
       <Navbar />
@@ -55,9 +79,7 @@ const ChooseDonationMethodPage = () => {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <span className="text-sm">
-                    Donate money to this NGO
-                  </span>
+                  <span className="text-sm">Donate money to this NGO</span>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
