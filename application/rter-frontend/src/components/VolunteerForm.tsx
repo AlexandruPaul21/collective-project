@@ -13,12 +13,28 @@ import axios from "axios";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PUBLIC_API_URL } from "@/utils/url";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { User } from "@/utils/types";
+import { UserService } from "@/apis/profile/UserService";
 const VolunteerForm = () => {
   const navigate = useNavigate();
+
+  const { ngoEmail } = useParams();
+  const [currentUser, setCurrentUser] = useState<User>();
+  useEffect(() => {
+    loadUserInfo();
+  }, []);
+
+  const loadUserInfo = async () => {
+    await UserService.getCurrentUser().then((user) => {
+      setCurrentUser(user);
+      console.log(user);
+    });
+  };
+
   const formSchema = z.object({
     from: z.string().min(1, "Sender is required"),
     recipient: z.string().min(1, "Recipient is required"),
@@ -51,6 +67,15 @@ const VolunteerForm = () => {
     const password = localStorage.getItem("password");
     setPassword(password || "");
   }, []);
+
+  useEffect(() => {
+    if (ngoEmail) {
+      form.setValue("recipient", ngoEmail);
+    }
+    if (currentUser) {
+      form.setValue("from", currentUser.email);
+    }
+  }, [ngoEmail, currentUser]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -103,7 +128,12 @@ const VolunteerForm = () => {
     <div className="flex h-full w-full items-center justify-center overflow-auto">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex flex-col gap-7 p-5 bg-[#FFFFFF] rounded-xl border-2">
+          <div className="flex flex-col gap-7 rounded-xl border-2 bg-[#FFFFFF] p-5">
+            <div className="flex items-center justify-center">
+              <h1 className="py-2 text-xl font-bold md:py-4 md:text-2xl">
+                Contact the NGO
+              </h1>
+            </div>
             <FormField
               control={form.control}
               name="from"
@@ -112,9 +142,10 @@ const VolunteerForm = () => {
                   <FormLabel className="text-md">From: *</FormLabel>
                   <FormControl>
                     <Input
-                      disabled={isLoading}
+                      disabled={!!currentUser}
+                      defaultValue={currentUser ? currentUser.email : ""}
+                      placeholder="Enter Your Email"
                       className="w-[300px] md:w-[500px] xl:w-[800px]"
-                      placeholder="Enter The Sender Email"
                       {...field}
                     />
                   </FormControl>
@@ -122,7 +153,6 @@ const VolunteerForm = () => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="recipient"
@@ -131,9 +161,9 @@ const VolunteerForm = () => {
                   <FormLabel className="text-md">To: *</FormLabel>
                   <FormControl>
                     <Input
-                      disabled={isLoading}
+                      disabled={true}
+                      defaultValue={ngoEmail}
                       className="w-[300px] md:w-[500px] xl:w-[800px]"
-                      placeholder="Enter The Recipient Email"
                       {...field}
                     />
                   </FormControl>
@@ -177,7 +207,7 @@ const VolunteerForm = () => {
               )}
             />
             <div className="flex items-center justify-center ">
-              <Button className="w-[100px] bg-[#01608b] hover:bg-[#01608b]/90 md:w-[200px] xl:w-[300px]">
+              <Button className="w-[100px] bg-[#1565C0] hover:bg-[#1565C0]/90 md:w-[200px] xl:w-[300px]">
                 Send
               </Button>
             </div>

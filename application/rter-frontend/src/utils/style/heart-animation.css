@@ -1,0 +1,29 @@
+@keyframes fillHeart {
+  0% {
+    fill: #808080;
+    transform: scale(1);
+  }
+  25% {
+    fill: #ff4500;
+    transform: scale(1.1);
+  }
+  50% {
+    fill: #ff6347;
+    transform: scale(1.2);
+  }
+  75% {
+    fill: #ff4500;
+    transform: scale(1.1);
+  }
+  100% {
+    fill: red;
+    transform: scale(1);
+  }
+}
+
+.heartAnimation {
+  animation-name: fillHeart;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}

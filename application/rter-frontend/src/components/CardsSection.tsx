@@ -13,7 +13,6 @@ const CardsSection = () => {
   const [favorites, setFavorites] = useState<NGOProps[]>([]);
   const { searchValue } = useSearch();
   const [filteredNgos, setFilteredNgos] = useState<NGOProps[]>([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {

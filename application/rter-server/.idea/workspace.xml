@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e908170a-2f26-46bb-9033-595922ff71ac" name="Changes" comment="" />
+    <list default="true" id="e908170a-2f26-46bb-9033-595922ff71ac" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/CardsSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/CardsSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/DonateItemsForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/DonateItemsForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/NGOCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/NGOCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/NavbarWithSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/NavbarWithSearch.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/VolunteerForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/VolunteerForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/pages/donatePages/ChooseDonationMethodPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/pages/donatePages/ChooseDonationMethodPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/rterserver/donation/dto/NonPaymentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/rterserver/donation/dto/NonPaymentRequest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +24,18 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -32,18 +54,18 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "dragos-fe",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "spring.configuration.checksum": "299a7f487e9d5a48a613fd673e4c0e64",
+    "spring.configuration.checksum": "d677d42a33c11e79b67d85cb5e851540",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager">
     <configuration name="RterServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="rter-server.main" />
+      <module name="application.rter-server.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.rterserver.RterServerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -61,6 +83,7 @@
       <workItem from="1705508060202" duration="1694000" />
       <workItem from="1705562554517" duration="2349000" />
       <workItem from="1705589322005" duration="5279000" />
+      <workItem from="1705661994183" duration="1465000" />
     </task>
     <servers />
   </component>

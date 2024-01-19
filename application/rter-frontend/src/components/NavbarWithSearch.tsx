@@ -11,7 +11,7 @@ import { Link, To } from "react-router-dom";
 import { Input } from "./ui/input";
 import { useSearch } from "./providers/SearchProvider";
 import SandwichMenu from "./HamburgerMenu";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const NavbarWithSearch = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const NavbarWithSearch = () => {
     if (isAuthenticated) {
       navigate(path);
     } else {
-      navigate('/sign-in');
+      navigate("/sign-in");
     }
   };
 
@@ -78,14 +78,14 @@ const NavbarWithSearch = () => {
         </div>
 
         <div className="hidden items-center gap-4 md:flex">
-        <a onClick={() => handleProtectedLinkClick('/favourites')} >
-            <div className="flex items-center">
+          <a onClick={() => handleProtectedLinkClick("/favourites")}>
+            <div className="flex cursor-pointer items-center">
               <Heart className="mr-1 h-4 w-4" />
               <span className="text-base lg:text-lg">Favourites</span>
             </div>
           </a>
-          <a onClick={() => handleProtectedLinkClick('/donations')} >
-            <div className="flex items-center">
+          <a onClick={() => handleProtectedLinkClick("/donations")}>
+            <div className="flex cursor-pointer items-center">
               <CircleDollarSign className="mr-1 h-4 w-4" />
               <span className="text-base lg:text-lg">Donations</span>
             </div>
@@ -99,14 +99,14 @@ const NavbarWithSearch = () => {
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <a onClick={() => handleProtectedLinkClick('/profile')} >
+              <a onClick={() => handleProtectedLinkClick("/profile")}>
                 <DropdownMenuItem>Profile</DropdownMenuItem>
               </a>
-              <a onClick={() => handleProtectedLinkClick('/profile')} >
+              <a onClick={() => handleProtectedLinkClick("/profile")}>
                 <DropdownMenuItem>Settings</DropdownMenuItem>
               </a>
-              <a onClick={() => handleProtectedLinkClick('/donations')} >
-                <DropdownMenuItem>Profile</DropdownMenuItem>
+              <a onClick={() => handleProtectedLinkClick("/donations")}>
+                <DropdownMenuItem>Transactions</DropdownMenuItem>
               </a>
             </DropdownMenuContent>
           </DropdownMenu>
