@@ -30,6 +30,23 @@ export type PaymentRequest = {
   ngoName: string;
 }
 
+export type Donation = {
+  id: number;
+  amount: number;
+  type: DonationType;
+  details: string;
+  createdat: Date;
+  iduser: number;
+  idngo: number;
+}
+
+export enum DonationType {
+  Payment = "PAYMENT",
+  Food = "FOOD",
+  Item = "ITEM",
+  Volunteer = "VOLUNTEER",
+}
+
 export type PaymentResponse = {
   status: string;
   message: string;

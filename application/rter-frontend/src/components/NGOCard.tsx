@@ -35,9 +35,9 @@ import { useNavigate } from "react-router";
 
 interface NGOCardProps {
   ngo: NGOProps;
-  isFavorite: boolean;
-  currentUser: User;
-  onFavoriteChange: () => void;
+  isFavorite?: boolean;
+  currentUser?: User;
+  onFavoriteChange?: () => void;
 }
 
 const styles = {
