@@ -218,7 +218,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
         onOpenChange={(): void => setIsDialogOpen(!isDialogOpen)}
       >
         <DialogOverlay />
-        <DialogContent className="min-h-[400px] max-w-[350px] md:max-w-[700px] rounded-lg">
+        <DialogContent className="min-h-[400px] max-w-[350px] rounded-lg md:max-w-[700px]">
           <DialogHeader className="py-4">
             <DialogTitle>{ngo.name}</DialogTitle>
           </DialogHeader>

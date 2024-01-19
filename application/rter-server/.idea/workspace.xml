@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e908170a-2f26-46bb-9033-595922ff71ac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/CardsSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/CardsSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/DonateItemsForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/DonateItemsForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/NGOCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/NGOCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/NavbarWithSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/NavbarWithSearch.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/VolunteerForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/VolunteerForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/pages/donatePages/ChooseDonationMethodPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/pages/donatePages/ChooseDonationMethodPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/rterserver/donation/dto/NonPaymentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/rterserver/donation/dto/NonPaymentRequest.java" afterDir="false" />
-    </list>
+    <list default="true" id="e908170a-2f26-46bb-9033-595922ff71ac" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +73,7 @@
       <workItem from="1705508060202" duration="1694000" />
       <workItem from="1705562554517" duration="2349000" />
       <workItem from="1705589322005" duration="5279000" />
-      <workItem from="1705661994183" duration="1465000" />
+      <workItem from="1705661994183" duration="2059000" />
     </task>
     <servers />
   </component>
