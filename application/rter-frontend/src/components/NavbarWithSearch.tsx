@@ -103,9 +103,6 @@ const NavbarWithSearch = () => {
               <a onClick={() => handleProtectedLinkClick("/profile")}>
                 <DropdownMenuItem>Profile</DropdownMenuItem>
               </a>
-              <a onClick={() => handleProtectedLinkClick("/profile")}>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-              </a>
               <a onClick={() => handleProtectedLinkClick("/donations")}>
                 <DropdownMenuItem>Transactions</DropdownMenuItem>
               </a>

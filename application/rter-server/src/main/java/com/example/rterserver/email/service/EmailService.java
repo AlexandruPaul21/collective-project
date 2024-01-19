@@ -43,7 +43,7 @@ public class EmailService {
 
         System.out.println(deliveryDate);
         // Add a prefix to the email address to avoid sending emails to real NGOs
-        String to = "testruntimeterror123-" + ngo.getEmail();
+        String to = "matei.otniel20@gmail.com";
 
         // Create a Properties object to store mail-related configuration settings
         Properties prop = new Properties();
@@ -117,7 +117,7 @@ public class EmailService {
         Ngo ngo = ngoRepo.findById(idNgo).orElseThrow(() -> new RuntimeException("Ngo not found"));
 
         // Add a prefix to the email address to avoid sending emails to real NGOs and spamming them :)
-        String to = "testruntimeterror123-" + ngo.getEmail();
+        String to = "matei.otniel20@gmail.com";
 
         // Create a Properties object to store mail-related configuration settings
         Properties prop = new Properties();
