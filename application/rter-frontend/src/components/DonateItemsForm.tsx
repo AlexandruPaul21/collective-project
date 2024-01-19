@@ -146,7 +146,7 @@ const DonateItemsForm = () => {
           <div className="m-4 flex max-w-[450px] flex-col gap-7 rounded-xl border-2 bg-[#FFFFFF] px-[30px] py-5 md:w-[500px] md:px-[100px] ">
             <div className="flex items-center justify-center">
               <h1 className="py-2 text-xl font-bold md:py-4 md:text-2xl">
-                Donate Other Things
+                Donate Others
               </h1>
             </div>
             <FormField
@@ -155,7 +155,7 @@ const DonateItemsForm = () => {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel className="text-md ml-1 flex items-center">
-                    Select Donation Drop-off Date *
+                    Select Drop-off Date *
                   </FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -233,7 +233,7 @@ const DonateItemsForm = () => {
               )}
             />
 
-            <div className="flex items-center justify-center pt-[50px]">
+            <div className="flex items-center justify-center pt-[20px]">
               <Button className="w-[100px] bg-[#1565C0] hover:bg-[#1565C0]/90 md:w-[150px] xl:w-[200px]">
                 Send
               </Button>
