@@ -171,4 +171,9 @@ public class NgoService {
         return ngoRepo.findByName(name)
                 .orElseThrow(() -> new NotFoundException("Ngo not found with name: " + name));
     }
+
+    public Ngo getNgoById(Long id) {
+        return ngoRepo.findById(id)
+                .orElseThrow(() -> new NotFoundException("NGO not found with ID: " + id));
+    }
 }

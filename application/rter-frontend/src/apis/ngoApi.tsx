@@ -44,3 +44,13 @@ export const getAllFavoriteNGOs: (username: string, password: string, userId: nu
     });
     return result.then(x => x.data)
 };
+
+export const getNgoById: (username: string, password: string, ngoId: number) => Promise<NGOProps> = (username, password, ngoId) => {
+    const result =  axios.get(`${ngosUrl}/${ngoId}`, {
+        auth: {
+            username: username,
+            password: password
+        }
+    });
+    return result.then(x => x.data)
+};
