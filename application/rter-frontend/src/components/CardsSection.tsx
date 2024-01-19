@@ -2,7 +2,6 @@ import { NGOProps } from "@/utils/types/ngoProps";
 import NGOCard from "./NGOCard";
 import { getAllFavoriteNGOs, getAllNGOs } from "@/apis/ngoApi";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { UserService } from "@/apis/profile/UserService";
 import { User } from "@/utils/types";
 import { useSearch } from "./providers/SearchProvider";

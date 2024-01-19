@@ -4,13 +4,11 @@ import { NGOProps } from "@/utils/types/ngoProps";
 import { useState, useEffect } from "react";
 import NGOCard from "./NGOCard";
 import { User } from "@/utils/types";
-import { useNavigate } from "react-router";
 
 
 const FavoriteCards = () => {
   const [currentUser, setCurrentUser] = useState<User>();
   const [favorites, setFavorites] = useState<NGOProps[]>([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     loadUserInfo();
@@ -35,14 +33,6 @@ const FavoriteCards = () => {
     }
   }, [currentUser]);
 
-  const onContactClick = () => {
-    navigate("/volunteer");
-  };
-
-  const onDonateClick = () => {
-    navigate("/donate");
-  }
-
   const handleFavoriteChange = () => {
     fetchFavoriteNGOs();
   };
@@ -55,8 +45,6 @@ const FavoriteCards = () => {
               ngo={ngo}
               isFavorite={true}
               currentUser={currentUser!}
-              onDonateClick={onDonateClick}
-              onContactClick={onContactClick}
               onFavoriteChange={handleFavoriteChange}
             />
           </div>

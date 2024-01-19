@@ -1,9 +1,9 @@
 import axios from "axios";
-import {NGOProps} from "@/utils/types/ngoProps";
 import { donationsUrl } from "./urlConstants";
+import { Donation } from "@/utils/types";
 
-export const getAllDonations: (username: string, password: string) => Promise<NGOProps[]> = (username, password) => {
-    const result = axios.get(`${donationsUrl}`, {
+export const getAllDonations: (username: string, password: string, userId: number) => Promise<Donation[]> = (username, password,userId) => {
+    const result = axios.get(`${donationsUrl}/history/${userId}`, {
         auth: {
             username: username,
             password: password
