@@ -8,6 +8,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class StripeService {
         Stripe.apiKey = secretKey;
     }
 
+    @Transactional
     public PaymentResponse charge(PaymentRequest paymentRequest) {
         Map<String,Object> chargeParams = new HashMap<>();
         chargeParams.put("amount",paymentRequest.getAmount());

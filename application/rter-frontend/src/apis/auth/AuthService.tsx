@@ -41,8 +41,21 @@ const login = (data:LoginRequest) =>{
     });
 }
 
-export const AuthService = {
+const logout = () => {
+  localStorage.removeItem('username');
+  localStorage.removeItem('password');
+  history.pushState({}, '', '/sign-in');
+  location.reload();
+}
 
+const loginPage = () => {
+  history.pushState({}, '', '/sign-in');
+  location.reload();
+}
+
+export const AuthService = {
+  logout,
   signup,
   login,
+  loginPage
 };

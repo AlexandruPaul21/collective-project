@@ -12,6 +12,7 @@ import { Input } from "./ui/input";
 import { useSearch } from "./providers/SearchProvider";
 import SandwichMenu from "./HamburgerMenu";
 import { useNavigate } from "react-router-dom";
+import {AuthService} from "@/apis/auth/AuthService.tsx";
 
 const NavbarWithSearch = () => {
   const navigate = useNavigate();
@@ -108,6 +109,10 @@ const NavbarWithSearch = () => {
               <a onClick={() => handleProtectedLinkClick("/donations")}>
                 <DropdownMenuItem>Transactions</DropdownMenuItem>
               </a>
+              <DropdownMenuItem onClick={
+                username=="Username"?AuthService.loginPage:
+                AuthService.logout
+              }>{username=="Username"?"Sign-in":"Logout"}</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

@@ -1,5 +1,13 @@
 /*max-w-[350px] md:max-w-[700px]*/
 .map-container{
     height: 20vh;
-    width: 350px;
+    width: 400px;
 }
+
+@media (max-width: 767px) {
+    .map-container{
+        height: 20vh;
+        width: 200px;
+    }
+}
+
