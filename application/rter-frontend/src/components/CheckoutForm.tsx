@@ -7,7 +7,7 @@ const CARD_ELEMENT_OPTIONS = {
       fontSize: '18px', 
       color: '#424770',
       '::placeholder': {
-        color: '#aab7c4',
+        color: '#424770',
       }, 
     },
     invalid: {
