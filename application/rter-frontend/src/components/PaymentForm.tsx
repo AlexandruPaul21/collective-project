@@ -105,6 +105,9 @@ const PaymentForm = () => {
       <Form {...form}>
         <form>
           <div className="flex flex-col gap-7 rounded-xl border-2 bg-[#FFFFFF] px-[30px] py-5">
+            <h1 className="py-2 text-xl  text-center font-bold md:py-4 md:text-2xl">
+              Donate to the NGO
+            </h1>
             <FormField
               control={form.control}
               name="amount"
@@ -118,6 +121,14 @@ const PaymentForm = () => {
                       className="w-[300px] md:w-[500px] xl:w-[800px]"
                       placeholder="Enter the amount"
                       {...field}
+                      onChange={(e) => {
+                        let cleaned = e.target.value.replace(/\D+/g, "");
+                        if (cleaned.length > 2) {
+                          cleaned =
+                            cleaned.slice(0, -2) + "." + cleaned.slice(-2);
+                        }
+                        field.onChange(cleaned);
+                      }}
                     />
                   </FormControl>
                   <FormMessage />
