@@ -50,7 +50,6 @@ const DonateItemsForm = () => {
     await UserService.getCurrentUser().then((user) => {
       setCurrentUser(user);
       console.log(user);
-
     });
   };
 
@@ -141,12 +140,14 @@ const DonateItemsForm = () => {
     }
   };
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-auto">
+    <div className="flex h-full w-full items-center justify-center overflow-auto ">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex w-[500px] flex-col gap-7 rounded-xl border-2 bg-[#FFFFFF] p-5 px-[100px]">
+          <div className="m-4 flex max-w-[450px] flex-col gap-7 rounded-xl border-2 bg-[#FFFFFF] px-[30px] py-5 md:w-[500px] md:px-[100px] ">
             <div className="flex items-center justify-center">
-              <h1 className="py-4 text-2xl font-bold">Donate Items</h1>
+              <h1 className="py-2 text-xl font-bold md:py-4 md:text-2xl">
+                Donate Other Things
+              </h1>
             </div>
             <FormField
               control={form.control}
@@ -233,7 +234,7 @@ const DonateItemsForm = () => {
             />
 
             <div className="flex items-center justify-center pt-[50px]">
-              <Button className="w-[100px] bg-[#01608b] hover:bg-[#01608b]/90 md:w-[100px] xl:w-[200px]">
+              <Button className="w-[100px] bg-[#1565C0] hover:bg-[#1565C0]/90 md:w-[150px] xl:w-[200px]">
                 Send
               </Button>
             </div>
