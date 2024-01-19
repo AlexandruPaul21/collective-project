@@ -34,6 +34,9 @@ public class NonPaymentRequest {
         this.idngo = idngo;
     }
 
+    public NonPaymentRequest() {
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }

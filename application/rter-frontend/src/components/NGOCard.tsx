@@ -2,6 +2,7 @@ import * as React from "react";
 import { Gift, LucideHeart, Phone } from "lucide-react";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
+import "../utils/style/heart-animation.css";
 import {
   Dialog,
   DialogOverlay,
@@ -65,7 +66,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
   const onContactClick = () => {
-    navigate("/volunteer");
+    navigate("/volunteer/" + ngo.email);
   };
   const onDonateClick = () => {
     if (!currentUser) {
@@ -157,7 +158,11 @@ const NGOCard: React.FC<NGOCardProps> = ({
               style={{ background: "transparent" }}
             >
               {isFavorite ? (
-                <LucideHeart size={20} style={{ color: "red" }} />
+                <LucideHeart
+                  size={20}
+                  className="heartAnimation"
+                  style={{ color: "red" }}
+                />
               ) : (
                 <LucideHeart size={20} style={{ color: "black" }} />
               )}
@@ -219,20 +224,22 @@ const NGOCard: React.FC<NGOCardProps> = ({
         onOpenChange={(): void => setIsDialogOpen(!isDialogOpen)}
       >
         <DialogOverlay />
-        <DialogContent className="min-h-[400px] max-w-[700px]">
-          <DialogHeader>
+        <DialogContent className="min-h-[400px] max-w-[350px] md:max-w-[700px] rounded-lg">
+          <DialogHeader className="py-4">
             <DialogTitle>{ngo.name}</DialogTitle>
           </DialogHeader>
           <DialogDescription>
-            <div className="flex justify-start">
+            <div className="flex items-center justify-center md:justify-start">
               <img
                 src={ngo.imageUrl}
                 alt={`${ngo.name} Logo`}
-                className="flex max-h-[200px] max-w-[200px] items-center justify-center rounded-lg"
+                className="hidden max-h-[200px] max-w-[200px] items-center justify-center rounded-lg md:flex"
               />
-              <div className="mb-10 ml-5 mt-2 flex flex-col justify-between">
+              <div className="mb-10 ml-5 mt-2 flex flex-col items-center justify-between md:items-start">
                 {!ngo.contact.includes("null") ? (
-                  <span className="overflow-hidden">{ngo.contact}</span>
+                  <span className="overflow-hidden text-center md:text-start">
+                    {ngo.contact}
+                  </span>
                 ) : (
                   <span>No contact information provided</span>
                 )}
@@ -243,7 +250,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
 
                 <a
                   href={ngo.website}
-                  className="hover:text-sky-800 text-lg hover:underline"
+                  className="text-lg hover:text-[#4e85c4] hover:underline"
                 >
                   Visit their website
                 </a>
@@ -251,7 +258,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
             </div>
           </DialogDescription>
 
-          <DialogFooter className="flex items-center justify-between space-x-4">
+          <DialogFooter className="flex justify-center space-x-4 md:items-center md:justify-end">
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
@@ -273,6 +280,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
                     onClick={onContactClick}
                     style={styles.contactButton}
                     disabled={isContactDisabled}
+                    className="w-[130px]"
                   >
                     <Phone size={20} />
                     <span className="ml-2">Contact Us</span>

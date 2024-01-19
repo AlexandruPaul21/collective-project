@@ -33,7 +33,7 @@ function App() {
               <Route path="/donate/money/:ngoId" element={<DonateMoney />} />
               <Route path="/sign-in" element={<SignInPage />} />
               <Route path="/sign-up" element={<SignUpPage />} />
-              <Route path="/volunteer" element={<VolunteerPage />} />
+              <Route path="/volunteer/:ngoEmail" element={<VolunteerPage />} />
               <Route path="/profile" element={<UserProfilePage />} />
             </Routes>
           </Suspense>
