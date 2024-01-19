@@ -40,8 +40,9 @@ const CheckoutForm = ({ onTokenReceived }: { onTokenReceived: (token: string) =>
     <form onSubmit={handleSubmit}>
       <CardElement options={CARD_ELEMENT_OPTIONS} />
       <div className="flex items-center justify-center mt-10">
-      <Button onClick={handleSubmit} className="w-[100px] bg-[#01608b] hover:bg-[#01608b]/90 md:w-[200px] xl:w-[300px]">
-        Submit Payment
+      <Button onClick={handleSubmit} className="w-[100px] bg-[#1565C0] hover:bg-[#1565C0]/90 md:w-[200px] xl:w-[300px]">
+        Pay
+
       </Button>
       </div>
     </form>
