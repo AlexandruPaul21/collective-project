@@ -77,6 +77,7 @@ const PaymentForm = () => {
         paymentRequest,
       );
       toast.success("Donation made successfully!");
+
       console.log(paymentResponse.message);
       console.log(paymentResponse.status);
       onClose();
@@ -129,13 +130,14 @@ const PaymentForm = () => {
               name="currency"
               render={({ field }) => (
                 <FormItem className="flex w-[300px] flex-col md:w-[500px] xl:w-[800px]">
+
                   <FormLabel className="text-md">Currency: *</FormLabel>
                   <FormControl>
                     <select
                       {...field}
                       disabled={isLoading}
                       className="border-gray-300 focus:ring-blue-500 focus:border-blue-500 h-10 w-[300px] rounded-md border text-muted-foreground focus:outline-none focus:ring-1 text-sm md:w-[500px] md:px-2 xl:w-[800px]"
-                    >
+
                       <option value="">Select currency</option>
                       <option value="ron">RON</option>
                       <option value="usd">USD</option>
@@ -167,7 +169,8 @@ const PaymentForm = () => {
             />
             <Elements stripe={stripePromise}>
               <CheckoutForm onTokenReceived={handleToken} />
-            </Elements>
+           </Elements>
+
           </div>
         </form>
       </Form>

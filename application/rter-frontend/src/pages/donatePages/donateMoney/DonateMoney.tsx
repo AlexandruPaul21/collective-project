@@ -1,7 +1,9 @@
+
 import Navbar from "@/components/Navbar";
 import PaymentForm from "@/components/PaymentForm";
 import Background from "../../../../public/donation-background.svg";
 const DonateMoney = () => {
+
   return (
     <div className="h-screen">
       <Navbar />

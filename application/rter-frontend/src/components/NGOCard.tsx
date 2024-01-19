@@ -64,6 +64,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
   const navigate = useNavigate();
   const isContactDisabled = ngo.email === "null";
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+
   const onContactClick = () => {
     if (!currentUser) {
       navigate("/sign-in");
@@ -133,7 +134,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       await fromAddress(ngo.address)
-        .then(({ results }) => {
+        .then(({ results }: { results: any[] }) => {
           setLat(results[0].geometry.location.lat);
           setLng(results[0].geometry.location.lng);
           setIsLoaded(true);

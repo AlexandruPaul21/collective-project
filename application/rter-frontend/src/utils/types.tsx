@@ -21,6 +21,20 @@ export type LoginRequest = {
   password: string;
 }
 
+export type PaymentRequest = {
+  token: string;
+  amount: number;
+  currency: string;
+  description: string;
+  username: string;
+  ngoName: string;
+}
+
+export type PaymentResponse = {
+  status: string;
+  message: string;
+}
+
 export enum Gender { MALE = "MALE", FEMALE = "FEMALE" }
 
 export enum COLORS {

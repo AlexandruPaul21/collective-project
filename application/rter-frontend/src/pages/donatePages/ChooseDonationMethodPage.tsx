@@ -36,15 +36,6 @@ const ChooseDonationMethodPage = () => {
     });
   };
 
-  const redirectTo = () => {
-    if (!currentUser && !isLoading) {
-      navigate("/sign-in");
-      return;
-    }
-  };
-  useEffect(() => {
-    redirectTo();
-  }, [currentUser, isLoading]);
 
   return (
     <div className="flex h-screen flex-col">
