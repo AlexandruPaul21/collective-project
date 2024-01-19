@@ -1,21 +1,5 @@
-/*.map{*/
-/*    height: 15vh;*/
-/*    width: 15vw;*/
-/*}*/
-
+/*max-w-[350px] md:max-w-[700px]*/
 .map-container{
     height: 20vh;
-    width: 25vw;
+    width: 350px;
 }
-
-/*!* Account page resizable *!*/
-/*@media (max-height: 1200px) {*/
-/*    .map-container {*/
-/*        min-height: 100vh;*/
-/*    }*/
-/*}*/
-/*@media (min-height: 1200px) {*/
-/*    .map-container {*/
-/*        height: calc(100vh - 80px);*/
-/*    }*/
-/*}*/
