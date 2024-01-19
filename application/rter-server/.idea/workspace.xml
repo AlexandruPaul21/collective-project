@@ -6,14 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e908170a-2f26-46bb-9033-595922ff71ac" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../rter-frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/CardsSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/CardsSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/DonateItemsForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/DonateItemsForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/NGOCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/NGOCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/NavbarWithSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/NavbarWithSearch.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../rter-frontend/src/components/VolunteerForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/components/VolunteerForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rter-frontend/src/pages/donatePages/ChooseDonationMethodPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../rter-frontend/src/pages/donatePages/ChooseDonationMethodPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/rterserver/donation/dto/NonPaymentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/rterserver/donation/dto/NonPaymentRequest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,24 +40,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dragos-fe",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "spring.configuration.checksum": "d677d42a33c11e79b67d85cb5e851540",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dragos-fe&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;d677d42a33c11e79b67d85cb5e851540&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="RterServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="application.rter-server.main" />
@@ -83,7 +78,7 @@
       <workItem from="1705508060202" duration="1694000" />
       <workItem from="1705562554517" duration="2349000" />
       <workItem from="1705589322005" duration="5279000" />
-      <workItem from="1705661994183" duration="1465000" />
+      <workItem from="1705661994183" duration="2059000" />
     </task>
     <servers />
   </component>

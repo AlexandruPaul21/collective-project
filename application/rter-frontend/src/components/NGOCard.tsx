@@ -64,13 +64,23 @@ const NGOCard: React.FC<NGOCardProps> = ({
   const navigate = useNavigate();
   const isContactDisabled = ngo.email === "null";
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+
   const onContactClick = () => {
-    navigate("/volunteer/" + ngo.email);
+    if (!currentUser) {
+      navigate("/sign-in");
+      return;
+    }
+    navigate("/volunteer/"+ngo.id +"/"+ngo.email);
   };
   const onDonateClick = () => {
+    if (!currentUser) {
+      navigate("/sign-in");
+      return;
+    }
     const emailFlag = ngo.email === "null" ? "0" : "1";
     navigate("/donate/" + ngo.id + "/" + emailFlag);
   };
+
   const handleFavoriteClick = async () => {
     if (!currentUser) {
       navigate("/sign-in");
@@ -124,7 +134,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       await fromAddress(ngo.address)
-        .then(({ results }) => {
+        .then(({ results }: { results: any[] }) => {
           setLat(results[0].geometry.location.lat);
           setLng(results[0].geometry.location.lng);
           setIsLoaded(true);
@@ -218,7 +228,7 @@ const NGOCard: React.FC<NGOCardProps> = ({
         onOpenChange={(): void => setIsDialogOpen(!isDialogOpen)}
       >
         <DialogOverlay />
-        <DialogContent className="min-h-[400px] max-w-[350px] md:max-w-[700px] rounded-lg">
+        <DialogContent className="min-h-[400px] max-w-[350px] rounded-lg md:max-w-[700px]">
           <DialogHeader className="py-4">
             <DialogTitle>{ngo.name}</DialogTitle>
           </DialogHeader>

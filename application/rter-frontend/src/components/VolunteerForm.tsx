@@ -22,7 +22,7 @@ import { UserService } from "@/apis/profile/UserService";
 const VolunteerForm = () => {
   const navigate = useNavigate();
 
-  const { ngoEmail } = useParams();
+  const { ngoEmail, ngoId } = useParams();
   const [currentUser, setCurrentUser] = useState<User>();
   useEffect(() => {
     loadUserInfo();
@@ -38,7 +38,6 @@ const VolunteerForm = () => {
   const formSchema = z.object({
     from: z.string().min(1, "Sender is required"),
     recipient: z.string().min(1, "Recipient is required"),
-    subject: z.string().min(1, "Subject is required"),
     body: z.string().min(1, "Message is required"),
   });
 
@@ -47,7 +46,6 @@ const VolunteerForm = () => {
     defaultValues: {
       from: "",
       recipient: "",
-      subject: "",
       body: "",
     },
   });
@@ -79,10 +77,11 @@ const VolunteerForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const { from, body, ...otherValues } = values;
+      const { body } = values;
       const updatedValues = {
-        ...otherValues,
-        body: `${body} \n This body was sent by: ${from}`,
+        body:body,
+        idUser: currentUser?.id,
+        idNgo: ngoId,
       };
       const stringifiedObject = JSON.stringify(updatedValues);
       console.log(stringifiedObject);
@@ -173,24 +172,6 @@ const VolunteerForm = () => {
             />
             <FormField
               control={form.control}
-              name="subject"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-md">Subject: *</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isLoading}
-                      className="w-[300px] md:w-[500px] xl:w-[800px]"
-                      placeholder="Enter The Subject"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
               name="body"
               render={({ field }) => (
                 <FormItem>
@@ -207,7 +188,7 @@ const VolunteerForm = () => {
               )}
             />
             <div className="flex items-center justify-center ">
-              <Button className="w-[100px] bg-[#1565C0] hover:bg-[#1565C0]/90 md:w-[200px] xl:w-[300px]">
+              <Button className="w-[100px] bg-[#1565C0] hover:bg-[#1565C0]/90 md:w-[200px] xl:w-[300px]" disabled={isLoading}>
                 Send
               </Button>
             </div>

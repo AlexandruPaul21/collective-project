@@ -23,6 +23,8 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "@stripe/react-stripe-js": "^2.4.0",
+    "@stripe/stripe-js": "^2.3.0",
     "@react-google-maps/api": "^2.19.2",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.2",
